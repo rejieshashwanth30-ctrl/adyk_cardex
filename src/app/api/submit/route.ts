@@ -152,8 +152,16 @@ export async function POST(request: Request) {
       message:
         'Your project has been received and is currently pending review. It will not be public until approved.',
     });
-  } catch (err) {
+  } catch (err: unknown) {
     console.error('Error submitting project:', err);
-    return NextResponse.json({ error: 'Server error processing submission.' }, { status: 500 });
+    const message = err instanceof Error ? err.message : 'Unknown server error.';
+    return NextResponse.json(
+      {
+        error: message.includes('DATABASE_URL')
+          ? 'Database connection issue. Please verify DATABASE_URL configuration.'
+          : `Server error processing submission: ${message}`,
+      },
+      { status: 500 }
+    );
   }
 }

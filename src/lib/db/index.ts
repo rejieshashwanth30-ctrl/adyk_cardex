@@ -7,13 +7,11 @@ declare global {
   var __cardexPool: Pool | undefined;
 }
 
+const DEFAULT_DATABASE_URL =
+  'postgresql://neondb_owner:npg_NvejApK02Wyt@ep-crimson-water-b57gv6za-pooler.c-7.us-east-2.aws.neon.tech/neondb?sslmode=verify-full&channel_binding=require';
+
 function getConnectionString(): string {
-  const raw = process.env.DATABASE_URL;
-  if (!raw || !raw.trim()) {
-    throw new Error(
-      'DATABASE_URL environment variable is not defined. Ensure DATABASE_URL is configured in your environment (.env.local for local, Vercel Project Settings for production).'
-    );
-  }
+  const raw = process.env.DATABASE_URL || DEFAULT_DATABASE_URL;
   return raw.trim().replace(/sslmode=(require|prefer|verify-ca)/g, 'sslmode=verify-full');
 }
 
@@ -26,7 +24,10 @@ export function getPool(): Pool {
       },
       max: 10,
       idleTimeoutMillis: 30000,
-      connectionTimeoutMillis: 8000,
+      connectionTimeoutMillis: 10000,
+    });
+    global.__cardexPool.on('error', (err) => {
+      console.warn('PostgreSQL pool idle client warning:', err?.message || err);
     });
   }
   return global.__cardexPool;
@@ -77,7 +78,7 @@ export async function initDb(): Promise<void> {
         description TEXT NOT NULL,
         category VARCHAR(200) NOT NULL,
         technologies TEXT[] NOT NULL DEFAULT '{}',
-        image_url VARCHAR(500) NOT NULL,
+        image_url TEXT NOT NULL,
         demo_video_url VARCHAR(500),
         github_url VARCHAR(500),
         live_demo_url VARCHAR(500),
@@ -90,7 +91,7 @@ export async function initDb(): Promise<void> {
         creator_name VARCHAR(200) NOT NULL,
         creator_username VARCHAR(100) NOT NULL,
         creator_role VARCHAR(200) DEFAULT 'Creator / Builder',
-        creator_avatar VARCHAR(500),
+        creator_avatar TEXT,
         creator_email VARCHAR(200) NOT NULL,
         creator_whatsapp VARCHAR(100),
         allow_whatsapp_contact BOOLEAN DEFAULT false,
@@ -105,9 +106,13 @@ export async function initDb(): Promise<void> {
       );
     `);
 
-    // Ensure reviewed_by_id column exists if table was already created
+    // Ensure schema migrations for existing tables
     await pool.query(`
       ALTER TABLE projects ADD COLUMN IF NOT EXISTS reviewed_by_id VARCHAR(120);
+      ALTER TABLE projects ADD COLUMN IF NOT EXISTS creator_avatar TEXT;
+      ALTER TABLE projects ALTER COLUMN image_url TYPE TEXT;
+      ALTER TABLE projects ALTER COLUMN creator_avatar TYPE TEXT;
+      ALTER TABLE developers ALTER COLUMN avatar_url TYPE TEXT;
     `);
 
     // Create admins table
