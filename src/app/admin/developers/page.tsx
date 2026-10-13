@@ -6,6 +6,8 @@ import { getAllDevelopersAdmin } from '@/lib/data/store';
 import { Users, ArrowLeft, ExternalLink, Globe, MessageSquare } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from '@/components/ui/Icons';
 
+export const instant = false;
+
 export const metadata = {
   title: 'Developers Directory — ADYK CARDEX Admin',
 };

@@ -6,6 +6,8 @@ import { getProjectsByStatus } from '@/lib/data/store';
 import { XCircle, ArrowLeft } from 'lucide-react';
 import AdminProjectRow from '@/components/admin/AdminProjectRow';
 
+export const instant = false;
+
 export const metadata = {
   title: 'Declined Projects — ADYK CARDEX Admin',
 };

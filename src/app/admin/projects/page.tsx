@@ -6,6 +6,8 @@ import { getAllProjectsAdmin } from '@/lib/data/store';
 import { ArrowLeft } from 'lucide-react';
 import AdminProjectsList from '@/components/admin/AdminProjectsList';
 
+export const instant = false;
+
 export const metadata = {
   title: 'All Projects — ADYK CARDEX Admin',
 };

@@ -6,6 +6,8 @@ import { getProjectsByStatus } from '@/lib/data/store';
 import { Clock, ArrowLeft } from 'lucide-react';
 import AdminProjectRow from '@/components/admin/AdminProjectRow';
 
+export const instant = false;
+
 export const metadata = {
   title: 'Pending Submissions — ADYK CARDEX Admin',
 };

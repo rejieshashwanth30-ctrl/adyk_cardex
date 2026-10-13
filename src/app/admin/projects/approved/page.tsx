@@ -6,6 +6,8 @@ import { getProjectsByStatus } from '@/lib/data/store';
 import { CheckCircle2, ArrowLeft } from 'lucide-react';
 import AdminProjectRow from '@/components/admin/AdminProjectRow';
 
+export const instant = false;
+
 export const metadata = {
   title: 'Approved Projects — ADYK CARDEX Admin',
 };
