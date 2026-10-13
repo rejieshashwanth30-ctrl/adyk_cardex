@@ -1,0 +1,214 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    /* PRIMUM Ultra-Premium White Luxury Design Tokens */
+    --bg-primary: #FFFFFF;
+    --bg-secondary: #F8F7F4;
+    --bg-surface: #FFFFFF;
+    --bg-elevated: #FAF9F6;
+    --bg-ivory: #F5F3EF;
+    
+    --border-regular: #EAE8E3;
+    --border-subtle: #F2EFE9;
+    --border-bright: #DCD9D1;
+    
+    --text-primary: #111111;
+    --text-secondary: #555555;
+    --text-muted: #858585;
+    
+    --gold-accent: #B99752;
+    --gold-light: #D4AF37;
+    --gold-subtle: rgba(185, 151, 82, 0.12);
+    --gold-sheen: rgba(185, 151, 82, 0.05);
+  }
+
+  * {
+    border-color: var(--border-subtle);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: #FFFFFF;
+    color: #111111;
+    color-scheme: light;
+  }
+
+  body {
+    background-color: #FFFFFF;
+    color: #111111;
+    overflow-x: hidden;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Luxury Minimalist Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #FAF9F6;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #D8D4CC;
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #B99752;
+  }
+
+  ::selection {
+    background: #111111;
+    color: #FFFFFF;
+  }
+}
+
+/* ============================================================
+   PRIMUM LUXURY WHITE MATERIALS & SURFACES
+   ============================================================ */
+
+/* 1. LUXURY WHITE GLASS: Frosted pearl-white surface with subtle warm border */
+.material-luxury-glass {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid #EAE8E3;
+  box-shadow: 0 10px 35px -10px rgba(0, 0, 0, 0.03);
+}
+
+.material-luxury-glass-hover {
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.material-luxury-glass-hover:hover {
+  background: rgba(255, 255, 255, 0.98);
+  border-color: #DCD9D1;
+  box-shadow: 0 20px 45px -15px rgba(0, 0, 0, 0.06), 0 0 25px rgba(185, 151, 82, 0.06);
+  transform: translateY(-2px);
+}
+
+/* 2. LUXURY CARD: Pure white architectural card */
+.material-luxury-card {
+  background: #FFFFFF;
+  border: 1px solid #EAE8E3;
+  box-shadow: 0 4px 25px -5px rgba(0, 0, 0, 0.03);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.material-luxury-card:hover {
+  border-color: #D6D2C8;
+  box-shadow: 0 16px 40px -12px rgba(0, 0, 0, 0.07), 0 0 20px rgba(185, 151, 82, 0.05);
+  transform: translateY(-2px);
+}
+
+/* 3. WARM IVORY SURFACE: Subtle contrast container */
+.material-warm-ivory {
+  background: #F8F7F4;
+  border: 1px solid #EAE8E3;
+}
+
+/* Backward compatibility aliases */
+.material-black-glass {
+  background: #FFFFFF;
+  border: 1px solid #EAE8E3;
+  box-shadow: 0 4px 20px -5px rgba(0, 0, 0, 0.03);
+}
+
+.material-black-glass-hover {
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.material-black-glass-hover:hover {
+  border-color: #D6D2C8;
+  box-shadow: 0 16px 40px -12px rgba(0, 0, 0, 0.07);
+  transform: translateY(-2px);
+}
+
+.glass-panel {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid #EAE8E3;
+  box-shadow: 0 4px 20px -5px rgba(0, 0, 0, 0.03);
+}
+
+/* ============================================================
+   ARCHITECTURAL LIGHTING & TEXTURES
+   ============================================================ */
+
+/* Subtle architectural hairline grid (1% black) */
+.architectural-grid {
+  background-image: 
+    linear-gradient(to right, rgba(17, 17, 17, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(17, 17, 17, 0.02) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* Subtle dot coordinate matrix */
+.architectural-dots {
+  background-image: radial-gradient(rgba(17, 17, 17, 0.04) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* Rich black & gold luxury typography gradients */
+.text-gradient-luxury {
+  background: linear-gradient(180deg, #111111 0%, #2A2A2A 60%, #555555 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-gold {
+  background: linear-gradient(135deg, #D4AF37 0%, #B99752 50%, #8C6D28 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Metallic gold border glow */
+.gold-glow-subtle {
+  box-shadow: 0 0 20px rgba(185, 151, 82, 0.12);
+}
+
+/* Smooth ambient gold light sweep */
+@keyframes luxuryGoldSweep {
+  0% {
+    transform: translateX(-150%) skewX(-20deg);
+  }
+  100% {
+    transform: translateX(250%) skewX(-20deg);
+  }
+}
+
+.animate-gold-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+.animate-gold-shimmer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(185, 151, 82, 0.15), transparent);
+  animation: luxuryGoldSweep 3.5s infinite ease-in-out;
+  pointer-events: none;
+}
+
+/* Project editorial image treatment: Crisp, high-end editorial contrast */
+.project-editorial-image {
+  filter: contrast(102%) brightness(98%);
+  transition: filter 0.5s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.group:hover .project-editorial-image {
+  filter: contrast(106%) brightness(101%);
+  transform: scale(1.025);
+}
+
+/* Accessible reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
