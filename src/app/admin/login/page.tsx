@@ -42,8 +42,9 @@ export default function AdminLoginPage() {
       // Successful login -> Redirect
       router.push(redirectTo);
       router.refresh();
-    } catch {
-      setError('Invalid admin credentials.');
+    } catch (err) {
+      console.error('Admin login connection error:', err);
+      setError('Connection or server error. Please try again.');
     } finally {
       setLoading(false);
     }

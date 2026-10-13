@@ -44,6 +44,12 @@ async function testLogin() {
   console.log('Active:', r2.rows[0].is_active);
   console.log('Test "CardexAdmin2026!":', await bcrypt.compare(adminPass, r2.rows[0].password_hash));
 
+  // 3. Check adykcompany.in@gmail.com
+  const r3 = await pool.query("SELECT email, password_hash, is_active FROM admins WHERE email = 'adykcompany.in@gmail.com'");
+  console.log('\nAccount: adykcompany.in@gmail.com');
+  console.log('Active:', r3.rows[0].is_active);
+  console.log('Test "adyk2007@@":', await bcrypt.compare('adyk2007@@', r3.rows[0].password_hash));
+
   await pool.end();
 }
 

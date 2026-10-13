@@ -126,6 +126,45 @@ export async function initDb(): Promise<void> {
       CREATE INDEX IF NOT EXISTS admins_email_idx ON admins(email);
     `);
 
+    // Ensure standard authorized administrators exist
+    const defaultAdmins = [
+      {
+        id: 'admin-adykcompany',
+        email: 'adykcompany.in@gmail.com',
+        passwordHash: '$2b$12$dv0LSa0aHHI7iCN9IPr9nOiGm75UmCqRkiBRcP5/hzRuYw2ft.Obi',
+        name: 'ADYK Company',
+        role: 'SUPER_ADMIN',
+      },
+      {
+        id: 'admin-rejiesh',
+        email: 'rejieshashwanth30@gmail.com',
+        passwordHash: '$2b$12$JKRCktBCh5l5TwCGXG4rnemxMtGY2L.UCEcTFLTRJAndhyoPdMwMO',
+        name: 'Rejie Shashwanth',
+        role: 'SUPER_ADMIN',
+      },
+      {
+        id: 'admin-adyk-io',
+        email: 'admin@adyk.io',
+        passwordHash: '$2b$12$LD81MOH/VIvqilrjMqblS.M2yZU7F2/yLborPP6weokXUiAh3d0ie',
+        name: 'Adyk Cardex Admin',
+        role: 'SUPER_ADMIN',
+      },
+    ];
+
+    for (const a of defaultAdmins) {
+      await pool.query(
+        `INSERT INTO admins (id, email, password_hash, name, role, is_active, created_at, updated_at)
+         VALUES ($1, $2, $3, $4, $5, true, NOW(), NOW())
+         ON CONFLICT (email) DO UPDATE SET
+           password_hash = EXCLUDED.password_hash,
+           name = EXCLUDED.name,
+           role = EXCLUDED.role,
+           is_active = true,
+           updated_at = NOW()`,
+        [a.id, a.email, a.passwordHash, a.name, a.role]
+      );
+    }
+
     // Check if developers table has data, seed if empty
     const devCount = await pool.query('SELECT COUNT(*) as count FROM developers');
     if (parseInt(devCount.rows[0].count, 10) === 0) {

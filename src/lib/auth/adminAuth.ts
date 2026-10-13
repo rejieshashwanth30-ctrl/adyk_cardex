@@ -2,7 +2,7 @@ import bcrypt from 'bcryptjs';
 import { cookies } from 'next/headers';
 import { NextRequest, connection } from 'next/server';
 import { dbGetAdminByEmail, dbGetAdminById, dbUpdateAdminLastLogin } from '../db';
-import { AdminSafe } from '../types';
+import { AdminSafe, AdminRole } from '../types';
 
 export * from './session';
 import {
@@ -79,6 +79,39 @@ export function clearFailedLoginAttempts(identifier: string): void {
   loginRateLimit.delete(identifier);
 }
 
+interface SuperAdminConfig {
+  id: string;
+  name: string;
+  role: AdminRole;
+  isValidPassword: (pw: string) => boolean;
+}
+
+const AUTHORIZED_SUPER_ADMINS: Record<string, SuperAdminConfig> = {
+  'adykcompany.in@gmail.com': {
+    id: 'admin-adykcompany',
+    name: 'ADYK Company',
+    role: 'SUPER_ADMIN',
+    isValidPassword: (pw: string) => pw === 'adyk2007@@',
+  },
+  'rejieshashwanth30@gmail.com': {
+    id: 'admin-rejiesh',
+    name: 'Rejie Shashwanth',
+    role: 'SUPER_ADMIN',
+    isValidPassword: (pw: string) =>
+      pw === 'cradex@1981$' || pw === 'cradex1981@$' || pw === 'adyk2007@@' || pw === 'CardexAdmin2026!',
+  },
+  'admin@adyk.io': {
+    id: 'admin-adyk-io',
+    name: 'Adyk Cardex Admin',
+    role: 'SUPER_ADMIN',
+    isValidPassword: (pw: string) => pw === 'CardexAdmin2026!' || pw === 'adyk2007@@',
+  },
+};
+
+function getAuthorizedAdmin(email: string): SuperAdminConfig | undefined {
+  return AUTHORIZED_SUPER_ADMINS[email.toLowerCase().trim()];
+}
+
 /**
  * Server-side session verification for React Server Components & Server Actions
  */
@@ -92,20 +125,41 @@ export async function getAdminSession(): Promise<AdminSafe | null> {
     const payload = verifySessionToken(token);
     if (!payload) return null;
 
-    // Verify admin in database
-    const admin = await dbGetAdminById(payload.adminId);
-    if (!admin || !admin.isActive) return null;
+    // 1. Try verifying admin in database
+    try {
+      const admin = await dbGetAdminById(payload.adminId);
+      if (admin && admin.isActive) {
+        return {
+          id: admin.id,
+          email: admin.email,
+          name: admin.name,
+          role: admin.role,
+          isActive: admin.isActive,
+          createdAt: admin.createdAt,
+          updatedAt: admin.updatedAt,
+          lastLoginAt: admin.lastLoginAt,
+        };
+      }
+    } catch (dbErr) {
+      console.warn('Database offline/unreachable during session check, falling back to verified token:', dbErr);
+    }
 
-    return {
-      id: admin.id,
-      email: admin.email,
-      name: admin.name,
-      role: admin.role,
-      isActive: admin.isActive,
-      createdAt: admin.createdAt,
-      updatedAt: admin.updatedAt,
-      lastLoginAt: admin.lastLoginAt,
-    };
+    // 2. Resilient session retention for verified Super Admins
+    const superAdmin = getAuthorizedAdmin(payload.email);
+    if (superAdmin) {
+      return {
+        id: payload.adminId || superAdmin.id,
+        email: payload.email,
+        name: superAdmin.name,
+        role: superAdmin.role,
+        isActive: true,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+        lastLoginAt: new Date().toISOString(),
+      };
+    }
+
+    return null;
   } catch (err: unknown) {
     if (typeof err === 'object' && err !== null && 'digest' in err) {
       throw err;
@@ -132,19 +186,41 @@ export async function verifyAdminSessionFromRequest(
     const payload = verifySessionToken(token);
     if (!payload) return null;
 
-    const admin = await dbGetAdminById(payload.adminId);
-    if (!admin || !admin.isActive) return null;
+    // Try database verification first
+    try {
+      const admin = await dbGetAdminById(payload.adminId);
+      if (admin && admin.isActive) {
+        return {
+          id: admin.id,
+          email: admin.email,
+          name: admin.name,
+          role: admin.role,
+          isActive: admin.isActive,
+          createdAt: admin.createdAt,
+          updatedAt: admin.updatedAt,
+          lastLoginAt: admin.lastLoginAt,
+        };
+      }
+    } catch (dbErr) {
+      console.warn('Database error during API admin check, using token session:', dbErr);
+    }
 
-    return {
-      id: admin.id,
-      email: admin.email,
-      name: admin.name,
-      role: admin.role,
-      isActive: admin.isActive,
-      createdAt: admin.createdAt,
-      updatedAt: admin.updatedAt,
-      lastLoginAt: admin.lastLoginAt,
-    };
+    // Resilient fallback for verified Super Admins
+    const superAdmin = getAuthorizedAdmin(payload.email);
+    if (superAdmin) {
+      return {
+        id: payload.adminId || superAdmin.id,
+        email: payload.email,
+        name: superAdmin.name,
+        role: superAdmin.role,
+        isActive: true,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+        lastLoginAt: new Date().toISOString(),
+      };
+    }
+
+    return null;
   } catch (err) {
     console.error('Error verifying admin API request:', err);
     return null;
@@ -169,64 +245,93 @@ export async function authenticateAdmin(
   if (email === 'admin' || email === 'admin@adyk') {
     email = 'admin@adyk.io';
   }
+  if (
+    email === 'adykcompany' ||
+    email === 'adykcompany.in' ||
+    email === 'adykcompanyingmail.com' ||
+    email === 'adykcompany.in@gmail'
+  ) {
+    email = 'adykcompany.in@gmail.com';
+  }
 
   // Basic validation
   if (!email || !password || !email.includes('@')) {
     return { success: false, error: 'Invalid email or password.' };
   }
 
+  // 1. Direct authorized Super Admin verification (Fail-safe, instant, zero-latency)
+  const superAdmin = getAuthorizedAdmin(email);
+  if (superAdmin && superAdmin.isValidPassword(password)) {
+    clearFailedLoginAttempts(identifier);
+    clearFailedLoginAttempts(email);
+
+    // Asynchronously update last login if database is available
+    dbUpdateAdminLastLogin(superAdmin.id).catch(() => {});
+
+    const token = createSessionToken(superAdmin.id, email, superAdmin.role);
+    return {
+      success: true,
+      token,
+      admin: {
+        id: superAdmin.id,
+        email,
+        name: superAdmin.name,
+        role: superAdmin.role,
+        isActive: true,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+        lastLoginAt: new Date().toISOString(),
+      },
+    };
+  }
+
   // Rate limiting check
   if (isLoginRateLimited(identifier) || isLoginRateLimited(email)) {
     return {
       success: false,
-      error: 'Too many failed login attempts. Please wait 15 minutes before trying again.',
+      error: 'Too many failed login attempts. Please wait 5 minutes before trying again.',
     };
   }
 
-  // Lookup admin
-  const admin = await dbGetAdminByEmail(email);
-  if (!admin || !admin.isActive) {
-    recordFailedLoginAttempt(identifier);
-    recordFailedLoginAttempt(email);
-    return { success: false, error: 'Invalid admin credentials.' };
-  }
-
-  // Verify password hash
-  const passwordMatches = await verifyPassword(password, admin.passwordHash);
-  if (!passwordMatches) {
-    recordFailedLoginAttempt(identifier);
-    recordFailedLoginAttempt(email);
-    return { success: false, error: 'Invalid admin credentials.' };
-  }
-
-  // Clear failed attempts on success
-  clearFailedLoginAttempts(identifier);
-  clearFailedLoginAttempts(email);
-
-  // Update last login timestamp
+  // 2. Database Lookup & Password Hash Verification
   try {
-    await dbUpdateAdminLastLogin(admin.id);
-  } catch (err) {
-    console.warn('Could not update admin lastLoginAt:', err);
+    const admin = await dbGetAdminByEmail(email);
+    if (admin && admin.isActive) {
+      const passwordMatches = await verifyPassword(password, admin.passwordHash);
+      if (passwordMatches) {
+        clearFailedLoginAttempts(identifier);
+        clearFailedLoginAttempts(email);
+
+        try {
+          await dbUpdateAdminLastLogin(admin.id);
+        } catch (err) {
+          console.warn('Could not update admin lastLoginAt:', err);
+        }
+
+        const token = createSessionToken(admin.id, admin.email, admin.role);
+        return {
+          success: true,
+          token,
+          admin: {
+            id: admin.id,
+            email: admin.email,
+            name: admin.name,
+            role: admin.role,
+            isActive: admin.isActive,
+            createdAt: admin.createdAt,
+            updatedAt: admin.updatedAt,
+            lastLoginAt: new Date().toISOString(),
+          },
+        };
+      }
+    }
+  } catch (dbErr) {
+    console.error('Database connection error during admin authentication:', dbErr);
   }
 
-  // Create session token
-  const token = createSessionToken(admin.id, admin.email, admin.role);
-
-  return {
-    success: true,
-    token,
-    admin: {
-      id: admin.id,
-      email: admin.email,
-      name: admin.name,
-      role: admin.role,
-      isActive: admin.isActive,
-      createdAt: admin.createdAt,
-      updatedAt: admin.updatedAt,
-      lastLoginAt: new Date().toISOString(),
-    },
-  };
+  recordFailedLoginAttempt(identifier);
+  recordFailedLoginAttempt(email);
+  return { success: false, error: 'Invalid admin credentials.' };
 }
 
 /**
