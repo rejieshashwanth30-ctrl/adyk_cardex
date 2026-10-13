@@ -8,6 +8,8 @@ interface ProjectPageProps {
   params: Promise<{ slug: string }>;
 }
 
+export const instant = false;
+
 export async function generateMetadata({ params }: ProjectPageProps): Promise<Metadata> {
   const { slug } = await params;
   const project = await getProjectBySlug(slug);

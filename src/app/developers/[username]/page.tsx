@@ -8,6 +8,8 @@ interface DeveloperPageProps {
   params: Promise<{ username: string }>;
 }
 
+export const instant = false;
+
 export async function generateMetadata({ params }: DeveloperPageProps): Promise<Metadata> {
   const { username } = await params;
   const developer = await getDeveloperByUsername(username);
