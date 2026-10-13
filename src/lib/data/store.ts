@@ -17,7 +17,9 @@ import {
 } from '../db';
 
 // File-based persistence storage path (acts as cache & offline fallback)
-const DATA_DIR = path.join(process.cwd(), '.cardex_data');
+const DATA_DIR = process.env.VERCEL
+  ? path.join('/tmp', '.cardex_data')
+  : path.join(process.cwd(), '.cardex_data');
 const DATA_FILE = path.join(DATA_DIR, 'projects.json');
 
 function ensureDataFile(): Project[] {
