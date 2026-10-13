@@ -1,13 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import CardexMark from '@/components/brand/CardexMark';
-import { Code2, ArrowRight, ArrowUpRight, Sparkles } from 'lucide-react';
-import {
-  WhatsappIcon,
-  LinkedinIcon,
-  InstagramIcon,
-  DiscordIcon,
-} from '@/components/ui/Icons';
+import { Code2, ArrowRight } from 'lucide-react';
 
 export const metadata = {
   title: 'About ADYK CARDEX — Manifesto & Architecture',
@@ -175,117 +169,6 @@ export default function AboutPage() {
               Startup team formation, open-source grant matching, and full institutional technology partnerships.
             </p>
           </div>
-        </div>
-      </div>
-
-      {/* ADYK Ecosystem & Contact Channels */}
-      <div className="p-8 sm:p-12 rounded-3xl material-luxury-card bg-white border border-[#EAE8E3] mb-16 shadow-sm">
-        <div className="flex items-center gap-2 text-xs uppercase tracking-wider text-[#858585] mb-2 font-semibold">
-          <Sparkles className="w-3.5 h-3.5 text-[#B99752]" />
-          <span>ADYK Multi-Venture Network</span>
-        </div>
-        <h2 className="text-2xl sm:text-3xl font-black text-[#111111] uppercase tracking-tight mb-3">
-          Connect With The ADYK Team
-        </h2>
-        <p className="text-sm text-[#555555] max-w-2xl leading-relaxed mb-8 font-normal">
-          Interested in learning, building, growing, and inspiring? ADYK is an expanding multi-venture technology ecosystem. Register on ADYK Inspire or reach out directly through any of our official channels.
-        </p>
-
-        {/* ADYK Inspire Banner Card */}
-        <div className="p-6 rounded-2xl bg-gradient-to-r from-[#FAF9F6] to-[#F5F3EC] border border-[#EAE8E3] mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <div>
-            <div className="text-xs font-bold text-[#111111] uppercase tracking-wider mb-1 flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-[#B99752] animate-ping" />
-              <span>ADYK Inspire Portal &bull; Learn &bull; Build &bull; Grow</span>
-            </div>
-            <p className="text-xs text-[#555555]">
-              Register to collaborate and connect directly with the ADYK team: <span className="font-mono text-[#111111]">https://adyk-inspire.vercel.app/</span>
-            </p>
-          </div>
-          <a
-            href="https://adyk-inspire.vercel.app/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-[#111111] hover:bg-[#222222] text-white text-xs uppercase tracking-wider font-semibold transition-all shadow-sm flex-shrink-0"
-          >
-            <span>Register Now</span>
-            <ArrowUpRight className="w-3.5 h-3.5 text-[#B99752]" />
-          </a>
-        </div>
-
-        {/* 4 Official Contact Channels Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <a
-            href="https://wa.me/918870605699"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-4 rounded-xl bg-[#FAF9F6] hover:bg-[#F3F1EC] border border-[#EAE8E3] hover:border-[#25D366]/40 transition-all flex items-center justify-between gap-3 group"
-          >
-            <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-lg bg-[#25D366]/10 text-[#25D366] flex items-center justify-center">
-                <WhatsappIcon className="w-4 h-4" />
-              </div>
-              <div>
-                <span className="text-xs font-bold text-[#111111] block">WhatsApp</span>
-                <span className="text-[11px] text-[#555555] font-mono">+91 88706 05699</span>
-              </div>
-            </div>
-            <ArrowUpRight className="w-3.5 h-3.5 text-[#858585] group-hover:text-[#25D366] transition-colors" />
-          </a>
-
-          <a
-            href="https://www.linkedin.com/in/adyk-a-multi-venture-company-38782a431?utm_source=share_via&utm_content=profile&utm_medium=member_ios"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-4 rounded-xl bg-[#FAF9F6] hover:bg-[#F3F1EC] border border-[#EAE8E3] hover:border-[#0A66C2]/40 transition-all flex items-center justify-between gap-3 group"
-          >
-            <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-lg bg-[#0A66C2]/10 text-[#0A66C2] flex items-center justify-center">
-                <LinkedinIcon className="w-4 h-4" />
-              </div>
-              <div>
-                <span className="text-xs font-bold text-[#111111] block">LinkedIn</span>
-                <span className="text-[11px] text-[#555555]">ADYK - Multi-Venture Company</span>
-              </div>
-            </div>
-            <ArrowUpRight className="w-3.5 h-3.5 text-[#858585] group-hover:text-[#0A66C2] transition-colors" />
-          </a>
-
-          <a
-            href="https://www.instagram.com/buildby.adyk?rpxt=MTE0ajhmNWJuY3Fsdw%3D%3D&utm_source=qr"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-4 rounded-xl bg-[#FAF9F6] hover:bg-[#F3F1EC] border border-[#EAE8E3] hover:border-[#E4405F]/40 transition-all flex items-center justify-between gap-3 group"
-          >
-            <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-lg bg-[#E4405F]/10 text-[#E4405F] flex items-center justify-center">
-                <InstagramIcon className="w-4 h-4" />
-              </div>
-              <div>
-                <span className="text-xs font-bold text-[#111111] block">Instagram</span>
-                <span className="text-[11px] text-[#555555]">@buildby.adyk</span>
-              </div>
-            </div>
-            <ArrowUpRight className="w-3.5 h-3.5 text-[#858585] group-hover:text-[#E4405F] transition-colors" />
-          </a>
-
-          <a
-            href="https://discord.gg/7qB6vGNb2"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-4 rounded-xl bg-[#FAF9F6] hover:bg-[#F3F1EC] border border-[#EAE8E3] hover:border-[#5865F2]/40 transition-all flex items-center justify-between gap-3 group"
-          >
-            <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-lg bg-[#5865F2]/10 text-[#5865F2] flex items-center justify-center">
-                <DiscordIcon className="w-4 h-4" />
-              </div>
-              <div>
-                <span className="text-xs font-bold text-[#111111] block">Discord</span>
-                <span className="text-[11px] text-[#555555]">ADYK Community Server</span>
-              </div>
-            </div>
-            <ArrowUpRight className="w-3.5 h-3.5 text-[#858585] group-hover:text-[#5865F2] transition-colors" />
-          </a>
         </div>
       </div>
 

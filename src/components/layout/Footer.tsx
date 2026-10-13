@@ -20,45 +20,50 @@ export default function Footer() {
     return null;
   }
 
+  // Only show the Inspire banner card on home (/) and contact (/contact) pages
+  const showInspireBanner = pathname === '/' || pathname === '/contact';
+
   return (
     <footer className="border-t border-[#EAE8E3] bg-[#FAF9F6] text-[#111111] relative z-10 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-12">
-        {/* ADYK Inspire & Ecosystem Connect Card */}
-        <div className="mb-14 p-6 sm:p-8 rounded-3xl bg-white border border-[#EAE8E3] shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
-          <div className="max-w-xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FAF9F6] border border-[#B99752]/30 text-xs font-semibold text-[#111111] mb-2.5">
-              <Sparkles className="w-3.5 h-3.5 text-[#B99752]" />
-              <span className="tracking-wide">ADYK INSPIRE &bull; LEARN &bull; BUILD &bull; GROW &bull; INSPIRE</span>
+        {/* ADYK Inspire & Ecosystem Connect Card (Only shown on home and contact pages) */}
+        {showInspireBanner && (
+          <div className="mb-14 p-6 sm:p-8 rounded-3xl bg-white border border-[#EAE8E3] shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+            <div className="max-w-xl">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FAF9F6] border border-[#B99752]/30 text-xs font-semibold text-[#111111] mb-2.5">
+                <Sparkles className="w-3.5 h-3.5 text-[#B99752]" />
+                <span className="tracking-wide">ADYK INSPIRE &bull; LEARN &bull; BUILD &bull; GROW &bull; INSPIRE</span>
+              </div>
+              <h3 className="text-xl sm:text-2xl font-black text-[#111111] tracking-tight uppercase">
+                REGISTER TO CONNECT WITH THE ADYK TEAM
+              </h3>
+              <p className="text-xs sm:text-sm text-[#555555] mt-1.5 leading-relaxed font-normal">
+                For anyone interested to learn, build, grow, and inspire together. Register on ADYK Inspire or message our leadership directly.
+              </p>
             </div>
-            <h3 className="text-xl sm:text-2xl font-black text-[#111111] tracking-tight uppercase">
-              REGISTER TO CONNECT WITH THE ADYK TEAM
-            </h3>
-            <p className="text-xs sm:text-sm text-[#555555] mt-1.5 leading-relaxed font-normal">
-              For anyone interested to learn, build, grow, and inspire together. Register on ADYK Inspire or message our leadership directly.
-            </p>
-          </div>
 
-          <div className="flex flex-wrap items-center gap-3 w-full lg:w-auto">
-            <a
-              href="https://adyk-inspire.vercel.app/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-[#111111] hover:bg-[#222222] text-white text-xs uppercase tracking-wider font-semibold transition-all shadow-sm"
-            >
-              <span>Register on ADYK Inspire</span>
-              <ArrowUpRight className="w-3.5 h-3.5 text-[#B99752]" />
-            </a>
-            <a
-              href="https://wa.me/918870605699"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-3 rounded-xl bg-white hover:bg-[#FAF9F6] border border-[#EAE8E3] text-[#111111] text-xs uppercase tracking-wider font-semibold transition-colors shadow-sm"
-            >
-              <WhatsappIcon className="w-3.5 h-3.5 text-[#25D366]" />
-              <span>WhatsApp: 8870605699</span>
-            </a>
+            <div className="flex flex-wrap items-center gap-3 w-full lg:w-auto">
+              <a
+                href="https://adyk-inspire.vercel.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-[#111111] hover:bg-[#222222] text-white text-xs uppercase tracking-wider font-semibold transition-all shadow-sm"
+              >
+                <span>Register on ADYK Inspire</span>
+                <ArrowUpRight className="w-3.5 h-3.5 text-[#B99752]" />
+              </a>
+              <a
+                href="https://wa.me/918870605699"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-3 rounded-xl bg-white hover:bg-[#FAF9F6] border border-[#EAE8E3] text-[#111111] text-xs uppercase tracking-wider font-semibold transition-colors shadow-sm"
+              >
+                <WhatsappIcon className="w-3.5 h-3.5 text-[#25D366]" />
+                <span>WhatsApp: 8870605699</span>
+              </a>
+            </div>
           </div>
-        </div>
+        )}
 
         {/* Footer Navigation Columns */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-14 border-b border-[#EAE8E3]">

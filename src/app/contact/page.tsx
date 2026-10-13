@@ -35,54 +35,7 @@ export default function ContactPage() {
         </p>
       </div>
 
-      {/* Featured: ADYK Inspire Registration Hero Card */}
-      <div className="p-8 sm:p-14 rounded-3xl material-luxury-card bg-gradient-to-br from-[#FFFFFF] via-[#FAF9F6] to-[#F5F3EC] border border-[#EAE8E3] shadow-sm mb-12">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8">
-          <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#111111] text-white text-[11px] font-semibold tracking-wider uppercase mb-3">
-              <Sparkles className="w-3.5 h-3.5 text-[#B99752]" />
-              <span>Official Registration Portal</span>
-            </div>
-            <h2 className="text-2xl sm:text-4xl font-black text-[#111111] tracking-tight uppercase">
-              ADYK INSPIRE
-            </h2>
-          </div>
 
-          <a
-            href="https://adyk-inspire.vercel.app/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-[#111111] hover:bg-[#222222] text-white text-xs uppercase tracking-wider font-semibold transition-all shadow-md self-start md:self-auto"
-          >
-            <span>Register on ADYK Inspire</span>
-            <ArrowUpRight className="w-3.5 h-3.5 text-[#B99752]" />
-          </a>
-        </div>
-
-        <p className="text-sm sm:text-base text-[#555555] leading-relaxed mb-8 max-w-2xl font-normal">
-          ADYK Inspire is the premier launchpad where individuals passionate about learning, building software &amp; hardware prototypes, scaling products, and inspiring future builders can register to connect directly with the ADYK core venture team.
-        </p>
-
-        {/* 4 Pillars */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-6 border-t border-[#EAE8E3]">
-          <div className="p-4 rounded-xl bg-white border border-[#EAE8E3] text-center">
-            <span className="text-xs font-bold text-[#111111] uppercase tracking-wide block">LEARN</span>
-            <span className="text-[11px] text-[#858585] mt-1 block">Engineering Mastery</span>
-          </div>
-          <div className="p-4 rounded-xl bg-white border border-[#EAE8E3] text-center">
-            <span className="text-xs font-bold text-[#111111] uppercase tracking-wide block">BUILD</span>
-            <span className="text-[11px] text-[#858585] mt-1 block">Production Artifacts</span>
-          </div>
-          <div className="p-4 rounded-xl bg-white border border-[#EAE8E3] text-center">
-            <span className="text-xs font-bold text-[#111111] uppercase tracking-wide block">GROW</span>
-            <span className="text-[11px] text-[#858585] mt-1 block">Multi-Venture Scale</span>
-          </div>
-          <div className="p-4 rounded-xl bg-white border border-[#EAE8E3] text-center">
-            <span className="text-xs font-bold text-[#111111] uppercase tracking-wide block">INSPIRE</span>
-            <span className="text-[11px] text-[#858585] mt-1 block">Global Ecosystem</span>
-          </div>
-        </div>
-      </div>
 
       {/* Direct Contact Channels Grid */}
       <div className="mb-14">
