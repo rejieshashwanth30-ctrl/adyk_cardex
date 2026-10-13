@@ -12,10 +12,17 @@ export interface SessionPayload {
 }
 
 function getSecretKey(): string {
-  return (
-    process.env.ADMIN_SESSION_SECRET ||
-    'adyk-cardex-super-secure-production-secret-token-key-2026'
-  );
+  const secret = process.env.ADMIN_SESSION_SECRET;
+  if (!secret || !secret.trim()) {
+    if (process.env.NODE_ENV === 'production') {
+      throw new Error(
+        'ADMIN_SESSION_SECRET environment variable is missing. Please configure ADMIN_SESSION_SECRET in your Vercel Project Environment Variables.'
+      );
+    }
+    // Development-only fallback for local offline testing
+    return 'cardex-development-only-session-secret-key-local';
+  }
+  return secret.trim();
 }
 
 /**
