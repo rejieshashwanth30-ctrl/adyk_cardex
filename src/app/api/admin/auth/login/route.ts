@@ -13,7 +13,7 @@ export async function POST(request: Request) {
 
     if (!email || !password) {
       return NextResponse.json(
-        { error: 'Invalid admin credentials.' },
+        { error: 'Please enter both your email address and password.' },
         { status: 400 }
       );
     }
@@ -22,7 +22,7 @@ export async function POST(request: Request) {
 
     if (!result.success || !result.token) {
       return NextResponse.json(
-        { error: result.error || 'Invalid admin credentials.' },
+        { error: result.error || 'Invalid email or password.' },
         { status: 401 }
       );
     }
@@ -37,10 +37,19 @@ export async function POST(request: Request) {
     response.cookies.set(cookieOptions.name, result.token, cookieOptions);
 
     return response;
-  } catch (err) {
+  } catch (err: unknown) {
     console.error('Error during admin login:', err);
+    const isDbError =
+      err instanceof Error &&
+      (err.message.includes('DATABASE_URL') ||
+        err.message.includes('connect') ||
+        err.message.includes('timeout'));
     return NextResponse.json(
-      { error: 'Invalid admin credentials.' },
+      {
+        error: isDbError
+          ? 'Database connection issue. Please verify DATABASE_URL in Vercel Environment Variables.'
+          : 'Server error during authentication. Please try again.',
+      },
       { status: 500 }
     );
   }
