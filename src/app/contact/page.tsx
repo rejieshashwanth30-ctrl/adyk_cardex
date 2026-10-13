@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import CardexMark from '@/components/brand/CardexMark';
-import { ArrowUpRight, Sparkles, MessageSquare, ShieldCheck, Mail } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import {
   WhatsappIcon,
   LinkedinIcon,

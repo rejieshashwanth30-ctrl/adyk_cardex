@@ -8,10 +8,13 @@ declare global {
 }
 
 function getConnectionString(): string {
-  const raw =
-    process.env.DATABASE_URL ||
-    'postgresql://neondb_owner:npg_NvejApK02Wyt@ep-crimson-water-b57gv6za-pooler.c-7.us-east-2.aws.neon.tech/neondb?sslmode=verify-full';
-  return raw.replace(/sslmode=(require|prefer|verify-ca)/g, 'sslmode=verify-full');
+  const raw = process.env.DATABASE_URL;
+  if (!raw || !raw.trim()) {
+    throw new Error(
+      'DATABASE_URL environment variable is not defined. Ensure DATABASE_URL is configured in your environment (.env.local for local, Vercel Project Settings for production).'
+    );
+  }
+  return raw.trim().replace(/sslmode=(require|prefer|verify-ca)/g, 'sslmode=verify-full');
 }
 
 export function getPool(): Pool {
@@ -567,4 +570,89 @@ export async function dbUpsertDeveloper(dev: Developer): Promise<Developer> {
     ]
   );
   return dev;
+}
+
+export async function dbDeleteProject(id: string): Promise<Project | null> {
+  await initDb();
+  const pool = getPool();
+  const res = await pool.query('DELETE FROM projects WHERE id = $1 RETURNING *', [id]);
+  if (res.rows.length === 0) return null;
+  return rowToProject(res.rows[0]);
+}
+
+export async function dbUpdateProject(
+  id: string,
+  updates: Partial<Project>
+): Promise<Project | null> {
+  await initDb();
+  const pool = getPool();
+  const now = new Date().toISOString();
+
+  // Fetch current project to merge partial updates
+  const existing = await pool.query('SELECT * FROM projects WHERE id = $1 LIMIT 1', [id]);
+  if (existing.rows.length === 0) return null;
+  const current = rowToProject(existing.rows[0]);
+
+  const updatedTitle = updates.title !== undefined ? updates.title.trim() : current.title;
+  const updatedTagline = updates.tagline !== undefined ? (updates.tagline?.trim() || null) : (current.tagline || null);
+  const updatedDesc = updates.description !== undefined ? updates.description.trim() : current.description;
+  const updatedCategory = updates.category !== undefined ? updates.category.trim() : current.category;
+  const updatedTech = updates.technologies !== undefined ? updates.technologies : current.technologies;
+  const updatedImg = updates.imageUrl !== undefined ? updates.imageUrl.trim() : current.imageUrl;
+  const updatedVideo = updates.demoVideoUrl !== undefined ? (updates.demoVideoUrl?.trim() || null) : (current.demoVideoUrl || null);
+  const updatedGithub = updates.githubUrl !== undefined ? (updates.githubUrl?.trim() || null) : (current.githubUrl || null);
+  const updatedLiveDemo = updates.liveDemoUrl !== undefined ? (updates.liveDemoUrl?.trim() || null) : (current.liveDemoUrl || null);
+  const updatedProblem = updates.problemSolved !== undefined ? (updates.problemSolved?.trim() || null) : (current.problemSolved || null);
+  const updatedHow = updates.howItWorks !== undefined ? (updates.howItWorks?.trim() || null) : (current.howItWorks || null);
+  const updatedStatus = updates.status !== undefined ? updates.status : current.status;
+  const updatedSubmissionStatus = updates.submissionStatus !== undefined ? updates.submissionStatus : current.submissionStatus;
+  const updatedCollabOpen = updates.collaborationOpen !== undefined ? updates.collaborationOpen : current.collaborationOpen;
+  const updatedLookingFor = updates.lookingFor !== undefined ? updates.lookingFor : current.lookingFor;
+  const updatedAdminNotes = updates.adminNotes !== undefined ? (updates.adminNotes?.trim() || null) : (current.adminNotes || null);
+
+  const res = await pool.query(
+    `UPDATE projects
+     SET title = $1,
+         tagline = $2,
+         description = $3,
+         category = $4,
+         technologies = $5,
+         image_url = $6,
+         demo_video_url = $7,
+         github_url = $8,
+         live_demo_url = $9,
+         problem_solved = $10,
+         how_it_works = $11,
+         status = $12,
+         submission_status = $13,
+         collaboration_open = $14,
+         looking_for = $15,
+         admin_notes = $16,
+         updated_at = $17
+     WHERE id = $18
+     RETURNING *`,
+    [
+      updatedTitle,
+      updatedTagline,
+      updatedDesc,
+      updatedCategory,
+      updatedTech,
+      updatedImg,
+      updatedVideo,
+      updatedGithub,
+      updatedLiveDemo,
+      updatedProblem,
+      updatedHow,
+      updatedStatus,
+      updatedSubmissionStatus,
+      updatedCollabOpen,
+      updatedLookingFor,
+      updatedAdminNotes,
+      now,
+      id,
+    ]
+  );
+
+  if (res.rows.length === 0) return null;
+  return rowToProject(res.rows[0]);
 }

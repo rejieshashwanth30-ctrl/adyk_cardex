@@ -1,4 +1,5 @@
 import React from 'react';
+import { connection } from 'next/server';
 import { notFound } from 'next/navigation';
 import { getDeveloperByUsername, getProjectsByCreator } from '@/lib/data/store';
 import DeveloperProfileClient from './DeveloperProfileClient';
@@ -27,6 +28,7 @@ export async function generateMetadata({ params }: DeveloperPageProps): Promise<
 }
 
 export default async function DeveloperProfilePage({ params }: DeveloperPageProps) {
+  await connection();
   const { username } = await params;
   const developer = await getDeveloperByUsername(username);
 

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useSyncExternalStore } from 'react';
 import { createPortal } from 'react-dom';
 import { Project, CollaborationRole } from '@/lib/types';
 import { X, MessageSquare, Send, CheckCircle2, ShieldCheck } from 'lucide-react';
@@ -11,17 +11,15 @@ interface CollaborateModalProps {
   onClose: () => void;
 }
 
+const emptySubscribe = () => () => {};
+
 export default function CollaborateModal({ project, isOpen, onClose }: CollaborateModalProps) {
-  const [mounted, setMounted] = useState(false);
+  const isClient = useSyncExternalStore(emptySubscribe, () => true, () => false);
   const [senderName, setSenderName] = useState('');
   const [senderContact, setSenderContact] = useState('');
   const [selectedRole, setSelectedRole] = useState(project.lookingFor[0] || 'Frontend Developer');
   const [proposal, setProposal] = useState('');
   const [submitted, setSubmitted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   // Lock body scroll and handle Escape key while modal is open
   useEffect(() => {
@@ -43,7 +41,7 @@ export default function CollaborateModal({ project, isOpen, onClose }: Collabora
     };
   }, [isOpen, onClose]);
 
-  if (!isOpen || !mounted) return null;
+  if (!isOpen || !isClient) return null;
 
   // Exact WhatsApp prefilled message URL
   const whatsAppText = encodeURIComponent(

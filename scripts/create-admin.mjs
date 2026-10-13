@@ -15,10 +15,13 @@ if (fs.existsSync('.env.local')) {
   } catch {}
 }
 
-const rawConn =
-  process.env.DATABASE_URL ||
-  'postgresql://neondb_owner:npg_NvejApK02Wyt@ep-crimson-water-b57gv6za-pooler.c-7.us-east-2.aws.neon.tech/neondb?sslmode=verify-full';
-const connectionString = rawConn.replace(/sslmode=(require|prefer|verify-ca)/g, 'sslmode=verify-full');
+const rawConn = process.env.DATABASE_URL;
+if (!rawConn || !rawConn.trim()) {
+  console.error('❌ Error: DATABASE_URL environment variable is missing.');
+  console.error('Ensure .env.local exists or provide DATABASE_URL in your environment.');
+  process.exit(1);
+}
+const connectionString = rawConn.trim().replace(/sslmode=(require|prefer|verify-ca)/g, 'sslmode=verify-full');
 
 // Read arguments: node scripts/create-admin.mjs [email] [password] [name] [role]
 // Or from env vars: ADMIN_EMAIL, ADMIN_PASSWORD, ADMIN_NAME, ADMIN_ROLE

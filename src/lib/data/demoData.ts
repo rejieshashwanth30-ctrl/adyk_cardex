@@ -60,7 +60,7 @@ export const INITIAL_PROJECTS: Project[] = [
     howItWorks:
       'Built atop Next.js and TypeScript, Adyk Cradez utilizes a lightweight WASM-backed graph scheduler that coordinates input streams, neural model inferences, and rendering engines. State mutations are propagated via WebSockets with delta compression for seamless interactive responsiveness.',
     status: 'BUILDING',
-    submissionStatus: 'APPROVED',
+    submissionStatus: 'DECLINED',
     collaborationOpen: true,
     lookingFor: ['Backend Developer', 'UI/UX Designer'],
     creatorName: 'Rahul Nair',

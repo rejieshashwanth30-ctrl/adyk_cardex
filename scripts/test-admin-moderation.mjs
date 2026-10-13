@@ -93,9 +93,26 @@ async function runTests() {
     }
     console.log('   ✅ Declined project is strictly private.\n');
 
-    // Clean up test project
+    // 7. Test Admin Edit / Update
+    await pool.query(
+      "UPDATE projects SET title = 'Updated Title Via Test Suite', updated_at = NOW() WHERE id = $1",
+      [testProjId]
+    );
+    const editRes = await pool.query("SELECT title FROM projects WHERE id = $1", [testProjId]);
+    if (editRes.rows[0]?.title !== 'Updated Title Via Test Suite') {
+      throw new Error('Project edit failed in PostgreSQL');
+    }
+    console.log('7. Edit verification in PostgreSQL: Title updated successfully.');
+    console.log('   ✅ Project mutation and update verified in PostgreSQL.\n');
+
+    // 8. Test Admin Delete
     await pool.query("DELETE FROM projects WHERE id = $1", [testProjId]);
-    console.log('7. Test cleanup complete.');
+    const deleteCheck = await pool.query("SELECT * FROM projects WHERE id = $1", [testProjId]);
+    if (deleteCheck.rows.length !== 0) {
+      throw new Error('Project delete failed in PostgreSQL');
+    }
+    console.log('8. Delete verification: Project successfully deleted from PostgreSQL.');
+    console.log('   ✅ Project deletion verified in PostgreSQL.\n');
 
     console.log('\n=============================================');
     console.log('🎉 ALL DATABASE & MODERATION TESTS PASSED!');

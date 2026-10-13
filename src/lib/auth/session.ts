@@ -14,7 +14,6 @@ export interface SessionPayload {
 function getSecretKey(): string {
   return (
     process.env.ADMIN_SESSION_SECRET ||
-    process.env.DATABASE_URL ||
     'adyk-cardex-super-secure-production-secret-token-key-2026'
   );
 }

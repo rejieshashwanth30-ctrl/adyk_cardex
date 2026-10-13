@@ -20,6 +20,10 @@ export default function AdminProjectsList({ initialProjects }: AdminProjectsList
     );
   };
 
+  const handleDelete = (deletedId: string) => {
+    setProjects((prev) => prev.filter((p) => p.id !== deletedId));
+  };
+
   const filtered = useMemo(() => {
     return projects.filter((p) => {
       const matchesStatus =
@@ -91,6 +95,7 @@ export default function AdminProjectsList({ initialProjects }: AdminProjectsList
               key={proj.id}
               project={proj}
               onStatusChange={handleStatusChange}
+              onDelete={handleDelete}
             />
           ))}
         </div>

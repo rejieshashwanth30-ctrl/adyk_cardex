@@ -1,1 +1,1 @@
-export { GET, POST } from '@/app/api/moderation/route';
+export { GET, POST, PATCH, PUT, DELETE } from '@/app/api/moderation/route';

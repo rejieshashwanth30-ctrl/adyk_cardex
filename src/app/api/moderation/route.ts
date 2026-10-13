@@ -1,7 +1,35 @@
 import { NextResponse } from 'next/server';
 import { revalidatePath } from 'next/cache';
-import { getAllProjectsAdmin, reviewProjectSubmission, getAdminStats } from '@/lib/data/store';
+import {
+  getAllProjectsAdmin,
+  reviewProjectSubmission,
+  updateProjectAdmin,
+  deleteProjectAdmin,
+  getAdminStats,
+} from '@/lib/data/store';
 import { verifyAdminSessionFromRequest } from '@/lib/auth/adminAuth';
+
+function revalidateProjectCaches(slug?: string) {
+  try {
+    revalidatePath('/', 'layout');
+    revalidatePath('/');
+    revalidatePath('/projects');
+    revalidatePath('/explore');
+    revalidatePath('/collaboration');
+    revalidatePath('/developers');
+    revalidatePath('/admin');
+    revalidatePath('/admin/projects');
+    revalidatePath('/admin/projects/pending');
+    revalidatePath('/admin/projects/approved');
+    revalidatePath('/admin/projects/declined');
+    if (slug) {
+      revalidatePath(`/projects/${slug}`);
+      revalidatePath('/projects/[slug]', 'page');
+    }
+  } catch (err) {
+    console.warn('Cache revalidation notice:', err);
+  }
+}
 
 export async function GET(request: Request) {
   try {
@@ -60,24 +88,8 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Project not found.' }, { status: 404 });
     }
 
-    // Immediately purge and revalidate public and admin route caches
-    try {
-      revalidatePath('/', 'layout');
-      revalidatePath('/');
-      revalidatePath('/projects');
-      revalidatePath('/explore');
-      revalidatePath('/collaboration');
-      revalidatePath('/admin');
-      revalidatePath('/admin/projects');
-      revalidatePath('/admin/projects/pending');
-      revalidatePath('/admin/projects/approved');
-      revalidatePath('/admin/projects/declined');
-      if (updated.slug) {
-        revalidatePath(`/projects/${updated.slug}`);
-      }
-    } catch (revalErr) {
-      console.warn('Cache revalidation warning:', revalErr);
-    }
+    // Purge and revalidate public and admin route caches
+    revalidateProjectCaches(updated.slug);
 
     return NextResponse.json({
       success: true,
@@ -86,5 +98,85 @@ export async function POST(request: Request) {
     });
   } catch {
     return NextResponse.json({ error: 'Failed to update project status' }, { status: 500 });
+  }
+}
+
+export async function PATCH(request: Request) {
+  try {
+    const admin = await verifyAdminSessionFromRequest(request);
+    if (!admin) {
+      return NextResponse.json(
+        { error: 'Unauthorized. Admin authentication required.' },
+        { status: 401 }
+      );
+    }
+
+    const body = await request.json().catch(() => ({}));
+    const { id, updates } = body;
+
+    if (!id || !updates || typeof updates !== 'object') {
+      return NextResponse.json(
+        { error: 'Valid project ID and update fields are required.' },
+        { status: 400 }
+      );
+    }
+
+    const updated = await updateProjectAdmin(id, updates);
+    if (!updated) {
+      return NextResponse.json({ error: 'Project not found.' }, { status: 404 });
+    }
+
+    revalidateProjectCaches(updated.slug);
+
+    return NextResponse.json({
+      success: true,
+      project: updated,
+      message: 'Project successfully updated in PostgreSQL database.',
+    });
+  } catch (err) {
+    console.error('PATCH /api/moderation error:', err);
+    return NextResponse.json({ error: 'Failed to update project.' }, { status: 500 });
+  }
+}
+
+export async function PUT(request: Request) {
+  return PATCH(request);
+}
+
+export async function DELETE(request: Request) {
+  try {
+    const admin = await verifyAdminSessionFromRequest(request);
+    if (!admin) {
+      return NextResponse.json(
+        { error: 'Unauthorized. Admin authentication required.' },
+        { status: 401 }
+      );
+    }
+
+    const body = await request.json().catch(() => ({}));
+    const { id } = body;
+
+    if (!id) {
+      return NextResponse.json(
+        { error: 'Project ID is required for deletion.' },
+        { status: 400 }
+      );
+    }
+
+    const deleted = await deleteProjectAdmin(id);
+    if (!deleted) {
+      return NextResponse.json({ error: 'Project not found.' }, { status: 404 });
+    }
+
+    revalidateProjectCaches(deleted.slug);
+
+    return NextResponse.json({
+      success: true,
+      deletedId: id,
+      message: 'Project successfully deleted from PostgreSQL database.',
+    });
+  } catch (err) {
+    console.error('DELETE /api/moderation error:', err);
+    return NextResponse.json({ error: 'Failed to delete project.' }, { status: 500 });
   }
 }

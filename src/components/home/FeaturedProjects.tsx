@@ -10,7 +10,7 @@ interface FeaturedProjectsProps {
 }
 
 export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
-  const demoProjects = projects.slice(0, 2);
+  const featuredProjectsList = projects.slice(0, 2);
 
   return (
     <section className="py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10 border-t border-[#EAE8E3]">
@@ -38,7 +38,7 @@ export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
       </ScrollReveal>
 
       {/* Editorial Bento Grid with Staggered Entrance */}
-      {demoProjects.length === 0 ? (
+      {featuredProjectsList.length === 0 ? (
         <ScrollReveal variant="fade-up" duration={700}>
           <div className="p-12 sm:p-16 rounded-3xl bg-[#FAF9F6] border border-[#EAE8E3] text-center max-w-2xl mx-auto space-y-4">
             <span className="text-xs uppercase tracking-wider text-[#858585] font-semibold block">
@@ -63,7 +63,7 @@ export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
         </ScrollReveal>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
-          {demoProjects.map((project, idx) => (
+          {featuredProjectsList.map((project, idx) => (
             <ScrollReveal
               key={project.id}
               variant="fade-up"

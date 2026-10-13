@@ -1,7 +1,4 @@
-import fs from 'fs';
-import path from 'path';
 import { Project, Developer, SubmissionPayload, SubmissionStatus } from '../types';
-import { INITIAL_PROJECTS, INITIAL_DEVELOPERS } from './demoData';
 import {
   dbGetApprovedProjects,
   dbGetProjectBySlug,
@@ -9,6 +6,8 @@ import {
   dbGetAllProjectsAdmin,
   dbInsertProject,
   dbReviewProject,
+  dbUpdateProject,
+  dbDeleteProject,
   dbGetAllDevelopers,
   dbGetDeveloperByUsername,
   dbUpsertDeveloper,
@@ -16,135 +15,66 @@ import {
   dbGetAdminStats,
 } from '../db';
 
-// File-based persistence storage path (acts as cache & offline fallback)
-const DATA_DIR = process.env.VERCEL
-  ? path.join('/tmp', '.cardex_data')
-  : path.join(process.cwd(), '.cardex_data');
-const DATA_FILE = path.join(DATA_DIR, 'projects.json');
-
-function ensureDataFile(): Project[] {
-  try {
-    if (!fs.existsSync(DATA_DIR)) {
-      fs.mkdirSync(DATA_DIR, { recursive: true });
-    }
-    if (!fs.existsSync(DATA_FILE)) {
-      fs.writeFileSync(DATA_FILE, JSON.stringify(INITIAL_PROJECTS, null, 2), 'utf8');
-      return INITIAL_PROJECTS;
-    }
-    const raw = fs.readFileSync(DATA_FILE, 'utf8');
-    const parsed = JSON.parse(raw);
-    if (Array.isArray(parsed) && parsed.length > 0) {
-      return parsed;
-    }
-    return INITIAL_PROJECTS;
-  } catch (err) {
-    console.error('Error loading cardex data store:', err);
-    return INITIAL_PROJECTS;
-  }
-}
-
-function saveDataFile(projects: Project[]) {
-  try {
-    if (!fs.existsSync(DATA_DIR)) {
-      fs.mkdirSync(DATA_DIR, { recursive: true });
-    }
-    fs.writeFileSync(DATA_FILE, JSON.stringify(projects, null, 2), 'utf8');
-  } catch (err) {
-    console.error('Error saving cardex data store:', err);
-  }
-}
-
-// In-memory cache synced with disk and PostgreSQL
-let cachedProjects: Project[] = ensureDataFile();
-let cachedDevelopers: Developer[] = [...INITIAL_DEVELOPERS];
-
 /**
- * Public discovery methods: Strictly approved projects only!
+ * Public discovery methods: Strictly approved projects from PostgreSQL!
  */
 export async function getApprovedProjects(): Promise<Project[]> {
   try {
     const dbProjects = await dbGetApprovedProjects();
-    if (Array.isArray(dbProjects)) {
-      cachedProjects = dbProjects;
-      saveDataFile(cachedProjects);
-      return dbProjects.map(sanitizeProjectForPublic);
-    }
+    return (dbProjects || []).map(sanitizeProjectForPublic);
   } catch (err) {
-    console.warn('PostgreSQL fetch fallback to local cache:', err);
+    console.error('PostgreSQL getApprovedProjects error:', err);
+    return [];
   }
-
-  return cachedProjects
-    .filter((p) => p.submissionStatus === 'APPROVED')
-    .map(sanitizeProjectForPublic);
 }
 
 export async function getProjectBySlug(slug: string): Promise<Project | undefined> {
   try {
     const dbProject = await dbGetProjectBySlug(slug);
-    if (dbProject) {
-      if (dbProject.submissionStatus !== 'APPROVED') return undefined;
-      return sanitizeProjectForPublic(dbProject);
-    }
+    if (!dbProject) return undefined;
+    if (dbProject.submissionStatus !== 'APPROVED') return undefined;
+    return sanitizeProjectForPublic(dbProject);
   } catch (err) {
-    console.warn('PostgreSQL getProjectBySlug fallback to cache:', err);
+    console.error(`PostgreSQL getProjectBySlug('${slug}') error:`, err);
+    return undefined;
   }
-
-  const project = cachedProjects.find((p) => p.slug === slug);
-  if (!project) return undefined;
-  if (project.submissionStatus !== 'APPROVED') return undefined;
-  return sanitizeProjectForPublic(project);
 }
 
 export async function getProjectsByCreator(username: string): Promise<Project[]> {
   try {
     const dbProjects = await dbGetProjectsByCreator(username);
-    if (dbProjects && dbProjects.length > 0) {
-      return dbProjects.map(sanitizeProjectForPublic);
-    }
+    return (dbProjects || []).map(sanitizeProjectForPublic);
   } catch (err) {
-    console.warn('PostgreSQL getProjectsByCreator fallback to cache:', err);
+    console.error(`PostgreSQL getProjectsByCreator('${username}') error:`, err);
+    return [];
   }
-
-  return cachedProjects
-    .filter((p) => p.creatorUsername === username && p.submissionStatus === 'APPROVED')
-    .map(sanitizeProjectForPublic);
 }
 
 /**
- * Developer directory methods
+ * Developer directory methods: Live data from PostgreSQL!
  */
 export async function getDevelopers(): Promise<Developer[]> {
   try {
     const dbDevs = await dbGetAllDevelopers();
-    if (dbDevs && dbDevs.length > 0) {
-      cachedDevelopers = dbDevs;
-      return dbDevs.map(sanitizeDeveloperForPublic);
-    }
+    return (dbDevs || []).map(sanitizeDeveloperForPublic);
   } catch (err) {
-    console.warn('PostgreSQL getDevelopers fallback to cache:', err);
+    console.error('PostgreSQL getDevelopers error:', err);
+    return [];
   }
-
-  return cachedDevelopers.map(sanitizeDeveloperForPublic);
 }
 
 export async function getDeveloperByUsername(username: string): Promise<Developer | undefined> {
   try {
     const dbDev = await dbGetDeveloperByUsername(username);
-    if (dbDev) {
-      return sanitizeDeveloperForPublic(dbDev);
-    }
+    return dbDev ? sanitizeDeveloperForPublic(dbDev) : undefined;
   } catch (err) {
-    console.warn('PostgreSQL getDeveloperByUsername fallback to cache:', err);
+    console.error(`PostgreSQL getDeveloperByUsername('${username}') error:`, err);
+    return undefined;
   }
-
-  const dev = cachedDevelopers.find(
-    (d) => d.username.toLowerCase() === username.toLowerCase()
-  );
-  return dev ? sanitizeDeveloperForPublic(dev) : undefined;
 }
 
 /**
- * Privacy controls: Remove private emails & raw phone numbers
+ * Privacy controls: Remove private emails & raw contact info unless opted in
  */
 function sanitizeProjectForPublic(project: Project): Project {
   return {
@@ -162,21 +92,15 @@ function sanitizeDeveloperForPublic(dev: Developer): Developer {
 }
 
 /**
- * Admin / Moderation methods
+ * Admin / Moderation methods: Direct PostgreSQL execution
  */
 export async function getAllProjectsAdmin(): Promise<Project[]> {
   try {
-    const dbProjects = await dbGetAllProjectsAdmin();
-    if (Array.isArray(dbProjects)) {
-      cachedProjects = dbProjects;
-      saveDataFile(cachedProjects);
-      return dbProjects;
-    }
+    return await dbGetAllProjectsAdmin();
   } catch (err) {
-    console.warn('PostgreSQL getAllProjectsAdmin fallback to cache:', err);
+    console.error('PostgreSQL getAllProjectsAdmin error:', err);
+    return [];
   }
-
-  return [...cachedProjects];
 }
 
 export async function reviewProjectSubmission(
@@ -186,59 +110,41 @@ export async function reviewProjectSubmission(
   adminId?: string
 ): Promise<Project | null> {
   try {
-    const updated = await dbReviewProject(id, decision as SubmissionStatus, adminNotes, adminId);
-    if (updated) {
-      // Synchronize in-memory and disk cache from PostgreSQL
-      try {
-        const all = await dbGetAllProjectsAdmin();
-        if (Array.isArray(all)) {
-          cachedProjects = all;
-          saveDataFile(cachedProjects);
-        }
-      } catch {
-        const idx = cachedProjects.findIndex((p) => p.id === id);
-        if (idx !== -1) {
-          cachedProjects[idx] = updated;
-        } else {
-          cachedProjects.unshift(updated);
-        }
-        saveDataFile(cachedProjects);
-      }
-      return updated;
-    }
+    return await dbReviewProject(id, decision as SubmissionStatus, adminNotes, adminId);
   } catch (err) {
-    console.error('PostgreSQL reviewProjectSubmission error:', err);
+    console.error(`PostgreSQL reviewProjectSubmission('${id}', '${decision}') error:`, err);
+    throw err;
   }
+}
 
-  // Local fallback
-  const index = cachedProjects.findIndex((p) => p.id === id);
-  if (index === -1) return null;
+export async function updateProjectAdmin(
+  id: string,
+  updates: Partial<Project>
+): Promise<Project | null> {
+  try {
+    return await dbUpdateProject(id, updates);
+  } catch (err) {
+    console.error(`PostgreSQL updateProjectAdmin('${id}') error:`, err);
+    throw err;
+  }
+}
 
-  const now = new Date().toISOString();
-  cachedProjects[index] = {
-    ...cachedProjects[index],
-    submissionStatus: decision,
-    adminNotes: adminNotes || cachedProjects[index].adminNotes,
-    reviewedAt: now,
-    reviewedById: adminId,
-    updatedAt: now,
-  };
-
-  saveDataFile(cachedProjects);
-  return cachedProjects[index];
+export async function deleteProjectAdmin(id: string): Promise<Project | null> {
+  try {
+    return await dbDeleteProject(id);
+  } catch (err) {
+    console.error(`PostgreSQL deleteProjectAdmin('${id}') error:`, err);
+    throw err;
+  }
 }
 
 export async function getProjectsByStatus(status: SubmissionStatus): Promise<Project[]> {
   try {
-    const dbProjects = await dbGetProjectsBySubmissionStatus(status);
-    if (dbProjects) {
-      return dbProjects;
-    }
+    return await dbGetProjectsBySubmissionStatus(status);
   } catch (err) {
-    console.warn('PostgreSQL getProjectsByStatus fallback to cache:', err);
+    console.error(`PostgreSQL getProjectsByStatus('${status}') error:`, err);
+    return [];
   }
-
-  return cachedProjects.filter((p) => p.submissionStatus === status);
 }
 
 export async function getAdminStats(): Promise<{
@@ -251,30 +157,24 @@ export async function getAdminStats(): Promise<{
   try {
     return await dbGetAdminStats();
   } catch (err) {
-    console.warn('PostgreSQL getAdminStats fallback to cache calculation:', err);
-    const pendingCount = cachedProjects.filter((p) => p.submissionStatus === 'PENDING').length;
-    const approvedCount = cachedProjects.filter((p) => p.submissionStatus === 'APPROVED').length;
-    const declinedCount = cachedProjects.filter((p) => p.submissionStatus === 'DECLINED').length;
+    console.error('PostgreSQL getAdminStats error:', err);
     return {
-      pendingCount,
-      approvedCount,
-      declinedCount,
-      totalProjects: cachedProjects.length,
-      totalDevelopers: cachedDevelopers.length,
+      pendingCount: 0,
+      approvedCount: 0,
+      declinedCount: 0,
+      totalProjects: 0,
+      totalDevelopers: 0,
     };
   }
 }
 
 export async function getAllDevelopersAdmin(): Promise<Developer[]> {
   try {
-    const dbDevs = await dbGetAllDevelopers();
-    if (dbDevs && dbDevs.length > 0) {
-      return dbDevs;
-    }
+    return await dbGetAllDevelopers();
   } catch (err) {
-    console.warn('PostgreSQL getAllDevelopersAdmin fallback to cache:', err);
+    console.error('PostgreSQL getAllDevelopersAdmin error:', err);
+    return [];
   }
-  return [...cachedDevelopers];
 }
 
 /**
@@ -341,15 +241,7 @@ export async function submitProject(payload: SubmissionPayload): Promise<{
   };
 
   // Insert into PostgreSQL
-  try {
-    await dbInsertProject(newProject);
-  } catch (err) {
-    console.error('PostgreSQL dbInsertProject error:', err);
-  }
-
-  // Update in-memory & file cache
-  cachedProjects.unshift(newProject);
-  saveDataFile(cachedProjects);
+  await dbInsertProject(newProject);
 
   // Auto-register developer if not existing
   const newDev: Developer = {
@@ -374,17 +266,7 @@ export async function submitProject(payload: SubmissionPayload): Promise<{
   try {
     await dbUpsertDeveloper(newDev);
   } catch (err) {
-    console.error('PostgreSQL dbUpsertDeveloper error:', err);
-  }
-
-  const existingDev = cachedDevelopers.find((d) => d.username === username);
-  if (!existingDev) {
-    cachedDevelopers.push(newDev);
-  } else {
-    existingDev.featuredProjectSlugs.push(slug);
-    if (payload.creatorAvatarUrl?.trim()) {
-      existingDev.avatarUrl = payload.creatorAvatarUrl.trim();
-    }
+    console.error('PostgreSQL dbUpsertDeveloper error during submit:', err);
   }
 
   return { success: true, project: newProject };

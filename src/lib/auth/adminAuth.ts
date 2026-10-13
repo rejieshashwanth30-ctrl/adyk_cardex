@@ -8,7 +8,6 @@ export * from './session';
 import {
   ADMIN_COOKIE_NAME,
   SESSION_DURATION_SECONDS,
-  SessionPayload,
   createSessionToken,
   verifySessionToken,
 } from './session';
