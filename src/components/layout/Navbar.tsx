@@ -15,6 +15,7 @@ import {
   Handshake,
   Info,
   Search,
+  MessageSquare,
 } from 'lucide-react';
 
 const NAV_LINKS = [
@@ -23,6 +24,7 @@ const NAV_LINKS = [
   { name: 'Developers', href: '/developers', icon: Users },
   { name: 'Collaboration', href: '/collaboration', icon: Handshake },
   { name: 'About', href: '/about', icon: Info },
+  { name: 'Contact', href: '/contact', icon: MessageSquare },
 ];
 
 export default function Navbar() {

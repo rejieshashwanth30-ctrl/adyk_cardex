@@ -8,6 +8,7 @@ import CollaborationSection from '@/components/home/CollaborationSection';
 import HowItWorksSection from '@/components/home/HowItWorksSection';
 import SubmitCtaSection from '@/components/home/SubmitCtaSection';
 import HomeAboutSection from '@/components/home/HomeAboutSection';
+import HomeContactSection from '@/components/home/HomeContactSection';
 import { getApprovedProjects, getDevelopers } from '@/lib/data/store';
 
 export const metadata = {
@@ -48,6 +49,9 @@ export default async function HomePage() {
 
       {/* 9. About ADYK CARDEX */}
       <HomeAboutSection />
+
+      {/* 10. Connect with ADYK & ADYK Inspire */}
+      <HomeContactSection />
     </div>
   );
 }
