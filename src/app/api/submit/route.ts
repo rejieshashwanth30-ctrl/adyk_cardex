@@ -118,6 +118,7 @@ export async function POST(request: Request) {
     const payload: SubmissionPayload = {
       creatorName,
       creatorEmail,
+      creatorAvatarUrl: sanitizeString(body.creatorAvatarUrl) || undefined,
       creatorWhatsApp: sanitizeString(body.creatorWhatsApp),
       allowWhatsAppContact: Boolean(body.allowWhatsAppContact),
       projectTitle,

@@ -1,7 +1,8 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Developer, Project } from '@/lib/types';
 import AvailabilityBadge from '@/components/developers/AvailabilityBadge';
 import ProjectCard from '@/components/projects/ProjectCard';
@@ -25,11 +26,15 @@ export default function DeveloperProfileClient({
   developer,
   projects,
 }: DeveloperProfileClientProps) {
+  const [imageError, setImageError] = useState(false);
   const initials = developer.name
     .split(' ')
     .map((n) => n[0])
     .join('')
-    .slice(0, 2);
+    .slice(0, 2)
+    .toUpperCase();
+
+  const hasAvatar = Boolean(developer.avatarUrl && !imageError);
 
   // WhatsApp click-to-chat if allowed
   const cleanPhone = developer.whatsApp?.replace(/[^0-9]/g, '') || '';
@@ -59,8 +64,22 @@ export default function DeveloperProfileClient({
           {/* Avatar & Info */}
           <div className="flex flex-col sm:flex-row items-start gap-8">
             <div className="relative w-28 h-28 rounded-2xl bg-[#F8F7F4] border border-[#EAE8E3] flex items-center justify-center font-bold text-3xl text-[#111111] flex-shrink-0 shadow-sm">
-              {initials}
-              <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-white rounded-full border border-[#EAE8E3] shadow-sm flex items-center justify-center">
+              {hasAvatar ? (
+                <div className="w-full h-full rounded-2xl overflow-hidden relative">
+                  <Image
+                    src={developer.avatarUrl!}
+                    alt={developer.name}
+                    fill
+                    priority
+                    className="object-cover"
+                    sizes="112px"
+                    onError={() => setImageError(true)}
+                  />
+                </div>
+              ) : (
+                <span>{initials}</span>
+              )}
+              <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-white rounded-full border border-[#EAE8E3] shadow-sm flex items-center justify-center z-10">
                 <CardexMark size="xs" />
               </div>
             </div>

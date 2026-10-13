@@ -92,6 +92,7 @@ export interface Developer {
 export interface SubmissionPayload {
   creatorName: string;
   creatorEmail: string;
+  creatorAvatarUrl?: string;
   creatorWhatsApp?: string;
   allowWhatsAppContact: boolean;
   projectTitle: string;

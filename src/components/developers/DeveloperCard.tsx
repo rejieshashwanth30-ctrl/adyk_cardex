@@ -1,5 +1,8 @@
-import React from 'react';
+'use client';
+
+import React, { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Developer } from '@/lib/types';
 import AvailabilityBadge from './AvailabilityBadge';
 import CardexMark from '../brand/CardexMark';
@@ -10,11 +13,15 @@ interface DeveloperCardProps {
 }
 
 export default function DeveloperCard({ developer }: DeveloperCardProps) {
+  const [imageError, setImageError] = useState(false);
   const initials = developer.name
     .split(' ')
     .map((n) => n[0])
     .join('')
-    .slice(0, 2);
+    .slice(0, 2)
+    .toUpperCase();
+
+  const hasAvatar = Boolean(developer.avatarUrl && !imageError);
 
   return (
     <div className="group relative rounded-2xl sm:rounded-3xl material-luxury-card p-7 sm:p-9 flex flex-col justify-between bg-white hover:bg-[#FAF9F6] transition-all duration-400">
@@ -22,9 +29,22 @@ export default function DeveloperCard({ developer }: DeveloperCardProps) {
         {/* Top Header: Avatar + Availability */}
         <div className="flex items-start justify-between gap-4 mb-6">
           <div className="flex items-center gap-4">
-            <div className="relative w-14 h-14 rounded-2xl bg-[#F8F7F4] border border-[#EAE8E3] flex items-center justify-center font-bold text-lg text-[#111111] shadow-[0_2px_10px_rgba(0,0,0,0.03)]">
-              {initials}
-              <div className="absolute -bottom-1.5 -right-1.5 w-5 h-5 bg-white rounded-full border border-[#EAE8E3] shadow-sm flex items-center justify-center">
+            <div className="relative w-14 h-14 rounded-2xl bg-[#F8F7F4] border border-[#EAE8E3] flex items-center justify-center font-bold text-lg text-[#111111] shadow-[0_2px_10px_rgba(0,0,0,0.03)] flex-shrink-0">
+              {hasAvatar ? (
+                <div className="w-full h-full rounded-2xl overflow-hidden relative">
+                  <Image
+                    src={developer.avatarUrl!}
+                    alt={developer.name}
+                    fill
+                    className="object-cover"
+                    sizes="56px"
+                    onError={() => setImageError(true)}
+                  />
+                </div>
+              ) : (
+                <span>{initials}</span>
+              )}
+              <div className="absolute -bottom-1.5 -right-1.5 w-5 h-5 bg-white rounded-full border border-[#EAE8E3] shadow-sm flex items-center justify-center z-10">
                 <CardexMark size="xs" glow={false} />
               </div>
             </div>

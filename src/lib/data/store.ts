@@ -319,6 +319,7 @@ export async function submitProject(payload: SubmissionPayload): Promise<{
     creatorName: payload.creatorName.trim(),
     creatorUsername: username,
     creatorRole: 'Creator / Builder',
+    creatorAvatar: payload.creatorAvatarUrl?.trim() || undefined,
     creatorEmail: payload.creatorEmail.trim(), // stored safely in private database
     creatorWhatsApp: payload.creatorWhatsApp?.trim() || undefined,
     allowWhatsAppContact: Boolean(payload.allowWhatsAppContact),
@@ -346,6 +347,7 @@ export async function submitProject(payload: SubmissionPayload): Promise<{
     name: payload.creatorName.trim(),
     role: 'Project Creator',
     bio: `Creator of ${payload.projectTitle.trim()}. Building on the open web.`,
+    avatarUrl: payload.creatorAvatarUrl?.trim() || undefined,
     skills: payload.technologies,
     availability: payload.collaborationOpen ? 'OPEN FOR COLLABORATION' : 'OPEN TO CONNECT',
     collaborationPreference: 'Open to connecting with builders and creators on ADYK CARDEX.',
@@ -369,6 +371,9 @@ export async function submitProject(payload: SubmissionPayload): Promise<{
     cachedDevelopers.push(newDev);
   } else {
     existingDev.featuredProjectSlugs.push(slug);
+    if (payload.creatorAvatarUrl?.trim()) {
+      existingDev.avatarUrl = payload.creatorAvatarUrl.trim();
+    }
   }
 
   return { success: true, project: newProject };

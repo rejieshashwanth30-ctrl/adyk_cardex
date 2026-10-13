@@ -16,6 +16,7 @@ import {
   Trash2,
 } from 'lucide-react';
 import { CollaborationRole, ProjectStatus } from '@/lib/types';
+import CardexMark from '@/components/brand/CardexMark';
 
 const COLLAB_OPTIONS: CollaborationRole[] = [
   'Frontend Developer',
@@ -41,6 +42,14 @@ export default function SubmitProjectPage() {
   const [creatorEmail, setCreatorEmail] = useState('');
   const [creatorWhatsApp, setCreatorWhatsApp] = useState('');
   const [allowWhatsAppContact, setAllowWhatsAppContact] = useState(false);
+
+  // Developer Avatar Upload State (Optional)
+  const avatarInputRef = useRef<HTMLInputElement>(null);
+  const [avatarUrl, setAvatarUrl] = useState('');
+  const [avatarFile, setAvatarFile] = useState<File | null>(null);
+  const [avatarPreview, setAvatarPreview] = useState<string | null>(null);
+  const [isUploadingAvatar, setIsUploadingAvatar] = useState(false);
+  const [avatarUploadError, setAvatarUploadError] = useState<string | null>(null);
 
   const [projectTitle, setProjectTitle] = useState('');
   const [projectDescription, setProjectDescription] = useState('');
@@ -146,6 +155,72 @@ export default function SubmitProjectPage() {
     }
   };
 
+  const handleAvatarSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setAvatarUploadError(null);
+
+    // Client-side file size check (5 MB)
+    if (file.size > 5 * 1024 * 1024) {
+      setAvatarUploadError(
+        `File exceeds maximum allowed size of 5 MB (Selected size: ${(file.size / (1024 * 1024)).toFixed(2)} MB).`
+      );
+      if (avatarInputRef.current) avatarInputRef.current.value = '';
+      return;
+    }
+
+    // Client-side MIME type check
+    const validTypes = ['image/jpeg', 'image/png', 'image/webp'];
+    if (!validTypes.includes(file.type.toLowerCase())) {
+      setAvatarUploadError(
+        'Unsupported file format. Please select a JPG, PNG, or WebP image.'
+      );
+      if (avatarInputRef.current) avatarInputRef.current.value = '';
+      return;
+    }
+
+    // Instant local preview
+    setAvatarFile(file);
+    const objectUrl = URL.createObjectURL(file);
+    setAvatarPreview(objectUrl);
+
+    // Upload to server-side endpoint
+    try {
+      setIsUploadingAvatar(true);
+      const formData = new FormData();
+      formData.append('file', file);
+
+      const res = await fetch('/api/upload', {
+        method: 'POST',
+        body: formData,
+      });
+
+      const data = await res.json();
+      if (!res.ok || !data.success) {
+        setAvatarUploadError(data.error || 'Failed to upload profile picture. Please try again.');
+        setAvatarUrl('');
+      } else {
+        setAvatarUrl(data.url);
+      }
+    } catch {
+      setAvatarUploadError('Network error uploading profile picture. Please try again.');
+      setAvatarUrl('');
+    } finally {
+      setIsUploadingAvatar(false);
+    }
+  };
+
+  const handleRemoveAvatar = () => {
+    setAvatarFile(null);
+    setAvatarPreview(null);
+    setAvatarUrl('');
+    setAvatarUploadError(null);
+    if (avatarInputRef.current) {
+      avatarInputRef.current.value = '';
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMessage('');
@@ -172,6 +247,7 @@ export default function SubmitProjectPage() {
           creatorEmail,
           creatorWhatsApp,
           allowWhatsAppContact,
+          creatorAvatarUrl: avatarUrl || undefined,
           projectTitle,
           projectDescription,
           category,
@@ -339,6 +415,125 @@ export default function SubmitProjectPage() {
                     Allow direct &ldquo;COLLABORATE ON WHATSAPP&rdquo; click-to-chat button on project page (Default: OFF)
                   </span>
                 </label>
+              </div>
+
+              {/* Developer Profile Picture (Optional) */}
+              <div className="pt-4 border-t border-[#EAE8E3]">
+                <div className="flex items-center justify-between mb-1.5">
+                  <label className="block text-xs font-semibold text-[#111111]">
+                    Developer Profile Picture (Optional)
+                  </label>
+                  {avatarUrl ? (
+                    <span className="text-xs text-[#059669] font-bold uppercase flex items-center gap-1">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#059669]" />
+                      <span>Photo Attached</span>
+                    </span>
+                  ) : (
+                    <span className="text-xs text-[#858585]">
+                      Optional &bull; Initials used if skipped
+                    </span>
+                  )}
+                </div>
+                <p className="text-xs text-[#555555] mb-3 font-normal">
+                  Upload an optional profile picture for your developer card. If skipped, your 2-letter monogram initials will be displayed.
+                </p>
+
+                {/* Native Device File Input for Profile Photo */}
+                <input
+                  ref={avatarInputRef}
+                  type="file"
+                  accept="image/jpeg,image/png,image/webp"
+                  className="hidden"
+                  onChange={handleAvatarSelect}
+                />
+
+                <div className="flex flex-col sm:flex-row sm:items-center gap-4 p-4 rounded-2xl bg-[#FAF9F6] border border-[#EAE8E3]">
+                  {/* The exact Developer Card preview box */}
+                  <div className="relative w-14 h-14 rounded-2xl bg-white border border-[#EAE8E3] flex items-center justify-center font-bold text-lg text-[#111111] shadow-[0_2px_10px_rgba(0,0,0,0.03)] flex-shrink-0">
+                    {avatarPreview ? (
+                      <div className="w-full h-full rounded-2xl overflow-hidden relative">
+                        <Image
+                          src={avatarPreview}
+                          alt="Profile Preview"
+                          fill
+                          unoptimized
+                          className="object-cover"
+                        />
+                        {isUploadingAvatar && (
+                          <div className="absolute inset-0 bg-black/50 backdrop-blur-xs flex items-center justify-center">
+                            <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                          </div>
+                        )}
+                      </div>
+                    ) : (
+                      <span>
+                        {creatorName.trim()
+                          ? creatorName
+                              .trim()
+                              .split(' ')
+                              .map((n) => n[0])
+                              .join('')
+                              .slice(0, 2)
+                              .toUpperCase()
+                          : 'DEV'}
+                      </span>
+                    )}
+                    <div className="absolute -bottom-1.5 -right-1.5 w-5 h-5 bg-white rounded-full border border-[#EAE8E3] shadow-sm flex items-center justify-center z-10">
+                      <CardexMark size="xs" glow={false} />
+                    </div>
+                  </div>
+
+                  {/* Actions & Explanations */}
+                  <div className="flex-1 min-w-0">
+                    <div className="flex flex-wrap items-center gap-2 mb-1.5">
+                      <button
+                        type="button"
+                        onClick={() => avatarInputRef.current?.click()}
+                        disabled={isUploadingAvatar}
+                        className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-white border border-[#EAE8E3] hover:border-[#111111] text-[#111111] text-xs uppercase tracking-wider font-semibold transition-all shadow-sm disabled:opacity-50"
+                      >
+                        {avatarPreview ? (
+                          <>
+                            <RefreshCw className="w-3 h-3 text-[#555555]" />
+                            <span>Change Profile Photo</span>
+                          </>
+                        ) : (
+                          <>
+                            <Plus className="w-3 h-3 text-[#B99752]" />
+                            <span>+ Upload Profile Photo</span>
+                          </>
+                        )}
+                      </button>
+
+                      {avatarPreview && (
+                        <button
+                          type="button"
+                          onClick={handleRemoveAvatar}
+                          disabled={isUploadingAvatar}
+                          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#FAF0F0] hover:bg-[#FCE8E8] border border-red-200 text-red-700 text-xs uppercase tracking-wider font-semibold transition-all disabled:opacity-50"
+                        >
+                          <Trash2 className="w-3 h-3" />
+                          <span>Remove</span>
+                        </button>
+                      )}
+                    </div>
+
+                    <p className="text-[11px] text-[#858585]">
+                      {isUploadingAvatar
+                        ? 'Optimizing & uploading profile picture...'
+                        : avatarPreview
+                        ? `${avatarFile?.name || 'Profile photo uploaded'} (ready)`
+                        : 'JPG, PNG, or WebP &bull; Max 5 MB &bull; Device camera or photo library'}
+                    </p>
+
+                    {avatarUploadError && (
+                      <p className="text-xs text-red-600 mt-1.5 font-medium flex items-center gap-1">
+                        <AlertCircle className="w-3.5 h-3.5 flex-shrink-0" />
+                        <span>{avatarUploadError}</span>
+                      </p>
+                    )}
+                  </div>
+                </div>
               </div>
             </div>
 

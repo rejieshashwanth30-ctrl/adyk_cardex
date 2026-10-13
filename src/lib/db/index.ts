@@ -537,6 +537,7 @@ export async function dbUpsertDeveloper(dev: Developer): Promise<Developer> {
       name = EXCLUDED.name,
       role = EXCLUDED.role,
       bio = EXCLUDED.bio,
+      avatar_url = COALESCE(EXCLUDED.avatar_url, developers.avatar_url),
       skills = EXCLUDED.skills,
       featured_project_slugs = EXCLUDED.featured_project_slugs,
       github_url = COALESCE(EXCLUDED.github_url, developers.github_url),

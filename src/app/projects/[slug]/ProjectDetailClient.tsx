@@ -26,6 +26,16 @@ interface ProjectDetailClientProps {
 
 export default function ProjectDetailClient({ project, creator }: ProjectDetailClientProps) {
   const [collabOpen, setCollabOpen] = useState(false);
+  const [avatarError, setAvatarError] = useState(false);
+
+  const creatorAvatarUrl = creator?.avatarUrl || project.creatorAvatar;
+  const showCreatorAvatar = Boolean(creatorAvatarUrl && !avatarError);
+  const creatorInitials = project.creatorName
+    .split(' ')
+    .map((n) => n[0])
+    .join('')
+    .slice(0, 2)
+    .toUpperCase();
 
   // Exact WhatsApp prefilled message
   const cleanPhone = project.creatorWhatsApp?.replace(/[^0-9]/g, '') || '';
@@ -212,12 +222,19 @@ export default function ProjectDetailClient({ project, creator }: ProjectDetailC
             </span>
 
             <div className="flex items-center gap-3.5 mb-4">
-              <div className="w-12 h-12 rounded-xl bg-[#F8F7F4] border border-[#EAE8E3] flex items-center justify-center font-bold text-[#111111] text-base">
-                {project.creatorName
-                  .split(' ')
-                  .map((n) => n[0])
-                  .join('')
-                  .slice(0, 2)}
+              <div className="relative w-12 h-12 rounded-xl bg-[#F8F7F4] border border-[#EAE8E3] flex items-center justify-center font-bold text-[#111111] text-base flex-shrink-0 overflow-hidden">
+                {showCreatorAvatar ? (
+                  <Image
+                    src={creatorAvatarUrl!}
+                    alt={project.creatorName}
+                    fill
+                    className="object-cover"
+                    sizes="48px"
+                    onError={() => setAvatarError(true)}
+                  />
+                ) : (
+                  <span>{creatorInitials}</span>
+                )}
               </div>
               <div>
                 <h3 className="text-base font-bold text-[#111111]">
