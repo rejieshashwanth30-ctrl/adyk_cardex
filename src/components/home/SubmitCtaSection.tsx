@@ -20,7 +20,7 @@ export default function SubmitCtaSection() {
             </div>
 
             {/* Label */}
-            <span className="font-mono text-xs uppercase tracking-[0.3em] text-[#858585] font-semibold block mb-4">
+            <span className="text-xs uppercase tracking-wider text-[#858585] font-semibold block mb-4">
               BUILT SOMETHING? &bull; OPEN INTAKE
             </span>
 
@@ -37,22 +37,22 @@ export default function SubmitCtaSection() {
             <div className="flex flex-wrap items-center justify-center gap-4">
               <Link
                 href="/submit"
-                className="inline-flex items-center gap-2.5 px-8 py-4 rounded-xl bg-[#111111] hover:bg-[#222222] text-white font-semibold text-xs font-mono uppercase tracking-[0.15em] shadow-[0_4px_25px_rgba(0,0,0,0.12)] hover:shadow-[0_6px_30px_rgba(0,0,0,0.18)] transition-all duration-300 hover:scale-[1.01]"
+                className="inline-flex items-center gap-2.5 px-8 py-4 rounded-xl bg-[#111111] hover:bg-[#222222] text-white font-semibold text-xs tracking-wider uppercase shadow-[0_4px_25px_rgba(0,0,0,0.12)] hover:shadow-[0_6px_30px_rgba(0,0,0,0.18)] transition-all duration-300 hover:scale-[1.01]"
               >
                 <Plus className="w-3.5 h-3.5 text-[#B99752] stroke-[2.5]" />
-                <span>SUBMIT YOUR PROJECT</span>
+                <span>Submit Your Project</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </Link>
 
               <Link
                 href="/about"
-                className="inline-flex items-center gap-2 px-7 py-4 rounded-xl bg-white hover:bg-[#F8F7F4] text-[#111111] font-semibold text-xs font-mono uppercase tracking-[0.15em] border border-[#EAE8E3] hover:border-[#D6D2C8] transition-all shadow-sm"
+                className="inline-flex items-center gap-2 px-7 py-4 rounded-xl bg-white hover:bg-[#F8F7F4] text-[#111111] font-semibold text-xs tracking-wider uppercase border border-[#EAE8E3] hover:border-[#D6D2C8] transition-all shadow-sm"
               >
-                <span>ABOUT ADYK CARDEX</span>
+                <span>About ADYK CARDEX</span>
               </Link>
             </div>
 
-            <div className="mt-10 flex items-center gap-5 text-xs font-mono text-[#858585]">
+            <div className="mt-10 flex items-center gap-5 text-xs text-[#858585] font-medium">
               <span className="flex items-center gap-1.5">
                 <ShieldCheck className="w-3.5 h-3.5 text-[#B99752]" />
                 <span>No Login Required in V1</span>

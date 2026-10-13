@@ -59,7 +59,7 @@ export default function DevelopersListClient({ initialDevelopers }: DevelopersLi
     <div className="pt-28 pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10">
       {/* Header */}
       <div className="mb-14 border-b border-[#EAE8E3] pb-10">
-        <div className="inline-flex items-center gap-2 text-[10px] font-mono uppercase tracking-[0.25em] text-[#858585] mb-3 font-semibold">
+        <div className="inline-flex items-center gap-2 text-xs uppercase tracking-wider text-[#858585] mb-3 font-semibold">
           <Users className="w-3.5 h-3.5 text-[#B99752]" />
           <span>BUILDERS</span>
         </div>
@@ -93,7 +93,7 @@ export default function DevelopersListClient({ initialDevelopers }: DevelopersLi
           )}
         </div>
 
-        <div className="p-4 rounded-xl material-luxury-card bg-white border border-[#EAE8E3] flex flex-wrap items-center gap-3 text-xs font-mono">
+        <div className="p-4 rounded-xl material-luxury-card bg-white border border-[#EAE8E3] flex flex-wrap items-center gap-3 text-xs">
           <div className="flex items-center gap-1.5 text-[#858585] mr-2 tracking-wider font-semibold">
             <SlidersHorizontal className="w-3.5 h-3.5 text-[#B99752]" />
             <span>FILTER:</span>
@@ -139,10 +139,10 @@ export default function DevelopersListClient({ initialDevelopers }: DevelopersLi
       {/* Grid */}
       {filteredDevelopers.length === 0 ? (
         <div className="text-center py-20 material-luxury-card bg-white rounded-3xl p-10 border border-[#EAE8E3]">
-          <p className="text-[#858585] text-sm font-mono mb-4">No developers match your active filters.</p>
+          <p className="text-[#858585] text-sm mb-4">No developers match your active filters.</p>
           <button
             onClick={resetFilters}
-            className="px-5 py-2.5 rounded-xl bg-[#111111] hover:bg-[#222222] text-white text-xs font-mono uppercase tracking-wider font-semibold transition-colors"
+            className="px-5 py-2.5 rounded-xl bg-[#111111] hover:bg-[#222222] text-white text-xs uppercase tracking-wider font-semibold transition-colors"
           >
             Reset Filters
           </button>

@@ -40,10 +40,10 @@ export default function ProjectDetailClient({ project, creator }: ProjectDetailC
       <div className="mb-8">
         <Link
           href="/projects"
-          className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.2em] text-[#858585] hover:text-[#111111] transition-colors font-medium"
+          className="inline-flex items-center gap-2 text-xs uppercase tracking-wider text-[#858585] hover:text-[#111111] transition-colors font-medium"
         >
           <ArrowLeft className="w-3.5 h-3.5" />
-          <span>BACK TO ALL PROJECTS</span>
+          <span>Back to all projects</span>
         </Link>
       </div>
 
@@ -66,9 +66,9 @@ export default function ProjectDetailClient({ project, creator }: ProjectDetailC
             <StatusBadge status={project.status} />
 
             {project.collaborationOpen && (
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono tracking-[0.15em] uppercase bg-white/95 border border-[#B99752]/40 text-[#111111] backdrop-blur-md shadow-sm">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs bg-white/95 border border-[#B99752]/40 text-[#111111] backdrop-blur-md shadow-sm">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#B99752] animate-pulse" />
-                <span className="font-semibold">OPEN FOR COLLABORATION</span>
+                <span className="font-semibold">Open for Collaboration</span>
               </span>
             )}
           </div>
@@ -76,7 +76,7 @@ export default function ProjectDetailClient({ project, creator }: ProjectDetailC
           {/* Hero Title & Identity Bottom Overlay */}
           <div className="absolute bottom-6 left-6 right-6 flex flex-col md:flex-row md:items-end justify-between gap-6 z-10">
             <div className="max-w-2xl text-white">
-              <span className="text-xs font-mono uppercase tracking-[0.25em] text-neutral-300 font-semibold mb-2 block">
+              <span className="text-xs uppercase tracking-wider text-neutral-300 font-semibold mb-2 block">
                 {project.category}
               </span>
               <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-[-0.03em] uppercase mb-2 text-white drop-shadow-sm">
@@ -95,17 +95,17 @@ export default function ProjectDetailClient({ project, creator }: ProjectDetailC
                 <button
                   type="button"
                   onClick={() => setCollabOpen(true)}
-                  className="px-6 py-3.5 rounded-xl bg-[#111111] hover:bg-[#222222] text-white font-mono text-xs uppercase tracking-[0.15em] font-semibold transition-all shadow-md"
+                  className="px-6 py-3.5 rounded-xl bg-[#111111] hover:bg-[#222222] text-white text-xs uppercase tracking-wider font-semibold transition-all shadow-md"
                 >
-                  COLLABORATE &rarr;
+                  Collaborate &rarr;
                 </button>
               )}
 
               <Link
                 href={`/developers/${project.creatorUsername}`}
-                className="px-5 py-3.5 rounded-xl bg-white hover:bg-[#F8F7F4] text-[#111111] font-mono text-xs uppercase tracking-[0.15em] font-semibold border border-[#EAE8E3] transition-colors shadow-sm"
+                className="px-5 py-3.5 rounded-xl bg-white hover:bg-[#F8F7F4] text-[#111111] text-xs uppercase tracking-wider font-semibold border border-[#EAE8E3] transition-colors shadow-sm"
               >
-                VIEW CREATOR &rarr;
+                View Creator &rarr;
               </Link>
             </div>
           </div>
@@ -118,9 +118,9 @@ export default function ProjectDetailClient({ project, creator }: ProjectDetailC
         <div className="lg:col-span-8 space-y-10">
           {/* Overview */}
           <section className="p-8 sm:p-10 rounded-3xl material-luxury-card bg-white border border-[#EAE8E3]">
-            <h2 className="text-lg font-bold text-[#111111] mb-4 flex items-center gap-2 font-mono uppercase tracking-wider">
+            <h2 className="text-lg font-bold text-[#111111] mb-4 flex items-center gap-2">
               <Layers className="w-4 h-4 text-[#B99752]" />
-              <span>PROJECT OVERVIEW</span>
+              <span>Project Overview</span>
             </h2>
             <p className="text-[#555555] text-base leading-relaxed whitespace-pre-line font-normal">
               {project.description}
@@ -130,9 +130,9 @@ export default function ProjectDetailClient({ project, creator }: ProjectDetailC
           {/* Problem Solved */}
           {project.problemSolved && (
             <section className="p-8 sm:p-10 rounded-3xl material-luxury-card bg-white border border-[#EAE8E3]">
-              <h2 className="text-lg font-bold text-[#111111] mb-4 flex items-center gap-2 font-mono uppercase tracking-wider">
+              <h2 className="text-lg font-bold text-[#111111] mb-4 flex items-center gap-2">
                 <ShieldCheck className="w-4 h-4 text-[#B99752]" />
-                <span>PROBLEM SOLVED</span>
+                <span>Problem Solved</span>
               </h2>
               <p className="text-[#555555] text-base leading-relaxed whitespace-pre-line font-normal">
                 {project.problemSolved}
@@ -143,9 +143,9 @@ export default function ProjectDetailClient({ project, creator }: ProjectDetailC
           {/* How It Works */}
           {project.howItWorks && (
             <section className="p-8 sm:p-10 rounded-3xl material-luxury-card bg-white border border-[#EAE8E3]">
-              <h2 className="text-lg font-bold text-[#111111] mb-4 flex items-center gap-2 font-mono uppercase tracking-wider">
+              <h2 className="text-lg font-bold text-[#111111] mb-4 flex items-center gap-2">
                 <Cpu className="w-4 h-4 text-[#B99752]" />
-                <span>HOW IT WORKS &amp; ARCHITECTURE</span>
+                <span>How It Works &amp; Architecture</span>
               </h2>
               <p className="text-[#555555] text-base leading-relaxed whitespace-pre-line font-normal">
                 {project.howItWorks}
@@ -156,8 +156,8 @@ export default function ProjectDetailClient({ project, creator }: ProjectDetailC
           {/* Collaboration Requirements */}
           {project.collaborationOpen && project.lookingFor.length > 0 && (
             <section className="p-8 sm:p-10 rounded-3xl material-luxury-card bg-[#FAF9F6] border border-[#EAE8E3] shadow-sm">
-              <div className="flex items-center gap-2 text-[#111111] text-xs font-mono uppercase tracking-[0.25em] font-bold mb-2">
-                <span>ACTIVE COLLABORATION NEEDS</span>
+              <div className="flex items-center gap-2 text-[#111111] text-xs uppercase tracking-wider font-bold mb-2">
+                <span>Active Collaboration Needs</span>
               </div>
               <h2 className="text-2xl sm:text-3xl font-black text-[#111111] uppercase tracking-tight mb-3">
                 Seeking Teammates &amp; Contributors
@@ -170,7 +170,7 @@ export default function ProjectDetailClient({ project, creator }: ProjectDetailC
                 {project.lookingFor.map((role) => (
                   <div
                     key={role}
-                    className="p-3.5 rounded-xl bg-white border border-[#EAE8E3] flex items-center gap-3 text-sm text-[#111111] font-mono uppercase tracking-wider shadow-sm font-medium"
+                    className="p-3.5 rounded-xl bg-white border border-[#EAE8E3] flex items-center gap-3 text-sm text-[#111111] shadow-sm font-medium"
                   >
                     <div className="w-1.5 h-1.5 rounded-full bg-[#B99752]" />
                     <span>{role}</span>
@@ -182,9 +182,9 @@ export default function ProjectDetailClient({ project, creator }: ProjectDetailC
                 <button
                   type="button"
                   onClick={() => setCollabOpen(true)}
-                  className="px-7 py-3.5 rounded-xl bg-[#111111] hover:bg-[#222222] text-white font-mono text-xs uppercase tracking-[0.15em] font-semibold shadow-md transition-colors"
+                  className="px-7 py-3.5 rounded-xl bg-[#111111] hover:bg-[#222222] text-white text-xs uppercase tracking-wider font-semibold shadow-md transition-colors"
                 >
-                  TRANSMIT COLLABORATION PROPOSAL &rarr;
+                  Transmit Collaboration Proposal &rarr;
                 </button>
 
                 {project.allowWhatsAppContact && project.creatorWhatsApp && (
@@ -192,10 +192,10 @@ export default function ProjectDetailClient({ project, creator }: ProjectDetailC
                     href={whatsAppLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white hover:bg-[#F8F7F4] border border-[#EAE8E3] hover:border-[#B99752] text-[#111111] font-mono text-xs uppercase tracking-[0.15em] transition-all font-semibold shadow-sm"
+                    className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white hover:bg-[#F8F7F4] border border-[#EAE8E3] hover:border-[#B99752] text-[#111111] text-xs uppercase tracking-wider transition-all font-semibold shadow-sm"
                   >
                     <MessageSquare className="w-4 h-4 text-[#B99752]" />
-                    <span>COLLABORATE ON WHATSAPP &rarr;</span>
+                    <span>Collaborate on WhatsApp &rarr;</span>
                   </a>
                 )}
               </div>
@@ -207,12 +207,12 @@ export default function ProjectDetailClient({ project, creator }: ProjectDetailC
         <div className="lg:col-span-4 space-y-6">
           {/* Creator Profile Box */}
           <div className="p-7 rounded-3xl material-luxury-card bg-white border border-[#EAE8E3]">
-            <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-[#858585] font-semibold block mb-4">
-              PROJECT CREATOR
+            <span className="text-xs uppercase tracking-wider text-[#858585] font-semibold block mb-4">
+              Project Creator
             </span>
 
             <div className="flex items-center gap-3.5 mb-4">
-              <div className="w-12 h-12 rounded-xl bg-[#F8F7F4] border border-[#EAE8E3] flex items-center justify-center font-mono font-bold text-[#111111] text-base">
+              <div className="w-12 h-12 rounded-xl bg-[#F8F7F4] border border-[#EAE8E3] flex items-center justify-center font-bold text-[#111111] text-base">
                 {project.creatorName
                   .split(' ')
                   .map((n) => n[0])
@@ -223,7 +223,7 @@ export default function ProjectDetailClient({ project, creator }: ProjectDetailC
                 <h3 className="text-base font-bold text-[#111111]">
                   {project.creatorName}
                 </h3>
-                <p className="text-xs font-mono uppercase tracking-wider text-[#858585]">
+                <p className="text-xs text-[#858585]">
                   @{project.creatorUsername}
                 </p>
               </div>
@@ -243,19 +243,19 @@ export default function ProjectDetailClient({ project, creator }: ProjectDetailC
 
             <Link
               href={`/developers/${project.creatorUsername}`}
-              className="w-full py-2.5 rounded-xl bg-[#F8F7F4] hover:bg-[#EAE8E3] border border-[#EAE8E3] text-xs font-mono uppercase tracking-[0.15em] text-center block text-[#111111] font-medium transition-colors"
+              className="w-full py-2.5 rounded-xl bg-[#F8F7F4] hover:bg-[#EAE8E3] border border-[#EAE8E3] text-xs uppercase tracking-wider text-center block text-[#111111] font-medium transition-colors"
             >
-              VIEW FULL PROFILE &rarr;
+              View Full Profile &rarr;
             </Link>
           </div>
 
           {/* External Links */}
           <div className="p-7 rounded-3xl material-luxury-card bg-white border border-[#EAE8E3]">
-            <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-[#858585] font-semibold block mb-4">
-              PROJECT LINKS
+            <span className="text-xs uppercase tracking-wider text-[#858585] font-semibold block mb-4">
+              Project Links
             </span>
 
-            <div className="space-y-2.5 text-xs font-mono">
+            <div className="space-y-2.5 text-xs">
               {project.githubUrl && (
                 <a
                   href={project.githubUrl}
@@ -305,8 +305,8 @@ export default function ProjectDetailClient({ project, creator }: ProjectDetailC
 
           {/* Technologies Stack Box */}
           <div className="p-7 rounded-3xl material-luxury-card bg-white border border-[#EAE8E3]">
-            <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-[#858585] font-semibold block mb-4">
-              TECHNOLOGIES USED
+            <span className="text-xs uppercase tracking-wider text-[#858585] font-semibold block mb-4">
+              Technologies Used
             </span>
 
             <div className="flex flex-wrap gap-2">
@@ -314,7 +314,7 @@ export default function ProjectDetailClient({ project, creator }: ProjectDetailC
                 <Link
                   key={tech}
                   href={`/explore?tech=${encodeURIComponent(tech)}`}
-                  className="px-3 py-1 rounded-lg text-xs font-mono bg-[#FAF9F6] hover:bg-[#F8F7F4] text-[#555555] hover:text-[#111111] border border-[#EAE8E3] uppercase tracking-wider transition-colors font-medium"
+                  className="px-3 py-1 rounded-lg text-xs bg-[#FAF9F6] hover:bg-[#F8F7F4] text-[#555555] hover:text-[#111111] border border-[#EAE8E3] transition-colors font-medium"
                 >
                   {tech}
                 </Link>

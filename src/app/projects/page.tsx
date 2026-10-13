@@ -20,7 +20,7 @@ export default async function ProjectsPage() {
       {/* Editorial Header */}
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-16 border-b border-[#EAE8E3] pb-10">
         <div>
-          <span className="font-mono text-xs uppercase tracking-[0.3em] text-[#858585] font-semibold block mb-3">
+          <span className="text-xs uppercase tracking-wider text-[#858585] font-semibold block mb-3">
             PROJECTS &bull; VERIFIED REPOSITORY
           </span>
           <h1 className="text-4xl sm:text-6xl font-black tracking-[-0.04em] text-[#111111] uppercase leading-[0.98]">
@@ -33,10 +33,10 @@ export default async function ProjectsPage() {
 
         <Link
           href="/submit"
-          className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-[#111111] hover:bg-[#222222] text-white font-semibold text-xs font-mono tracking-[0.15em] uppercase transition-all shadow-md flex-shrink-0"
+          className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-[#111111] hover:bg-[#222222] text-white font-semibold text-xs tracking-wider uppercase transition-all shadow-md flex-shrink-0"
         >
           <Plus className="w-3.5 h-3.5 text-[#B99752]" />
-          <span>SUBMIT YOUR PROJECT</span>
+          <span>Submit Your Project</span>
         </Link>
       </div>
 

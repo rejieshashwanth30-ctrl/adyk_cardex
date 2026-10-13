@@ -42,13 +42,14 @@ export default function DeveloperProfileClient({
   return (
     <div className="pt-28 pb-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10">
       {/* Breadcrumb */}
+      {/* Back link */}
       <div className="mb-10">
         <Link
           href="/developers"
-          className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.2em] text-[#858585] hover:text-[#111111] transition-colors font-medium"
+          className="inline-flex items-center gap-2 text-xs uppercase tracking-wider text-[#858585] hover:text-[#111111] transition-colors font-medium"
         >
           <ArrowLeft className="w-3.5 h-3.5" />
-          <span>BACK TO ALL BUILDERS</span>
+          <span>Back to all builders</span>
         </Link>
       </div>
 
@@ -57,7 +58,7 @@ export default function DeveloperProfileClient({
         <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-10">
           {/* Avatar & Info */}
           <div className="flex flex-col sm:flex-row items-start gap-8">
-            <div className="relative w-28 h-28 rounded-2xl bg-[#F8F7F4] border border-[#EAE8E3] flex items-center justify-center font-mono font-black text-4xl text-[#111111] tracking-widest flex-shrink-0 shadow-sm">
+            <div className="relative w-28 h-28 rounded-2xl bg-[#F8F7F4] border border-[#EAE8E3] flex items-center justify-center font-bold text-3xl text-[#111111] flex-shrink-0 shadow-sm">
               {initials}
               <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-white rounded-full border border-[#EAE8E3] shadow-sm flex items-center justify-center">
                 <CardexMark size="xs" />
@@ -72,7 +73,7 @@ export default function DeveloperProfileClient({
                 <AvailabilityBadge availability={developer.availability} />
               </div>
 
-              <p className="text-xs sm:text-sm font-mono text-[#858585] mb-4 tracking-wider uppercase font-semibold">
+              <p className="text-sm sm:text-base text-[#444444] mb-4 font-medium">
                 @{developer.username} &bull; {developer.role}
               </p>
 
@@ -80,7 +81,7 @@ export default function DeveloperProfileClient({
                 {developer.bio}
               </p>
 
-              <div className="flex flex-wrap items-center gap-5 text-xs font-mono text-[#858585]">
+              <div className="flex flex-wrap items-center gap-5 text-xs text-[#737373] font-medium">
                 {developer.location && (
                   <span className="flex items-center gap-1.5">
                     <MapPin className="w-3.5 h-3.5 text-[#B99752]" />
@@ -102,10 +103,10 @@ export default function DeveloperProfileClient({
                 href={whatsAppLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full flex items-center justify-center gap-2 py-3 px-5 rounded-xl bg-white hover:bg-[#F8F7F4] border border-[#EAE8E3] hover:border-[#B99752] text-[#111111] font-mono text-xs uppercase tracking-wider font-semibold shadow-sm transition-all"
+                className="w-full flex items-center justify-center gap-2 py-3 px-5 rounded-xl bg-white hover:bg-[#F8F7F4] border border-[#EAE8E3] hover:border-[#B99752] text-[#111111] text-xs uppercase tracking-wider font-semibold shadow-sm transition-all"
               >
                 <MessageSquare className="w-4 h-4 text-[#B99752]" />
-                <span>DIRECT WHATSAPP &rarr;</span>
+                <span>Direct WhatsApp &rarr;</span>
               </a>
             )}
 
@@ -115,10 +116,10 @@ export default function DeveloperProfileClient({
                   href={developer.githubUrl.startsWith('http') ? developer.githubUrl : `https://github.com/${developer.githubUrl}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl bg-[#FAF9F6] hover:bg-[#F8F7F4] border border-[#EAE8E3] text-[#111111] font-mono text-xs uppercase tracking-wider transition-colors shadow-sm font-medium"
+                  className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl bg-[#FAF9F6] hover:bg-[#F8F7F4] border border-[#EAE8E3] text-[#111111] text-xs uppercase tracking-wider transition-colors shadow-sm font-medium"
                 >
                   <GithubIcon className="w-4 h-4 text-[#111111]" />
-                  <span>GITHUB</span>
+                  <span>GitHub</span>
                 </a>
               )}
 
@@ -127,10 +128,10 @@ export default function DeveloperProfileClient({
                   href={developer.linkedInUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl bg-[#FAF9F6] hover:bg-[#F8F7F4] border border-[#EAE8E3] text-[#111111] font-mono text-xs uppercase tracking-wider transition-colors shadow-sm font-medium"
+                  className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl bg-[#FAF9F6] hover:bg-[#F8F7F4] border border-[#EAE8E3] text-[#111111] text-xs uppercase tracking-wider transition-colors shadow-sm font-medium"
                 >
                   <LinkedinIcon className="w-4 h-4 text-[#111111]" />
-                  <span>LINKEDIN</span>
+                  <span>LinkedIn</span>
                 </a>
               )}
             </div>
@@ -140,10 +141,10 @@ export default function DeveloperProfileClient({
                 href={developer.portfolioUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-[#FAF9F6] hover:bg-[#F8F7F4] border border-[#EAE8E3] text-[#111111] font-mono text-xs uppercase tracking-wider transition-colors shadow-sm font-medium"
+                className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-[#FAF9F6] hover:bg-[#F8F7F4] border border-[#EAE8E3] text-[#111111] text-xs uppercase tracking-wider transition-colors shadow-sm font-medium"
               >
                 <Globe className="w-4 h-4 text-[#111111]" />
-                <span>PERSONAL WEBSITE</span>
+                <span>Personal Website</span>
               </a>
             )}
           </div>
@@ -151,14 +152,14 @@ export default function DeveloperProfileClient({
 
         {/* Skills Tag Strip */}
         <div className="mt-10 pt-8 border-t border-[#EAE8E3]">
-          <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-[#858585] block mb-3 font-semibold">
-            ENGINEERING &amp; DESIGN DOMAINS
+          <span className="text-xs uppercase tracking-wider text-[#858585] block mb-3 font-semibold">
+            Engineering &amp; Design Domains
           </span>
           <div className="flex flex-wrap gap-2">
             {developer.skills.map((skill) => (
               <span
                 key={skill}
-                className="px-3.5 py-1.5 rounded-lg text-xs font-mono bg-[#FAF9F6] text-[#111111] border border-[#EAE8E3] font-medium uppercase tracking-wider shadow-sm"
+                className="px-3.5 py-1.5 rounded-lg text-xs bg-[#FAF9F6] text-[#111111] border border-[#EAE8E3] font-medium shadow-sm"
               >
                 {skill}
               </span>
@@ -174,14 +175,14 @@ export default function DeveloperProfileClient({
             <FolderKanban className="w-5 h-5 text-[#B99752]" />
             <span>BUILDS BY {developer.name} ({projects.length})</span>
           </h2>
-          <span className="text-xs font-mono uppercase tracking-wider text-[#858585]">
-            AUTHENTIC REPOSITORIES
+          <span className="text-xs uppercase tracking-wider text-[#858585] font-medium">
+            Authentic Repositories
           </span>
         </div>
 
         {projects.length === 0 ? (
           <div className="text-center py-16 material-luxury-card bg-white rounded-3xl p-8 border border-[#EAE8E3]">
-            <p className="text-sm font-mono text-[#858585]">No verified builds listed yet.</p>
+            <p className="text-sm text-[#858585]">No verified builds listed yet.</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">

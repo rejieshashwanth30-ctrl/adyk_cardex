@@ -97,7 +97,7 @@ export default function OpeningAnimation() {
               : 'opacity-0 translate-y-3'
           }`}
         >
-          <h1 className="font-mono text-2xl md:text-3xl font-bold tracking-[0.2em] text-[#111111]">
+          <h1 className="text-2xl md:text-3xl font-black tracking-tight text-[#111111]">
             ADYK CARDEX
           </h1>
         </div>
@@ -110,7 +110,7 @@ export default function OpeningAnimation() {
               : 'opacity-0 translate-y-2'
           }`}
         >
-          <p className="font-mono text-xs uppercase tracking-[0.35em] text-[#858585]">
+          <p className="text-xs uppercase tracking-widest text-[#858585] font-medium">
             BUILD. SHOWCASE. CONNECT.
           </p>
         </div>

@@ -36,7 +36,7 @@ export default function HowItWorksSection() {
       {/* Editorial Header */}
       <ScrollReveal variant="fade-up" duration={700}>
         <div className="text-center max-w-3xl mx-auto mb-20">
-          <span className="font-mono text-xs uppercase tracking-[0.3em] text-[#858585] font-semibold block mb-3">
+          <span className="text-xs uppercase tracking-wider text-[#858585] font-semibold block mb-3">
             METHODOLOGY &bull; ARCHITECTURE
           </span>
           <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-[-0.03em] text-[#111111] uppercase leading-[1.02]">
@@ -64,14 +64,14 @@ export default function HowItWorksSection() {
               <div>
                 {/* Step Number with Gold Accented Typography */}
                 <div className="flex items-center justify-between mb-8">
-                  <span className="font-mono text-4xl sm:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-b from-[#111111] via-[#333333] to-[#B99752]">
+                  <span className="text-4xl sm:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-b from-[#111111] via-[#333333] to-[#B99752]">
                     {step.num}
                   </span>
                   <span className="w-2.5 h-2.5 rounded-full bg-[#EAE8E3] group-hover:bg-[#B99752] transition-colors" />
                 </div>
 
                 {/* Sub-label */}
-                <span className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#858585] font-bold block mb-2">
+                <span className="text-xs uppercase tracking-wider text-[#858585] font-bold block mb-2">
                   {step.label}
                 </span>
 
@@ -86,8 +86,8 @@ export default function HowItWorksSection() {
                 </p>
               </div>
 
-              <div className="mt-8 pt-4 border-t border-[#EAE8E3] text-[10px] font-mono uppercase tracking-[0.2em] text-[#858585] group-hover:text-[#111111] transition-colors font-medium">
-                PHASE {step.num} {'//'} VERIFIED
+              <div className="mt-8 pt-4 border-t border-[#EAE8E3] text-xs uppercase tracking-wider text-[#858585] group-hover:text-[#111111] transition-colors font-medium">
+                Phase {step.num} &bull; Verified
               </div>
             </div>
           </ScrollReveal>

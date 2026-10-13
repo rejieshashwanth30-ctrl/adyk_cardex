@@ -51,7 +51,7 @@ export default function HeroSection() {
           {/* Eyebrow Badge */}
           <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white border border-[#EAE8E3] shadow-[0_2px_8px_rgba(0,0,0,0.03)] mb-8">
             <span className="w-1.5 h-1.5 rounded-full bg-[#B99752] animate-pulse" />
-            <span className="font-mono text-xs uppercase tracking-[0.3em] text-[#555555] font-semibold">
+            <span className="text-xs uppercase tracking-wider text-[#555555] font-semibold">
               ADYK CARDEX &bull; DISCOVERY ENGINE
             </span>
           </div>
@@ -77,30 +77,30 @@ export default function HeroSection() {
             {/* Primary CTA (Rich Black with Gold Accent Icon) */}
             <Link
               href="/projects"
-              className="group inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl bg-[#111111] hover:bg-[#222222] text-white font-semibold text-xs font-mono uppercase tracking-[0.18em] transition-all duration-300 shadow-[0_4px_25px_rgba(0,0,0,0.12)] hover:shadow-[0_6px_30px_rgba(0,0,0,0.18)] hover:-translate-y-0.5 active:translate-y-0"
+              className="group inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl bg-[#111111] hover:bg-[#222222] text-white font-semibold text-xs tracking-wider uppercase transition-all duration-300 shadow-[0_4px_25px_rgba(0,0,0,0.12)] hover:shadow-[0_6px_30px_rgba(0,0,0,0.18)] hover:-translate-y-0.5 active:translate-y-0"
             >
-              <span>EXPLORE PROJECTS</span>
+              <span>Explore Projects</span>
               <ArrowRight className="w-3.5 h-3.5 text-[#B99752] transition-transform duration-200 group-hover:translate-x-1" />
             </Link>
 
             {/* Secondary CTA (Pure White with Crisp Border & Gold Detail) */}
             <Link
               href="/developers"
-              className="inline-flex items-center justify-center gap-2.5 px-7 py-4 rounded-xl bg-white hover:bg-[#F8F7F4] text-[#111111] font-semibold text-xs font-mono uppercase tracking-[0.18em] border border-[#EAE8E3] hover:border-[#D6D2C8] transition-all duration-300 shadow-[0_2px_12px_rgba(0,0,0,0.03)] hover:-translate-y-0.5"
+              className="inline-flex items-center justify-center gap-2.5 px-7 py-4 rounded-xl bg-white hover:bg-[#F8F7F4] text-[#111111] font-semibold text-xs tracking-wider uppercase border border-[#EAE8E3] hover:border-[#D6D2C8] transition-all duration-300 shadow-[0_2px_12px_rgba(0,0,0,0.03)] hover:-translate-y-0.5"
             >
-              <span>DISCOVER DEVELOPERS</span>
+              <span>Discover Developers</span>
             </Link>
           </div>
 
           {/* Secondary Editorial Link */}
           <div className="mt-8 pt-5 border-t border-[#EAE8E3] w-full flex items-center gap-2">
-            <span className="text-xs text-[#858585] font-mono">Building an open product or prototype?</span>
+            <span className="text-xs text-[#858585]">Building an open product or prototype?</span>
             <Link
               href="/submit"
-              className="group inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-[#111111] hover:text-[#B99752] transition-colors font-medium"
+              className="group inline-flex items-center gap-1.5 text-xs uppercase tracking-wider text-[#111111] hover:text-[#B99752] transition-colors font-medium"
             >
               <span className="underline underline-offset-4 decoration-[#B99752]/40 group-hover:decoration-[#B99752]">
-                SUBMIT YOUR PROJECT &rarr;
+                Submit your project &rarr;
               </span>
             </Link>
           </div>

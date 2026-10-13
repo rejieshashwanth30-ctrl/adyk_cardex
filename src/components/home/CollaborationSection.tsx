@@ -22,7 +22,7 @@ export default function CollaborationSection({ projects }: CollaborationSectionP
       <ScrollReveal variant="fade-up" duration={700}>
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-16 border-b border-[#EAE8E3] pb-10">
           <div>
-            <span className="font-mono text-xs uppercase tracking-[0.3em] text-[#858585] font-semibold block mb-3">
+            <span className="text-xs uppercase tracking-wider text-[#858585] font-semibold block mb-3">
               COLLABORATION &bull; DIRECT CONNECTION
             </span>
             <h2 className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-[-0.04em] text-[#111111] uppercase max-w-3xl leading-[0.96]">
@@ -37,9 +37,9 @@ export default function CollaborationSection({ projects }: CollaborationSectionP
 
           <Link
             href="/collaboration"
-            className="group inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.2em] text-[#555555] hover:text-[#B99752] transition-colors flex-shrink-0 font-medium"
+            className="group inline-flex items-center gap-2 text-xs uppercase tracking-wider text-[#555555] hover:text-[#B99752] transition-colors flex-shrink-0 font-semibold"
           >
-            <span>ALL COLLABORATIONS ({collabProjects.length})</span>
+            <span>All Collaborations ({collabProjects.length})</span>
             <ArrowRight className="w-3.5 h-3.5 text-[#555555] group-hover:text-[#B99752] transition-transform group-hover:translate-x-1" />
           </Link>
         </div>
@@ -58,7 +58,7 @@ export default function CollaborationSection({ projects }: CollaborationSectionP
               <div>
                 {/* Meta Header */}
                 <div className="flex items-center justify-between gap-3 mb-5">
-                  <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#858585] font-semibold">
+                  <span className="text-xs uppercase tracking-wider text-[#858585] font-semibold">
                     {project.category}
                   </span>
                   <StatusBadge status={project.status} />
@@ -72,7 +72,7 @@ export default function CollaborationSection({ projects }: CollaborationSectionP
                 </h3>
 
                 {/* Creator Tag */}
-                <p className="text-xs font-mono text-[#858585] mb-5">
+                <p className="text-xs text-[#858585] mb-5 font-normal">
                   Created by{' '}
                   <Link
                     href={`/developers/${project.creatorUsername}`}
@@ -89,9 +89,9 @@ export default function CollaborationSection({ projects }: CollaborationSectionP
 
                 {/* Looking For Luxury Section */}
                 <div className="p-5 rounded-2xl bg-[#F8F7F4] border border-[#EAE8E3] mb-8">
-                  <div className="flex items-center justify-between text-[11px] font-mono uppercase tracking-[0.18em] text-[#858585] font-semibold mb-3">
+                  <div className="flex items-center justify-between text-xs uppercase tracking-wider text-[#858585] font-semibold mb-3">
                     <span>LOOKING FOR:</span>
-                    <span className="text-[#111111] font-mono text-[10px] px-2.5 py-0.5 rounded-full bg-white border border-[#B99752]/40 shadow-sm font-bold">
+                    <span className="text-[#111111] text-xs px-2.5 py-0.5 rounded-full bg-white border border-[#B99752]/40 shadow-sm font-semibold">
                       OPEN
                     </span>
                   </div>
@@ -99,7 +99,7 @@ export default function CollaborationSection({ projects }: CollaborationSectionP
                     {project.lookingFor.map((role) => (
                       <span
                         key={role}
-                        className="px-3 py-1.5 rounded-lg text-xs font-mono bg-white text-[#111111] border border-[#EAE8E3] font-medium uppercase tracking-wider shadow-sm"
+                        className="px-3 py-1.5 rounded-lg text-xs bg-white text-[#111111] border border-[#EAE8E3] font-medium shadow-sm"
                       >
                         &bull; {role}
                       </span>
@@ -112,18 +112,18 @@ export default function CollaborationSection({ projects }: CollaborationSectionP
               <div className="pt-6 border-t border-[#EAE8E3] flex items-center justify-between gap-4">
                 <Link
                   href={`/projects/${project.slug}`}
-                  className="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-[0.15em] text-[#555555] hover:text-[#111111] transition-colors font-medium group/link"
+                  className="inline-flex items-center gap-1.5 text-xs text-[#555555] hover:text-[#111111] transition-colors font-medium group/link"
                 >
-                  <span>VIEW PROJECT</span>
+                  <span>View Project</span>
                   <ArrowUpRight className="w-3.5 h-3.5 text-[#858585] transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
                 </Link>
 
                 <button
                   type="button"
                   onClick={() => setSelectedProject(project)}
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#111111] hover:bg-[#222222] text-white font-semibold text-xs font-mono tracking-[0.15em] uppercase transition-all shadow-[0_4px_20px_rgba(0,0,0,0.1)] hover:shadow-[0_6px_25px_rgba(0,0,0,0.15)] group/btn"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#111111] hover:bg-[#222222] text-white font-semibold text-xs tracking-wider uppercase transition-all shadow-[0_4px_20px_rgba(0,0,0,0.1)] hover:shadow-[0_6px_25px_rgba(0,0,0,0.15)] group/btn"
                 >
-                  <span>COLLABORATE</span>
+                  <span>Collaborate</span>
                   <span className="transition-transform duration-200 group-hover/btn:translate-x-1">&rarr;</span>
                 </button>
               </div>

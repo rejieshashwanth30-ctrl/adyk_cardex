@@ -16,20 +16,20 @@ export default async function Page() {
   return (
     <div className="pt-28 pb-24 px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto relative z-10">
       <div className="p-8 sm:p-12 rounded-3xl material-luxury-card bg-white border border-[#EAE8E3] shadow-sm">
-        <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#858585] block mb-2 font-semibold">
-          SUPABASE &bull; CONNECTION VERIFIED
+        <span className="text-xs uppercase tracking-wider text-[#858585] block mb-2 font-semibold">
+          Supabase &bull; Connection Verified
         </span>
         <h1 className="text-3xl font-black text-[#111111] uppercase tracking-tight mb-6">
           Supabase Todos Query
         </h1>
 
         {error && (
-          <div className="p-4 rounded-xl bg-amber-50 border border-amber-200 text-amber-800 text-xs font-mono mb-6">
+          <div className="p-4 rounded-xl bg-amber-50 border border-amber-200 text-amber-800 text-xs mb-6">
             Note: {error.message} (Create a &apos;todos&apos; table in your Supabase project to populate data).
           </div>
         )}
 
-        <ul className="space-y-2 mb-8 font-mono text-sm">
+        <ul className="space-y-2 mb-8 text-sm">
           {todos && todos.length > 0 ? (
             todos.map((todo: { id: string | number; name?: string; title?: string }) => (
               <li key={todo.id} className="p-3 rounded-lg bg-[#FAF9F6] border border-[#EAE8E3] text-[#111111]">
@@ -45,7 +45,7 @@ export default async function Page() {
 
         <Link
           href="/"
-          className="inline-flex items-center gap-2 text-xs font-mono text-[#111111] hover:text-[#B99752] transition-colors font-semibold"
+          className="inline-flex items-center gap-2 text-xs text-[#111111] hover:text-[#B99752] transition-colors font-semibold"
         >
           &larr; Return to ADYK CARDEX Homepage
         </Link>

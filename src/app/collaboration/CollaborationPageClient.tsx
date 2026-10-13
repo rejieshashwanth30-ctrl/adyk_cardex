@@ -34,9 +34,9 @@ export default function CollaborationPageClient({ projects }: CollaborationPageC
     <div className="pt-28 pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10">
       {/* Header */}
       <div className="mb-14 border-b border-[#EAE8E3] pb-10">
-        <div className="inline-flex items-center gap-2 text-[10px] font-mono uppercase tracking-[0.25em] text-[#858585] mb-3 font-semibold">
+        <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-wider text-[#858585] uppercase mb-3">
           <Handshake className="w-3.5 h-3.5 text-[#B99752]" />
-          <span>COLLABORATION</span>
+          <span>Collaboration</span>
         </div>
         <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-[#111111] uppercase leading-[0.95]">
           BUILDING<br />
@@ -49,14 +49,14 @@ export default function CollaborationPageClient({ projects }: CollaborationPageC
 
       {/* Role Filter Pills */}
       <div className="p-4 rounded-xl material-luxury-card bg-white border border-[#EAE8E3] mb-12 flex flex-wrap items-center gap-2">
-        <div className="flex items-center gap-1.5 text-xs font-mono text-[#858585] mr-2 tracking-wider font-semibold">
+        <div className="flex items-center gap-1.5 text-xs text-[#858585] mr-2 font-semibold">
           <Filter className="w-3.5 h-3.5 text-[#B99752]" />
-          <span>NEEDED ROLE:</span>
+          <span>Needed Role:</span>
         </div>
 
         <button
           onClick={() => setSelectedRole('ALL')}
-          className={`px-3 py-1.5 rounded-lg text-xs font-mono transition-colors font-medium ${
+          className={`px-3 py-1.5 rounded-lg text-xs transition-colors font-medium ${
             selectedRole === 'ALL'
               ? 'bg-[#111111] text-white font-bold shadow-sm'
               : 'text-[#555555] hover:text-[#111111] bg-[#FAF9F6] border border-[#EAE8E3]'
@@ -71,7 +71,7 @@ export default function CollaborationPageClient({ projects }: CollaborationPageC
             <button
               key={role}
               onClick={() => setSelectedRole(role)}
-              className={`px-3 py-1.5 rounded-lg text-xs font-mono transition-colors font-medium ${
+              className={`px-3 py-1.5 rounded-lg text-xs transition-colors font-medium ${
                 selectedRole === role
                   ? 'bg-[#111111] text-white font-bold shadow-sm'
                   : 'text-[#555555] hover:text-[#111111] bg-[#FAF9F6] border border-[#EAE8E3]'
@@ -87,13 +87,13 @@ export default function CollaborationPageClient({ projects }: CollaborationPageC
       {filteredProjects.length === 0 ? (
         <div className="py-20 text-center material-luxury-card bg-white rounded-3xl border border-[#EAE8E3] p-8">
           <Handshake className="w-10 h-10 text-[#858585] mx-auto mb-3" />
-          <h3 className="text-lg font-bold text-[#111111] mb-1 uppercase tracking-wider font-mono">No active projects seeking this role</h3>
-          <p className="text-xs text-[#555555] max-w-sm mx-auto mb-4 font-mono">
+          <h3 className="text-lg font-bold text-[#111111] mb-1 tracking-tight">No active projects seeking this role</h3>
+          <p className="text-xs text-[#555555] max-w-sm mx-auto mb-4">
             Check back soon or select another role filter.
           </p>
           <button
             onClick={() => setSelectedRole('ALL')}
-            className="px-4 py-2 rounded-lg bg-[#111111] hover:bg-[#222222] text-xs font-mono text-white transition-colors"
+            className="px-4 py-2 rounded-lg bg-[#111111] hover:bg-[#222222] text-xs text-white transition-colors font-medium"
           >
             Show All Roles
           </button>
@@ -109,7 +109,7 @@ export default function CollaborationPageClient({ projects }: CollaborationPageC
               <div>
                 {/* Meta Header */}
                 <div className="flex items-center justify-between gap-3 mb-4">
-                  <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#858585] font-semibold">
+                  <span className="text-xs font-medium text-[#858585]">
                     {project.category}
                   </span>
                   <StatusBadge status={project.status} />
@@ -123,7 +123,7 @@ export default function CollaborationPageClient({ projects }: CollaborationPageC
                 </h3>
 
                 {/* Creator */}
-                <p className="text-xs font-mono text-[#858585] mb-4">
+                <p className="text-xs text-[#858585] mb-4">
                   Created by{' '}
                   <Link
                     href={`/developers/${project.creatorUsername}`}
@@ -140,14 +140,14 @@ export default function CollaborationPageClient({ projects }: CollaborationPageC
 
                 {/* Required Skills Box */}
                 <div className="p-4 rounded-xl bg-[#FAF9F6] border border-[#EAE8E3] mb-6">
-                  <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#858585] font-semibold block mb-2.5">
+                  <span className="text-xs font-semibold text-[#858585] block mb-2.5">
                     Actively Seeking Contributors:
                   </span>
                   <div className="flex flex-wrap gap-1.5">
                     {project.lookingFor.map((role) => (
                       <span
                         key={role}
-                        className="px-2.5 py-1 rounded-md text-xs font-mono bg-white text-[#111111] border border-[#EAE8E3] shadow-sm font-medium"
+                        className="px-2.5 py-1 rounded-md text-xs bg-white text-[#111111] border border-[#EAE8E3] shadow-sm font-medium"
                       >
                         &bull; {role}
                       </span>
@@ -160,18 +160,18 @@ export default function CollaborationPageClient({ projects }: CollaborationPageC
               <div className="pt-5 border-t border-[#EAE8E3] flex items-center justify-between gap-4">
                 <Link
                   href={`/projects/${project.slug}`}
-                  className="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-[#555555] hover:text-[#111111] transition-colors font-medium"
+                  className="inline-flex items-center gap-1.5 text-xs text-[#555555] hover:text-[#111111] transition-colors font-medium"
                 >
-                  <span>VIEW PROJECT</span>
+                  <span>View Project</span>
                   <ArrowUpRight className="w-4 h-4 text-[#858585]" />
                 </Link>
 
                 <button
                   type="button"
                   onClick={() => setActiveProjectModal(project)}
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#111111] text-white hover:bg-[#222222] font-mono text-xs uppercase tracking-wider font-semibold transition-all shadow-md group/btn"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#111111] text-white hover:bg-[#222222] text-xs font-medium transition-all shadow-md group/btn"
                 >
-                  <span>COLLABORATE &rarr;</span>
+                  <span>Collaborate &rarr;</span>
                 </button>
               </div>
             </div>

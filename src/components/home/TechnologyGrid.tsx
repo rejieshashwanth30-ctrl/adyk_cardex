@@ -29,7 +29,7 @@ export default function TechnologyGrid() {
       <ScrollReveal variant="fade-up" duration={700}>
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-16 border-b border-[#EAE8E3] pb-10">
           <div>
-            <span className="font-mono text-xs uppercase tracking-[0.3em] text-[#858585] font-semibold block mb-3">
+            <span className="text-xs uppercase tracking-wider text-[#858585] font-semibold block mb-3">
               ECOSYSTEM &bull; STACK AGNOSTIC
             </span>
             <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-[-0.03em] text-[#111111] uppercase max-w-2xl leading-[1.02]">
@@ -38,7 +38,7 @@ export default function TechnologyGrid() {
             </h2>
           </div>
 
-          <div className="text-xs font-mono uppercase tracking-[0.2em] text-[#858585] font-medium">
+          <div className="text-xs uppercase tracking-wider text-[#858585] font-medium">
             TECHNOLOGY &rarr; PROJECTS &rarr; BUILDERS
           </div>
         </div>
@@ -68,7 +68,7 @@ export default function TechnologyGrid() {
 
                 <div className="relative z-10">
                   <div className="flex items-center justify-between mb-4">
-                    <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#858585] font-semibold">
+                    <span className="text-xs uppercase tracking-wider text-[#858585] font-semibold">
                       STACK COMPONENT
                     </span>
                     <ArrowUpRight className="w-3.5 h-3.5 text-[#858585] group-hover:text-[#111111] transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -87,7 +87,7 @@ export default function TechnologyGrid() {
                   </p>
                 </div>
 
-                <div className="relative z-10 mt-6 pt-4 border-t border-[#EAE8E3] flex items-center justify-between text-[11px] font-mono uppercase tracking-[0.15em] text-[#858585] group-hover:text-[#111111] transition-colors font-medium">
+                <div className="relative z-10 mt-6 pt-4 border-t border-[#EAE8E3] flex items-center justify-between text-xs uppercase tracking-wider text-[#858585] group-hover:text-[#111111] transition-colors font-medium">
                   <span>View Builds</span>
                   <span>&rarr;</span>
                 </div>

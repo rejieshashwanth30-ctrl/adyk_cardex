@@ -54,7 +54,7 @@ export default function CollaborateModal({ project, isOpen, onClose }: Collabora
             <div className="w-16 h-16 rounded-2xl bg-[#F8F7F4] border border-[#B99752]/40 flex items-center justify-center mb-5 text-[#B99752]">
               <CheckCircle2 className="w-8 h-8" />
             </div>
-            <h3 className="text-xl font-bold font-mono tracking-wider mb-2 uppercase text-[#111111]">PROPOSAL TRANSMITTED</h3>
+            <h3 className="text-xl font-bold mb-2 text-[#111111]">Proposal Transmitted</h3>
             <p className="text-sm text-[#555555] max-w-sm mb-6 leading-relaxed">
               Your message has been relayed to <span className="text-[#111111] font-semibold">{project.creatorName}</span>. They will review your note and connect directly.
             </p>
@@ -63,7 +63,7 @@ export default function CollaborateModal({ project, isOpen, onClose }: Collabora
                 setSubmitted(false);
                 onClose();
               }}
-              className="px-6 py-2.5 rounded-xl bg-[#111111] text-white font-semibold text-xs font-mono uppercase tracking-wider transition-colors hover:bg-[#222222]"
+              className="px-6 py-2.5 rounded-xl bg-[#111111] text-white font-medium text-xs transition-colors hover:bg-[#222222]"
             >
               Close Window
             </button>
@@ -72,8 +72,8 @@ export default function CollaborateModal({ project, isOpen, onClose }: Collabora
           <div>
             {/* Header */}
             <div className="mb-6">
-              <span className="font-mono text-[10px] tracking-[0.25em] text-[#858585] uppercase font-bold block mb-1">
-                DIRECT INTAKE &bull; ADYK CARDEX
+              <span className="text-xs font-semibold tracking-wider text-[#858585] uppercase block mb-1">
+                Direct Intake &bull; ADYK CARDEX
               </span>
               <h2 id="collab-title" className="text-2xl font-bold tracking-tight text-[#111111]">
                 Collaborate on {project.title}
@@ -86,14 +86,14 @@ export default function CollaborateModal({ project, isOpen, onClose }: Collabora
             {/* Seeking Roles */}
             {project.lookingFor && project.lookingFor.length > 0 && (
               <div className="mb-6 p-4 rounded-2xl bg-[#F8F7F4] border border-[#EAE8E3]">
-                <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#858585] font-semibold block mb-2">
+                <span className="text-xs font-medium text-[#858585] block mb-2">
                   Project actively seeking:
                 </span>
                 <div className="flex flex-wrap gap-1.5">
                   {project.lookingFor.map((role) => (
                     <span
                       key={role}
-                      className="px-2.5 py-1 rounded-md text-xs font-mono bg-white text-[#111111] border border-[#EAE8E3] uppercase tracking-wider font-medium shadow-sm"
+                      className="px-2.5 py-1 rounded-md text-xs bg-white text-[#111111] border border-[#EAE8E3] font-medium shadow-sm"
                     >
                       &bull; {role}
                     </span>
@@ -109,12 +109,12 @@ export default function CollaborateModal({ project, isOpen, onClose }: Collabora
                   href={whatsAppLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full flex items-center justify-center gap-2.5 py-3 rounded-xl bg-white hover:bg-[#F8F7F4] border border-[#EAE8E3] hover:border-[#B99752] text-[#111111] font-mono text-xs uppercase tracking-wider transition-all group shadow-sm font-semibold"
+                  className="w-full flex items-center justify-center gap-2.5 py-3 rounded-xl bg-white hover:bg-[#F8F7F4] border border-[#EAE8E3] hover:border-[#B99752] text-[#111111] text-xs font-medium transition-all group shadow-sm"
                 >
                   <MessageSquare className="w-4 h-4 text-[#B99752] group-hover:scale-105 transition-transform" />
-                  <span>COLLABORATE ON WHATSAPP &rarr;</span>
+                  <span>Collaborate on WhatsApp &rarr;</span>
                 </a>
-                <p className="text-[10px] text-[#858585] text-center mt-1.5 font-mono">
+                <p className="text-xs text-[#858585] text-center mt-1.5">
                   Direct encrypted chat via pre-filled introduction
                 </p>
               </div>
@@ -122,7 +122,7 @@ export default function CollaborateModal({ project, isOpen, onClose }: Collabora
 
             <div className="relative flex py-2 items-center mb-4">
               <div className="flex-grow border-t border-[#EAE8E3]" />
-              <span className="flex-shrink mx-3 text-[10px] font-mono uppercase tracking-[0.2em] text-[#858585] font-medium">
+              <span className="flex-shrink mx-3 text-xs text-[#858585] font-medium">
                 Or Send In-Portal Note
               </span>
               <div className="flex-grow border-t border-[#EAE8E3]" />
@@ -131,7 +131,7 @@ export default function CollaborateModal({ project, isOpen, onClose }: Collabora
             {/* Form */}
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="block text-xs font-mono uppercase tracking-wider text-[#111111] mb-1.5 font-semibold">
+                <label className="block text-xs font-semibold text-[#111111] mb-1.5">
                   Your Name / Identity *
                 </label>
                 <input
@@ -145,7 +145,7 @@ export default function CollaborateModal({ project, isOpen, onClose }: Collabora
               </div>
 
               <div>
-                <label className="block text-xs font-mono uppercase tracking-wider text-[#111111] mb-1.5 font-semibold">
+                <label className="block text-xs font-semibold text-[#111111] mb-1.5">
                   Your Contact (Email, GitHub or Profile Link) *
                 </label>
                 <input
@@ -159,13 +159,13 @@ export default function CollaborateModal({ project, isOpen, onClose }: Collabora
               </div>
 
               <div>
-                <label className="block text-xs font-mono uppercase tracking-wider text-[#111111] mb-1.5 font-semibold">
+                <label className="block text-xs font-semibold text-[#111111] mb-1.5">
                   Role You Wish to Contribute
                 </label>
                 <select
                   value={selectedRole}
                   onChange={(e) => setSelectedRole(e.target.value as CollaborationRole | 'Other')}
-                  className="w-full px-4 py-2.5 rounded-xl bg-[#FAF9F6] border border-[#EAE8E3] text-sm text-[#111111] focus:outline-none focus:border-[#B99752] transition-colors font-mono"
+                  className="w-full px-4 py-2.5 rounded-xl bg-[#FAF9F6] border border-[#EAE8E3] text-sm text-[#111111] focus:outline-none focus:border-[#B99752] transition-colors"
                 >
                   {project.lookingFor.map((role) => (
                     <option key={role} value={role}>
@@ -177,7 +177,7 @@ export default function CollaborateModal({ project, isOpen, onClose }: Collabora
               </div>
 
               <div>
-                <label className="block text-xs font-mono uppercase tracking-wider text-[#111111] mb-1.5 font-semibold">
+                <label className="block text-xs font-semibold text-[#111111] mb-1.5">
                   Brief Pitch / Background
                 </label>
                 <textarea
@@ -193,14 +193,14 @@ export default function CollaborateModal({ project, isOpen, onClose }: Collabora
               <div className="pt-2">
                 <button
                   type="submit"
-                  className="w-full py-3.5 rounded-xl bg-[#111111] hover:bg-[#222222] text-white font-semibold text-xs font-mono uppercase tracking-[0.15em] flex items-center justify-center gap-2 shadow-md transition-colors"
+                  className="w-full py-3.5 rounded-xl bg-[#111111] hover:bg-[#222222] text-white font-medium text-xs tracking-wide flex items-center justify-center gap-2 shadow-md transition-colors"
                 >
                   <Send className="w-3.5 h-3.5 text-[#B99752]" />
-                  <span>TRANSMIT COLLABORATION PROPOSAL</span>
+                  <span>Transmit Collaboration Proposal</span>
                 </button>
               </div>
 
-              <div className="flex items-center justify-center gap-1.5 text-[10px] font-mono text-[#858585] pt-1">
+              <div className="flex items-center justify-center gap-1.5 text-xs text-[#858585] pt-1">
                 <ShieldCheck className="w-3.5 h-3.5 text-[#B99752]" />
                 <span>Protected by ADYK CARDEX Creator Privacy Guard</span>
               </div>

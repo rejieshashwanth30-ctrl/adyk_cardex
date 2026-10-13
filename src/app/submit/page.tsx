@@ -216,24 +216,24 @@ export default function SubmitProjectPage() {
             <Clock className="w-8 h-8 animate-pulse text-[#B99752]" />
           </div>
 
-          <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-[#858585] font-bold block mb-2">
-            SUBMISSION PROTOCOL COMPLETE
+          <span className="text-xs uppercase tracking-wider text-[#858585] font-bold block mb-2">
+            Submission Protocol Complete
           </span>
 
           <h1 className="text-3xl sm:text-5xl font-black text-[#111111] mb-3 uppercase tracking-tight">
             PROJECT SUBMITTED
           </h1>
 
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#FAF9F6] border border-[#B99752]/40 text-[#111111] font-mono text-xs font-bold mb-6 shadow-sm">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#FAF9F6] border border-[#B99752]/40 text-[#111111] text-xs font-bold mb-6 shadow-sm">
             <span className="w-2 h-2 rounded-full bg-[#B99752] animate-ping" />
-            <span>STATUS: PENDING REVIEW</span>
+            <span>Status: Pending Review</span>
           </div>
 
           <p className="text-base text-[#555555] max-w-lg mx-auto leading-relaxed mb-6 font-normal">
             Your project has been received and is currently pending review. It will not appear publicly on the homepage, search, explore, or developers pages until it has been inspected and approved by ADYK CARDEX moderation.
           </p>
 
-          <div className="p-4 rounded-xl bg-[#FAF9F6] border border-[#EAE8E3] max-w-sm mx-auto font-mono text-xs text-[#555555] mb-8">
+          <div className="p-4 rounded-xl bg-[#FAF9F6] border border-[#EAE8E3] max-w-sm mx-auto text-xs text-[#555555] mb-8">
             <span className="text-[#858585] block mb-1">REFERENCE SUBMISSION ID:</span>
             <span className="text-[#111111] font-bold">{successData.submissionId}</span>
           </div>
@@ -241,13 +241,13 @@ export default function SubmitProjectPage() {
           <div className="flex flex-wrap items-center justify-center gap-4">
             <Link
               href="/explore"
-              className="px-6 py-3 rounded-xl bg-white hover:bg-[#FAF9F6] border border-[#EAE8E3] text-xs font-mono uppercase tracking-wider text-[#111111] font-semibold transition-colors shadow-sm"
+              className="px-6 py-3 rounded-xl bg-white hover:bg-[#FAF9F6] border border-[#EAE8E3] text-xs uppercase tracking-wider text-[#111111] font-semibold transition-colors shadow-sm"
             >
               &larr; Return to Explore
             </Link>
             <Link
               href="/moderation"
-              className="px-6 py-3 rounded-xl bg-[#111111] text-white hover:bg-[#222222] font-mono text-xs uppercase tracking-wider font-bold transition-colors shadow-sm"
+              className="px-6 py-3 rounded-xl bg-[#111111] text-white hover:bg-[#222222] text-xs uppercase tracking-wider font-bold transition-colors shadow-sm"
             >
               Open Moderation Panel &rarr;
             </Link>
@@ -257,9 +257,9 @@ export default function SubmitProjectPage() {
         <div>
           {/* Header */}
           <div className="mb-12 text-center sm:text-left border-b border-[#EAE8E3] pb-10">
-            <div className="inline-flex items-center gap-2 text-[10px] font-mono uppercase tracking-[0.25em] text-[#858585] mb-3 font-semibold">
+            <div className="inline-flex items-center gap-2 text-xs uppercase tracking-wider text-[#858585] mb-3 font-semibold">
               <UploadCloud className="w-3.5 h-3.5 text-[#B99752]" />
-              <span>PUBLIC INTAKE &bull; NO LOGIN REQUIRED</span>
+              <span>Public Intake &bull; No Login Required</span>
             </div>
             <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-[#111111] uppercase leading-[0.95]">
               SHOW US WHAT<br />
@@ -273,7 +273,7 @@ export default function SubmitProjectPage() {
           {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-8">
             {errorMessage && (
-              <div className="p-4 rounded-xl bg-red-50 border border-red-200 text-red-800 flex items-start gap-3 text-sm font-mono">
+              <div className="p-4 rounded-xl bg-red-50 border border-red-200 text-red-800 flex items-start gap-3 text-sm">
                 <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5 text-red-600" />
                 <span>{errorMessage}</span>
               </div>
@@ -281,14 +281,14 @@ export default function SubmitProjectPage() {
 
             {/* Creator Information Section */}
             <div className="p-6 sm:p-8 rounded-3xl material-luxury-card bg-white border border-[#EAE8E3] space-y-5">
-              <div className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.2em] text-[#111111] font-bold">
+              <div className="flex items-center gap-2 text-xs uppercase tracking-wider text-[#111111] font-bold">
                 <ShieldCheck className="w-4 h-4 text-[#B99752]" />
-                <span>01. CREATOR IDENTITY (PRIVACY PROTECTED)</span>
+                <span>01. Creator Identity (Privacy Protected)</span>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-mono uppercase tracking-wider text-[#111111] mb-1.5 font-semibold">
+                  <label className="block text-xs font-semibold text-[#111111] mb-1.5">
                     Creator Name *
                   </label>
                   <input
@@ -302,7 +302,7 @@ export default function SubmitProjectPage() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-mono uppercase tracking-wider text-[#111111] mb-1.5 font-semibold">
+                  <label className="block text-xs font-semibold text-[#111111] mb-1.5">
                     Creator Email * (Kept Strictly Private)
                   </label>
                   <input
@@ -317,7 +317,7 @@ export default function SubmitProjectPage() {
               </div>
 
               <div className="pt-2">
-                <label className="block text-xs font-mono uppercase tracking-wider text-[#111111] mb-1.5 font-semibold">
+                <label className="block text-xs font-semibold text-[#111111] mb-1.5">
                   Creator WhatsApp (Optional &bull; Defaults to Private)
                 </label>
                 <input
@@ -335,7 +335,7 @@ export default function SubmitProjectPage() {
                     onChange={(e) => setAllowWhatsAppContact(e.target.checked)}
                     className="w-4 h-4 rounded border-[#EAE8E3] text-[#111111] focus:ring-0"
                   />
-                  <span className="text-xs text-[#555555] font-mono">
+                  <span className="text-xs text-[#555555]">
                     Allow direct &ldquo;COLLABORATE ON WHATSAPP&rdquo; click-to-chat button on project page (Default: OFF)
                   </span>
                 </label>
@@ -344,14 +344,14 @@ export default function SubmitProjectPage() {
 
             {/* Project Details Section */}
             <div className="p-6 sm:p-8 rounded-3xl material-luxury-card bg-white border border-[#EAE8E3] space-y-5">
-              <div className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.2em] text-[#111111] font-bold">
+              <div className="flex items-center gap-2 text-xs uppercase tracking-wider text-[#111111] font-bold">
                 <Sparkles className="w-4 h-4 text-[#B99752]" />
-                <span>02. PROJECT SPECIFICATIONS</span>
+                <span>02. Project Specifications</span>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-mono uppercase tracking-wider text-[#111111] mb-1.5 font-semibold">
+                  <label className="block text-xs font-semibold text-[#111111] mb-1.5">
                     Project Title *
                   </label>
                   <input
@@ -365,7 +365,7 @@ export default function SubmitProjectPage() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-mono uppercase tracking-wider text-[#111111] mb-1.5 font-semibold">
+                  <label className="block text-xs font-semibold text-[#111111] mb-1.5">
                     Category *
                   </label>
                   <select
@@ -383,7 +383,7 @@ export default function SubmitProjectPage() {
               </div>
 
               <div>
-                <label className="block text-xs font-mono uppercase tracking-wider text-[#111111] mb-1.5 font-semibold">
+                <label className="block text-xs font-semibold text-[#111111] mb-1.5">
                   Project Description * (Minimum 20 characters)
                 </label>
                 <textarea
@@ -397,7 +397,7 @@ export default function SubmitProjectPage() {
               </div>
 
               <div>
-                <label className="block text-xs font-mono uppercase tracking-wider text-[#111111] mb-1.5 font-semibold">
+                <label className="block text-xs font-semibold text-[#111111] mb-1.5">
                   Technologies Used * (Comma-separated)
                 </label>
                 <input
@@ -413,16 +413,16 @@ export default function SubmitProjectPage() {
               {/* Real Project Image Upload Field */}
               <div>
                 <div className="flex items-center justify-between mb-1.5">
-                  <label className="block text-xs font-mono uppercase tracking-wider text-[#111111] font-semibold">
-                    PROJECT IMAGE *
+                  <label className="block text-xs font-semibold text-[#111111]">
+                    Project Image *
                   </label>
                   {imageUrl ? (
-                    <span className="text-[10px] font-mono text-[#059669] font-bold uppercase flex items-center gap-1">
+                    <span className="text-xs text-[#059669] font-bold uppercase flex items-center gap-1">
                       <CheckCircle2 className="w-3.5 h-3.5 text-[#059669]" />
-                      <span>IMAGE ATTACHED</span>
+                      <span>Image Attached</span>
                     </span>
                   ) : (
-                    <span className="text-[10px] font-mono text-[#858585] uppercase">
+                    <span className="text-xs text-[#858585]">
                       JPG / PNG / WebP &bull; Max 5 MB
                     </span>
                   )}
@@ -460,13 +460,13 @@ export default function SubmitProjectPage() {
                         e.stopPropagation();
                         fileInputRef.current?.click();
                       }}
-                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#111111] hover:bg-[#222222] text-white font-mono text-xs uppercase tracking-wider font-bold transition-all shadow-sm mb-2"
+                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#111111] hover:bg-[#222222] text-white text-xs uppercase tracking-wider font-bold transition-all shadow-sm mb-2"
                     >
                       <Plus className="w-3.5 h-3.5 text-[#B99752]" />
-                      <span>+ ADD PROJECT IMAGE</span>
+                      <span>+ Add Project Image</span>
                     </button>
 
-                    <p className="text-[11px] font-mono text-[#858585] mt-1">
+                    <p className="text-xs text-[#858585] mt-1">
                       Tap or click to browse device photos &amp; files
                     </p>
                   </div>
@@ -482,7 +482,7 @@ export default function SubmitProjectPage() {
                         className="object-cover"
                       />
                       {isUploadingImage && (
-                        <div className="absolute inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center text-white text-xs font-mono">
+                        <div className="absolute inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center text-white text-xs">
                           <div className="flex items-center gap-2">
                             <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
                             <span>Optimizing &amp; uploading image...</span>
@@ -493,10 +493,10 @@ export default function SubmitProjectPage() {
 
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-1">
                       <div className="min-w-0">
-                        <div className="text-xs font-mono font-bold text-[#111111] truncate">
+                        <div className="text-xs font-bold text-[#111111] truncate">
                           {imageFile?.name || 'Uploaded Project Image'}
                         </div>
-                        <div className="text-[10px] font-mono text-[#858585]">
+                        <div className="text-xs text-[#858585]">
                           {imageFile
                             ? `${(imageFile.size / (1024 * 1024)).toFixed(2)} MB • ${imageFile.type.toUpperCase().replace('IMAGE/', '')}`
                             : 'Image Ready'}
@@ -508,19 +508,19 @@ export default function SubmitProjectPage() {
                           type="button"
                           onClick={() => fileInputRef.current?.click()}
                           disabled={isUploadingImage}
-                          className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white border border-[#EAE8E3] hover:border-[#111111] text-[#111111] font-mono text-xs uppercase tracking-wider font-semibold transition-all shadow-sm disabled:opacity-50"
+                          className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white border border-[#EAE8E3] hover:border-[#111111] text-[#111111] text-xs uppercase tracking-wider font-semibold transition-all shadow-sm disabled:opacity-50"
                         >
                           <RefreshCw className="w-3 h-3 text-[#555555]" />
-                          <span>CHANGE IMAGE</span>
+                          <span>Change Image</span>
                         </button>
                         <button
                           type="button"
                           onClick={handleRemoveImage}
                           disabled={isUploadingImage}
-                          className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#FAF0F0] hover:bg-[#FCE8E8] border border-red-200 text-red-700 font-mono text-xs uppercase tracking-wider font-semibold transition-all disabled:opacity-50"
+                          className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#FAF0F0] hover:bg-[#FCE8E8] border border-red-200 text-red-700 text-xs uppercase tracking-wider font-semibold transition-all disabled:opacity-50"
                         >
                           <Trash2 className="w-3 h-3 text-red-600" />
-                          <span>REMOVE IMAGE</span>
+                          <span>Remove Image</span>
                         </button>
                       </div>
                     </div>
@@ -528,7 +528,7 @@ export default function SubmitProjectPage() {
                 )}
 
                 {imageUploadError && (
-                  <div className="mt-2.5 p-3 rounded-xl bg-red-50 border border-red-200 text-red-700 text-xs font-mono flex items-center gap-2">
+                  <div className="mt-2.5 p-3 rounded-xl bg-red-50 border border-red-200 text-red-700 text-xs flex items-center gap-2">
                     <AlertCircle className="w-4 h-4 flex-shrink-0" />
                     <span>{imageUploadError}</span>
                   </div>
@@ -537,7 +537,7 @@ export default function SubmitProjectPage() {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-mono uppercase tracking-wider text-[#111111] mb-1.5 font-semibold">
+                  <label className="block text-xs font-semibold text-[#111111] mb-1.5">
                     Problem Solved
                   </label>
                   <textarea
@@ -550,7 +550,7 @@ export default function SubmitProjectPage() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-mono uppercase tracking-wider text-[#111111] mb-1.5 font-semibold">
+                  <label className="block text-xs font-semibold text-[#111111] mb-1.5">
                     How It Works
                   </label>
                   <textarea
@@ -565,7 +565,7 @@ export default function SubmitProjectPage() {
 
               {/* Status Selector */}
               <div>
-                <label className="block text-xs font-mono uppercase tracking-wider text-[#111111] mb-2 font-semibold">
+                <label className="block text-xs font-semibold text-[#111111] mb-2">
                   Current Project Status *
                 </label>
                 <div className="grid grid-cols-3 gap-3">
@@ -574,7 +574,7 @@ export default function SubmitProjectPage() {
                       type="button"
                       key={status}
                       onClick={() => setProjectStatus(status)}
-                      className={`py-2.5 px-3 rounded-xl text-xs font-mono uppercase tracking-wider font-bold border transition-colors ${
+                      className={`py-2.5 px-3 rounded-xl text-xs uppercase tracking-wider font-semibold border transition-colors ${
                         projectStatus === status
                           ? 'bg-[#111111] text-white border-[#111111] shadow-sm'
                           : 'bg-[#FAF9F6] text-[#555555] border-[#EAE8E3] hover:text-[#111111]'
@@ -589,13 +589,13 @@ export default function SubmitProjectPage() {
 
             {/* External Links Section */}
             <div className="p-6 sm:p-8 rounded-3xl material-luxury-card bg-white border border-[#EAE8E3] space-y-4">
-              <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#111111] font-bold block">
-                03. LINKS &amp; REPOSITORIES (OPTIONAL)
+              <span className="text-xs uppercase tracking-wider text-[#111111] font-bold block">
+                03. Links &amp; Repositories (Optional)
               </span>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-mono uppercase tracking-wider text-[#111111] mb-1.5 font-semibold">
+                  <label className="block text-xs font-semibold text-[#111111] mb-1.5">
                     GitHub Repository URL
                   </label>
                   <input
@@ -603,12 +603,12 @@ export default function SubmitProjectPage() {
                     value={githubUrl}
                     onChange={(e) => setGithubUrl(e.target.value)}
                     placeholder="https://github.com/..."
-                    className="w-full px-4 py-2.5 rounded-xl bg-[#FAF9F6] border border-[#EAE8E3] text-xs font-mono text-[#111111] placeholder-[#858585] focus:outline-none focus:border-[#B99752]"
+                    className="w-full px-4 py-2.5 rounded-xl bg-[#FAF9F6] border border-[#EAE8E3] text-xs text-[#111111] placeholder-[#858585] focus:outline-none focus:border-[#B99752]"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-mono uppercase tracking-wider text-[#111111] mb-1.5 font-semibold">
+                  <label className="block text-xs font-semibold text-[#111111] mb-1.5">
                     Live Demo URL
                   </label>
                   <input
@@ -616,12 +616,12 @@ export default function SubmitProjectPage() {
                     value={liveDemoUrl}
                     onChange={(e) => setLiveDemoUrl(e.target.value)}
                     placeholder="https://yourdemo.app"
-                    className="w-full px-4 py-2.5 rounded-xl bg-[#FAF9F6] border border-[#EAE8E3] text-xs font-mono text-[#111111] placeholder-[#858585] focus:outline-none focus:border-[#B99752]"
+                    className="w-full px-4 py-2.5 rounded-xl bg-[#FAF9F6] border border-[#EAE8E3] text-xs text-[#111111] placeholder-[#858585] focus:outline-none focus:border-[#B99752]"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-mono uppercase tracking-wider text-[#111111] mb-1.5 font-semibold">
+                  <label className="block text-xs font-semibold text-[#111111] mb-1.5">
                     Demo Video URL
                   </label>
                   <input
@@ -629,12 +629,12 @@ export default function SubmitProjectPage() {
                     value={demoVideoUrl}
                     onChange={(e) => setDemoVideoUrl(e.target.value)}
                     placeholder="https://youtube.com/..."
-                    className="w-full px-4 py-2.5 rounded-xl bg-[#FAF9F6] border border-[#EAE8E3] text-xs font-mono text-[#111111] placeholder-[#858585] focus:outline-none focus:border-[#B99752]"
+                    className="w-full px-4 py-2.5 rounded-xl bg-[#FAF9F6] border border-[#EAE8E3] text-xs text-[#111111] placeholder-[#858585] focus:outline-none focus:border-[#B99752]"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-mono uppercase tracking-wider text-[#111111] mb-1.5 font-semibold">
+                  <label className="block text-xs font-semibold text-[#111111] mb-1.5">
                     Creator LinkedIn
                   </label>
                   <input
@@ -642,12 +642,12 @@ export default function SubmitProjectPage() {
                     value={creatorLinkedIn}
                     onChange={(e) => setCreatorLinkedIn(e.target.value)}
                     placeholder="https://linkedin.com/in/..."
-                    className="w-full px-4 py-2.5 rounded-xl bg-[#FAF9F6] border border-[#EAE8E3] text-xs font-mono text-[#111111] placeholder-[#858585] focus:outline-none focus:border-[#B99752]"
+                    className="w-full px-4 py-2.5 rounded-xl bg-[#FAF9F6] border border-[#EAE8E3] text-xs text-[#111111] placeholder-[#858585] focus:outline-none focus:border-[#B99752]"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-mono uppercase tracking-wider text-[#111111] mb-1.5 font-semibold">
+                  <label className="block text-xs font-semibold text-[#111111] mb-1.5">
                     Creator Portfolio / Website
                   </label>
                   <input
@@ -655,7 +655,7 @@ export default function SubmitProjectPage() {
                     value={creatorWebsite}
                     onChange={(e) => setCreatorWebsite(e.target.value)}
                     placeholder="https://yourportfolio.dev"
-                    className="w-full px-4 py-2.5 rounded-xl bg-[#FAF9F6] border border-[#EAE8E3] text-xs font-mono text-[#111111] placeholder-[#858585] focus:outline-none focus:border-[#B99752]"
+                    className="w-full px-4 py-2.5 rounded-xl bg-[#FAF9F6] border border-[#EAE8E3] text-xs text-[#111111] placeholder-[#858585] focus:outline-none focus:border-[#B99752]"
                   />
                 </div>
               </div>
@@ -664,26 +664,26 @@ export default function SubmitProjectPage() {
             {/* Collaboration Section */}
             <div className="p-6 sm:p-8 rounded-3xl material-luxury-card bg-white border border-[#EAE8E3] space-y-4">
               <div className="flex items-center justify-between">
-                <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#111111] font-bold">
-                  04. COLLABORATION SETTINGS
+                <span className="text-xs uppercase tracking-wider text-[#111111] font-bold">
+                  04. Collaboration Settings
                 </span>
 
                 <button
                   type="button"
                   onClick={() => setCollaborationOpen(!collaborationOpen)}
-                  className={`px-3.5 py-1.5 rounded-full text-xs font-mono uppercase tracking-wider font-semibold border transition-colors ${
+                  className={`px-3.5 py-1.5 rounded-full text-xs uppercase tracking-wider font-semibold border transition-colors ${
                     collaborationOpen
                       ? 'bg-[#111111] text-white border-[#111111] shadow-sm'
                       : 'bg-[#FAF9F6] text-[#858585] border-[#EAE8E3]'
                   }`}
                 >
-                  {collaborationOpen ? 'OPEN FOR COLLABORATION: YES' : 'OPEN FOR COLLABORATION: NO'}
+                  {collaborationOpen ? 'Open for Collaboration: Yes' : 'Open for Collaboration: No'}
                 </button>
               </div>
 
               {collaborationOpen && (
                 <div className="pt-2">
-                  <label className="block text-xs font-mono uppercase tracking-wider text-[#111111] mb-2 font-semibold">
+                  <label className="block text-xs font-semibold text-[#111111] mb-2">
                     Looking For (Select Roles):
                   </label>
                   <div className="flex flex-wrap gap-2">
@@ -694,7 +694,7 @@ export default function SubmitProjectPage() {
                           type="button"
                           key={role}
                           onClick={() => toggleRole(role)}
-                          className={`px-3.5 py-1.5 rounded-lg text-xs font-mono border transition-colors ${
+                          className={`px-3.5 py-1.5 rounded-lg text-xs border transition-colors ${
                             selected
                               ? 'bg-[#111111] text-white border-[#111111] font-bold shadow-sm'
                               : 'bg-[#FAF9F6] border-[#EAE8E3] text-[#555555] hover:text-[#111111]'
@@ -715,12 +715,12 @@ export default function SubmitProjectPage() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full py-4 rounded-2xl bg-[#111111] hover:bg-[#222222] text-white font-black text-sm tracking-widest uppercase transition-all shadow-md disabled:opacity-50"
+                className="w-full py-4 rounded-2xl bg-[#111111] hover:bg-[#222222] text-white font-semibold text-sm tracking-wide uppercase transition-all shadow-md disabled:opacity-50"
               >
-                {isSubmitting ? 'TRANSMITTING INTAKE...' : 'SUBMIT PROJECT FOR REVIEW &rarr;'}
+                {isSubmitting ? 'Transmitting Intake...' : 'Submit Project for Review &rarr;'}
               </button>
 
-              <div className="flex items-center justify-center gap-2 mt-4 text-xs font-mono text-[#858585]">
+              <div className="flex items-center justify-center gap-2 mt-4 text-xs text-[#858585]">
                 <Info className="w-3.5 h-3.5 text-[#B99752]" />
                 <span>Project will undergo review before appearing on public feeds.</span>
               </div>

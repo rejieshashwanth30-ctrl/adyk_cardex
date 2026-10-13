@@ -43,7 +43,7 @@ export default function StatusBadge({ status, className = '', showDot = true }: 
 
   return (
     <span
-      className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-mono tracking-[0.15em] uppercase border backdrop-blur-md shadow-sm ${current.bg} ${current.border} ${current.text} ${className}`}
+      className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium border backdrop-blur-md shadow-sm ${current.bg} ${current.border} ${current.text} ${className}`}
     >
       {showDot && (
         <span

@@ -80,17 +80,17 @@ export default function Navbar() {
               <CardexMark size="sm" animated />
               <div className="flex items-center gap-2.5">
                 <div className="flex flex-col">
-                  <span className="text-[13px] sm:text-sm font-black tracking-[0.16em] text-[#111111] font-mono group-hover:text-black transition-colors uppercase leading-none">
+                  <span className="text-[13px] sm:text-sm font-bold tracking-tight text-[#111111] group-hover:text-black transition-colors uppercase leading-none">
                     ADYK CARDEX
                   </span>
-                  <span className="hidden sm:block text-[8.5px] uppercase tracking-[0.24em] text-[#888888] font-mono leading-none mt-1">
+                  <span className="hidden sm:block text-[9px] uppercase tracking-wider text-[#888888] font-medium leading-none mt-1">
                     DISCOVERY ENGINE
                   </span>
                 </div>
 
                 <div className="hidden xl:flex items-center gap-1.5 pl-2.5 ml-0.5 border-l border-black/10">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#10B981] animate-pulse" />
-                  <span className="text-[9px] font-mono font-semibold tracking-[0.2em] text-[#666666] uppercase">
+                  <span className="text-[9px] font-semibold tracking-wider text-[#666666] uppercase">
                     LIVE
                   </span>
                 </div>
@@ -106,9 +106,9 @@ export default function Navbar() {
                   <Link
                     key={link.name}
                     href={link.href}
-                    className={`relative px-3.5 py-1.5 rounded-lg text-xs font-mono tracking-wider transition-all duration-200 ${
+                    className={`relative px-3.5 py-1.5 rounded-lg text-xs font-medium tracking-normal transition-all duration-200 ${
                       isActive
-                        ? 'bg-white text-[#111111] font-bold shadow-[0_1px_3px_rgba(0,0,0,0.06)] border border-black/[0.06]'
+                        ? 'bg-white text-[#111111] font-semibold shadow-[0_1px_3px_rgba(0,0,0,0.06)] border border-black/[0.06]'
                         : 'text-[#666666] hover:text-[#111111] hover:bg-white/60'
                     }`}
                   >
@@ -127,19 +127,19 @@ export default function Navbar() {
             <div className="hidden md:flex items-center gap-2.5">
               <Link
                 href="/explore"
-                className="inline-flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-mono text-[#666666] hover:text-[#111111] bg-black/[0.03] hover:bg-black/[0.06] border border-black/[0.05] transition-all"
+                className="inline-flex items-center gap-2 px-3 py-2 rounded-xl text-xs text-[#666666] hover:text-[#111111] bg-black/[0.03] hover:bg-black/[0.06] border border-black/[0.05] transition-all font-medium"
                 title="Search and Explore Projects"
               >
                 <Search className="w-3.5 h-3.5 text-[#888888]" />
                 <span className="hidden lg:inline text-[11px] uppercase tracking-wider">Search</span>
-                <kbd className="hidden lg:inline-flex text-[9px] font-mono px-1 py-0.5 rounded bg-black/[0.06] text-[#666666] leading-none">
+                <kbd className="hidden lg:inline-flex text-[9px] px-1 py-0.5 rounded bg-black/[0.06] text-[#666666] leading-none">
                   ⌘K
                 </kbd>
               </Link>
 
               <Link
                 href="/submit"
-                className="group relative inline-flex items-center gap-2 px-4 sm:px-4.5 py-2 rounded-xl text-xs font-mono uppercase tracking-[0.14em] text-white bg-gradient-to-b from-[#1C1C1C] to-[#0A0A0A] hover:from-[#262626] hover:to-[#121212] border border-[#2B2B2B] hover:border-black transition-all duration-200 shadow-[0_2px_10px_rgba(0,0,0,0.12),inset_0_1px_0_rgba(255,255,255,0.15)] hover:shadow-[0_4px_16px_rgba(0,0,0,0.2)] active:scale-[0.98]"
+                className="group relative inline-flex items-center gap-2 px-4 sm:px-4.5 py-2 rounded-xl text-xs uppercase tracking-wider text-white bg-gradient-to-b from-[#1C1C1C] to-[#0A0A0A] hover:from-[#262626] hover:to-[#121212] border border-[#2B2B2B] hover:border-black transition-all duration-200 shadow-[0_2px_10px_rgba(0,0,0,0.12),inset_0_1px_0_rgba(255,255,255,0.15)] hover:shadow-[0_4px_16px_rgba(0,0,0,0.2)] active:scale-[0.98]"
               >
                 <Plus className="w-3.5 h-3.5 text-[#B99752] transition-transform duration-300 group-hover:rotate-90" />
                 <span className="font-semibold">Submit Project</span>
@@ -176,13 +176,13 @@ export default function Navbar() {
               <div className="flex flex-col gap-2">
                 <Link
                   href="/explore"
-                  className="flex items-center justify-between p-3 rounded-xl bg-black/[0.03] text-xs font-mono text-[#555555] border border-black/[0.04]"
+                  className="flex items-center justify-between p-3 rounded-xl bg-black/[0.03] text-xs font-medium text-[#555555] border border-black/[0.04]"
                 >
                   <div className="flex items-center gap-2.5">
                     <Search className="w-4 h-4 text-[#888888]" />
                     <span>Search Projects & Developers</span>
                   </div>
-                  <kbd className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-black/[0.06] text-[#666666]">
+                  <kbd className="text-[10px] px-1.5 py-0.5 rounded bg-black/[0.06] text-[#666666]">
                     ⌘K
                   </kbd>
                 </Link>
@@ -195,9 +195,9 @@ export default function Navbar() {
                     <Link
                       key={link.name}
                       href={link.href}
-                      className={`flex items-center justify-between p-3.5 rounded-xl text-xs font-mono tracking-wider transition-colors ${
+                      className={`flex items-center justify-between p-3.5 rounded-xl text-xs tracking-normal transition-colors ${
                         isActive
-                          ? 'bg-[#F5F4F0] text-[#111111] font-bold border border-black/[0.06]'
+                          ? 'bg-[#F5F4F0] text-[#111111] font-semibold border border-black/[0.06]'
                           : 'text-[#555555] hover:bg-black/[0.02] hover:text-[#111111]'
                       }`}
                     >
@@ -215,7 +215,7 @@ export default function Navbar() {
                 <div className="pt-3 mt-1 border-t border-black/5">
                   <Link
                     href="/submit"
-                    className="flex items-center justify-center gap-2 w-full py-3.5 rounded-xl text-xs font-mono uppercase tracking-[0.15em] bg-[#111111] text-white font-semibold shadow-md active:scale-[0.99] transition-transform"
+                    className="flex items-center justify-center gap-2 w-full py-3.5 rounded-xl text-xs uppercase tracking-wider bg-[#111111] text-white font-semibold shadow-md active:scale-[0.99] transition-transform"
                   >
                     <Plus className="w-4 h-4 text-[#B99752]" />
                     <span>Submit Your Project</span>

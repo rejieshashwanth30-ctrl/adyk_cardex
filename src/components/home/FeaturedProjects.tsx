@@ -18,7 +18,7 @@ export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
       <ScrollReveal variant="fade-up" duration={700}>
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-16 border-b border-[#EAE8E3] pb-10">
           <div>
-            <span className="font-mono text-xs uppercase tracking-[0.3em] text-[#858585] font-semibold block mb-3">
+            <span className="text-xs uppercase tracking-wider text-[#858585] font-semibold block mb-3">
               PROJECTS &bull; WHAT PEOPLE BUILD
             </span>
             <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-[-0.03em] text-[#111111] uppercase max-w-3xl leading-[1.02]">
@@ -29,9 +29,9 @@ export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
 
           <Link
             href="/projects"
-            className="group inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.2em] text-[#555555] hover:text-[#B99752] transition-colors flex-shrink-0 font-medium"
+            className="group inline-flex items-center gap-2 text-xs uppercase tracking-wider text-[#555555] hover:text-[#B99752] transition-colors flex-shrink-0 font-semibold"
           >
-            <span>ALL PROJECTS ({projects.length})</span>
+            <span>All Projects ({projects.length})</span>
             <ArrowRight className="w-3.5 h-3.5 text-[#555555] group-hover:text-[#B99752] transition-transform group-hover:translate-x-1" />
           </Link>
         </div>

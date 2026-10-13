@@ -136,8 +136,8 @@ function ExploreInner({ initialProjects, initialDevelopers }: ExploreClientProps
     <div className="pt-28 pb-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10">
       {/* Editorial Header */}
       <div className="mb-12 border-b border-[#EAE8E3] pb-10">
-        <span className="font-mono text-xs uppercase tracking-[0.3em] text-[#858585] font-semibold block mb-3">
-          DISCOVERY ENGINE &bull; ADYK CARDEX
+        <span className="text-xs uppercase tracking-wider text-[#858585] font-semibold block mb-3">
+          Discovery Engine &bull; ADYK CARDEX
         </span>
         <h1 className="text-4xl sm:text-6xl font-black tracking-[-0.04em] text-[#111111] uppercase leading-[0.98]">
           EXPLORE ADYK CARDEX.
@@ -151,38 +151,38 @@ function ExploreInner({ initialProjects, initialDevelopers }: ExploreClientProps
       <div className="flex items-center gap-2 border-b border-[#EAE8E3] pb-5 mb-10 overflow-x-auto">
         <button
           onClick={() => setActiveTab('PROJECTS')}
-          className={`flex items-center gap-2 px-6 py-2.5 rounded-full font-mono text-xs uppercase tracking-[0.15em] transition-all whitespace-nowrap ${
+          className={`flex items-center gap-2 px-6 py-2.5 rounded-full text-xs uppercase tracking-wider transition-all whitespace-nowrap font-medium ${
             activeTab === 'PROJECTS'
               ? 'bg-[#111111] text-white font-bold shadow-md'
               : 'text-[#555555] hover:text-[#111111] bg-white border border-[#EAE8E3] hover:border-[#D6D2C8]'
           }`}
         >
           <FolderKanban className="w-3.5 h-3.5 text-[#B99752]" />
-          <span>PROJECTS ({initialProjects.length})</span>
+          <span>Projects ({initialProjects.length})</span>
         </button>
 
         <button
           onClick={() => setActiveTab('DEVELOPERS')}
-          className={`flex items-center gap-2 px-6 py-2.5 rounded-full font-mono text-xs uppercase tracking-[0.15em] transition-all whitespace-nowrap ${
+          className={`flex items-center gap-2 px-6 py-2.5 rounded-full text-xs uppercase tracking-wider transition-all whitespace-nowrap font-medium ${
             activeTab === 'DEVELOPERS'
               ? 'bg-[#111111] text-white font-bold shadow-md'
               : 'text-[#555555] hover:text-[#111111] bg-white border border-[#EAE8E3] hover:border-[#D6D2C8]'
           }`}
         >
           <Users className="w-3.5 h-3.5 text-[#B99752]" />
-          <span>DEVELOPERS ({initialDevelopers.length})</span>
+          <span>Developers ({initialDevelopers.length})</span>
         </button>
 
         <button
           onClick={() => setActiveTab('COLLABORATION')}
-          className={`flex items-center gap-2 px-6 py-2.5 rounded-full font-mono text-xs uppercase tracking-[0.15em] transition-all whitespace-nowrap ${
+          className={`flex items-center gap-2 px-6 py-2.5 rounded-full text-xs uppercase tracking-wider transition-all whitespace-nowrap font-medium ${
             activeTab === 'COLLABORATION'
               ? 'bg-[#111111] text-white font-bold shadow-md'
               : 'text-[#555555] hover:text-[#111111] bg-white border border-[#EAE8E3] hover:border-[#D6D2C8]'
           }`}
         >
           <Handshake className="w-3.5 h-3.5 text-[#B99752]" />
-          <span>COLLABORATION ({initialProjects.filter((p) => p.collaborationOpen).length})</span>
+          <span>Collaboration ({initialProjects.filter((p) => p.collaborationOpen).length})</span>
         </button>
       </div>
 
@@ -214,7 +214,7 @@ function ExploreInner({ initialProjects, initialDevelopers }: ExploreClientProps
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value as 'newest' | 'featured' | 'updated')}
-              className="w-full py-3.5 px-4 rounded-xl bg-white border border-[#EAE8E3] text-xs font-mono uppercase tracking-wider text-[#111111] focus:outline-none focus:border-[#B99752] shadow-sm font-medium"
+              className="w-full py-3.5 px-4 rounded-xl bg-white border border-[#EAE8E3] text-xs text-[#111111] focus:outline-none focus:border-[#B99752] shadow-sm font-medium"
             >
               <option value="featured">Sort: Featured First</option>
               <option value="newest">Sort: Newest Submissions</option>
@@ -224,10 +224,10 @@ function ExploreInner({ initialProjects, initialDevelopers }: ExploreClientProps
         </div>
 
         {/* Filter Pill Toolbar */}
-        <div className="p-4 rounded-2xl material-luxury-card bg-white flex flex-wrap items-center gap-3 text-xs font-mono">
+        <div className="p-4 rounded-2xl material-luxury-card bg-white flex flex-wrap items-center gap-3 text-xs">
           <div className="flex items-center gap-1.5 text-[#858585] mr-2 font-semibold">
             <SlidersHorizontal className="w-3.5 h-3.5 text-[#B99752]" />
-            <span>FILTERS:</span>
+            <span>Filters:</span>
           </div>
 
           {/* Technology filter */}
@@ -294,13 +294,13 @@ function ExploreInner({ initialProjects, initialDevelopers }: ExploreClientProps
           {filteredProjects.length === 0 ? (
             <div className="py-20 text-center material-luxury-card rounded-2xl bg-white p-8">
               <FolderKanban className="w-10 h-10 text-[#858585] mx-auto mb-3" />
-              <h3 className="text-lg font-bold text-[#111111] mb-1 uppercase font-mono">No matching projects found</h3>
-              <p className="text-xs text-[#555555] max-w-sm mx-auto mb-4 font-mono">
+              <h3 className="text-lg font-bold text-[#111111] mb-1">No matching projects found</h3>
+              <p className="text-xs text-[#555555] max-w-sm mx-auto mb-4">
                 No verified projects matched the active search and filter constraints.
               </p>
               <button
                 onClick={resetFilters}
-                className="px-4 py-2 rounded-lg bg-[#111111] text-white hover:bg-[#222222] text-xs font-mono transition-colors font-medium"
+                className="px-4 py-2 rounded-lg bg-[#111111] text-white hover:bg-[#222222] text-xs transition-colors font-medium"
               >
                 Clear Filters
               </button>
@@ -318,13 +318,13 @@ function ExploreInner({ initialProjects, initialDevelopers }: ExploreClientProps
           {filteredDevelopers.length === 0 ? (
             <div className="py-20 text-center material-luxury-card rounded-2xl bg-white p-8">
               <Users className="w-10 h-10 text-[#858585] mx-auto mb-3" />
-              <h3 className="text-lg font-bold text-[#111111] mb-1 uppercase font-mono">No matching developers found</h3>
-              <p className="text-xs text-[#555555] max-w-sm mx-auto mb-4 font-mono">
+              <h3 className="text-lg font-bold text-[#111111] mb-1">No matching developers found</h3>
+              <p className="text-xs text-[#555555] max-w-sm mx-auto mb-4">
                 No builders matched your search keywords or technology filters.
               </p>
               <button
                 onClick={resetFilters}
-                className="px-4 py-2 rounded-lg bg-[#111111] text-white hover:bg-[#222222] text-xs font-mono transition-colors font-medium"
+                className="px-4 py-2 rounded-lg bg-[#111111] text-white hover:bg-[#222222] text-xs transition-colors font-medium"
               >
                 Clear Filters
               </button>
@@ -346,8 +346,8 @@ export default function ExploreClient(props: ExploreClientProps) {
   return (
     <Suspense
       fallback={
-        <div className="pt-32 pb-20 text-center font-mono text-xs text-[#858585]">
-          INITIALIZING DISCOVERY ENGINE...
+        <div className="pt-32 pb-20 text-center text-xs text-[#858585]">
+          Loading discovery engine...
         </div>
       }
     >
