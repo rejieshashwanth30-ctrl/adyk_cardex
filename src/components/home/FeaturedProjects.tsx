@@ -38,18 +38,43 @@ export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
       </ScrollReveal>
 
       {/* Editorial Bento Grid with Staggered Entrance */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
-        {demoProjects.map((project, idx) => (
-          <ScrollReveal
-            key={project.id}
-            variant="fade-up"
-            delay={idx * 120}
-            duration={750}
-          >
-            <ProjectCard project={project} featured={true} />
-          </ScrollReveal>
-        ))}
-      </div>
+      {demoProjects.length === 0 ? (
+        <ScrollReveal variant="fade-up" duration={700}>
+          <div className="p-12 sm:p-16 rounded-3xl bg-[#FAF9F6] border border-[#EAE8E3] text-center max-w-2xl mx-auto space-y-4">
+            <span className="text-xs uppercase tracking-wider text-[#858585] font-semibold block">
+              CURATED SHOWCASE &bull; REPOSITORY PENDING
+            </span>
+            <h3 className="text-xl sm:text-2xl font-black text-[#111111] uppercase tracking-tight">
+              AWAITING APPROVED SUBMISSIONS
+            </h3>
+            <p className="text-xs sm:text-sm text-[#666666] leading-relaxed max-w-md mx-auto">
+              Every project on ADYK CARDEX is moderated by administrators before public display. Be the first to showcase your engineering!
+            </p>
+            <div className="pt-2">
+              <Link
+                href="/submit"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#111111] hover:bg-[#222222] text-white text-xs uppercase tracking-wider font-semibold transition-all shadow-sm"
+              >
+                <span>Submit Your Project</span>
+                <ArrowRight className="w-3.5 h-3.5 text-[#B99752]" />
+              </Link>
+            </div>
+          </div>
+        </ScrollReveal>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
+          {demoProjects.map((project, idx) => (
+            <ScrollReveal
+              key={project.id}
+              variant="fade-up"
+              delay={idx * 120}
+              duration={750}
+            >
+              <ProjectCard project={project} featured={true} />
+            </ScrollReveal>
+          ))}
+        </div>
+      )}
     </section>
   );
 }

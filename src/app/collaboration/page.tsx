@@ -8,9 +8,12 @@ export const metadata = {
     'Find people who have the skills your project needs. Direct developer collaboration without gatekeepers on ADYK CARDEX.',
 };
 
+import { connection } from 'next/server';
+
 export const instant = false;
 
 export default async function CollaborationPage() {
+  await connection();
   const allProjects = await getApprovedProjects();
   const collabProjects = allProjects.filter((p) => p.collaborationOpen);
 

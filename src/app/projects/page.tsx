@@ -10,9 +10,12 @@ export const metadata = {
     'Explore verified technology projects, architectures, and open experiments built by developers on ADYK CARDEX.',
 };
 
+import { connection } from 'next/server';
+
 export const instant = false;
 
 export default async function ProjectsPage() {
+  await connection();
   const projects = await getApprovedProjects();
 
   return (
@@ -41,11 +44,33 @@ export default async function ProjectsPage() {
       </div>
 
       {/* Projects Bento Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
-        {projects.map((project) => (
-          <ProjectCard key={project.id} project={project} featured={true} />
-        ))}
-      </div>
+      {projects.length === 0 ? (
+        <div className="p-16 rounded-3xl bg-[#FAF9F6] border border-[#EAE8E3] text-center max-w-xl mx-auto space-y-4">
+          <div className="w-12 h-12 rounded-2xl bg-white border border-[#EAE8E3] text-[#111111] flex items-center justify-center mx-auto shadow-sm">
+            <Plus className="w-5 h-5 text-[#B99752]" />
+          </div>
+          <h2 className="text-lg font-bold text-[#111111] uppercase tracking-tight">
+            NO PUBLIC PROJECTS DISPLAYED
+          </h2>
+          <p className="text-xs text-[#666666] leading-relaxed">
+            All submitted projects must be approved by administrators before appearing publicly.
+          </p>
+          <div className="pt-2">
+            <Link
+              href="/submit"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#111111] hover:bg-[#222222] text-white text-xs uppercase tracking-wider font-semibold transition-colors"
+            >
+              <span>Submit A Project</span>
+            </Link>
+          </div>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
+          {projects.map((project) => (
+            <ProjectCard key={project.id} project={project} featured={true} />
+          ))}
+        </div>
+      )}
     </div>
   );
 }

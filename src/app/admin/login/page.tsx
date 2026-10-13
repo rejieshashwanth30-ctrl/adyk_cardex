@@ -119,7 +119,7 @@ export default function AdminLoginPage() {
           )}
 
           {/* Form */}
-          <form onSubmit={handleSubmit} className="space-y-5" noValidate>
+          <form onSubmit={handleSubmit} method="POST" action="#" className="space-y-5" noValidate>
             <div>
               <label
                 htmlFor="admin-email"

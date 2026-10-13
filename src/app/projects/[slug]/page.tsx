@@ -8,6 +8,8 @@ interface ProjectPageProps {
   params: Promise<{ slug: string }>;
 }
 
+import { connection } from 'next/server';
+
 export const instant = false;
 
 export async function generateMetadata({ params }: ProjectPageProps): Promise<Metadata> {
@@ -32,6 +34,7 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
 }
 
 export default async function ProjectDetailPage({ params }: ProjectPageProps) {
+  await connection();
   const { slug } = await params;
   const project = await getProjectBySlug(slug);
 

@@ -56,8 +56,12 @@ async function runUploadTests() {
     throw new Error('Security check failed to reject invalid file!');
   }
 
-  // 4. Test uploading oversized file (> 5 MB)
-  const bigBuffer = Buffer.alloc(5.2 * 1024 * 1024); // 5.2 MB
+  // 4. Test uploading oversized file (> 10 MB)
+  const bigBuffer = Buffer.alloc(10.5 * 1024 * 1024); // 10.5 MB
+  bigBuffer[0] = 0x89;
+  bigBuffer[1] = 0x50;
+  bigBuffer[2] = 0x4e;
+  bigBuffer[3] = 0x47;
   const formBig = new FormData();
   formBig.append('file', new Blob([bigBuffer], { type: 'image/png' }), 'large.png');
 
@@ -66,10 +70,10 @@ async function runUploadTests() {
     body: formBig,
   });
   const bigData = await bigRes.json();
-  console.log('\n3. Oversized file (> 5 MB) upload status:', bigRes.status);
+  console.log('\n3. Oversized file (> 10 MB) upload status:', bigRes.status);
   console.log('   Expected error returned:', bigData.error);
-  if (bigRes.status === 400 && bigData.error.includes('5 MB')) {
-    console.log('   ✅ Maximum file size constraint strictly enforced.');
+  if (bigRes.status === 400 && bigData.error.includes('10 MB')) {
+    console.log('   ✅ Maximum file size constraint (10 MB) strictly enforced.');
   } else {
     throw new Error('Failed to reject oversized file!');
   }

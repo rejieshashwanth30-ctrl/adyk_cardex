@@ -16,6 +16,7 @@ import {
   Info,
   Search,
   MessageSquare,
+  Shield,
 } from 'lucide-react';
 
 const NAV_LINKS = [
@@ -140,6 +141,15 @@ export default function Navbar() {
               </Link>
 
               <Link
+                href="/admin"
+                className="hidden lg:inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs text-[#666666] hover:text-[#111111] bg-black/[0.03] hover:bg-black/[0.06] border border-black/[0.05] transition-all font-medium"
+                title="Admin Control Console"
+              >
+                <Shield className="w-3.5 h-3.5 text-[#888888]" />
+                <span className="text-[11px] uppercase tracking-wider font-semibold">Admin</span>
+              </Link>
+
+              <Link
                 href="/submit"
                 className="group relative inline-flex items-center gap-2 px-4 sm:px-4.5 py-2 rounded-xl text-xs uppercase tracking-wider text-white bg-gradient-to-b from-[#1C1C1C] to-[#0A0A0A] hover:from-[#262626] hover:to-[#121212] border border-[#2B2B2B] hover:border-black transition-all duration-200 shadow-[0_2px_10px_rgba(0,0,0,0.12),inset_0_1px_0_rgba(255,255,255,0.15)] hover:shadow-[0_4px_16px_rgba(0,0,0,0.2)] active:scale-[0.98]"
               >
@@ -214,13 +224,21 @@ export default function Navbar() {
                   );
                 })}
 
-                <div className="pt-3 mt-1 border-t border-black/5">
+                <div className="pt-3 mt-1 border-t border-black/5 flex flex-col gap-2">
                   <Link
                     href="/submit"
                     className="flex items-center justify-center gap-2 w-full py-3.5 rounded-xl text-xs uppercase tracking-wider bg-[#111111] text-white font-semibold shadow-md active:scale-[0.99] transition-transform"
                   >
                     <Plus className="w-4 h-4 text-[#B99752]" />
                     <span>Submit Your Project</span>
+                  </Link>
+
+                  <Link
+                    href="/admin"
+                    className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl text-xs font-mono uppercase tracking-wider text-[#666666] hover:text-[#111111] bg-black/[0.03] hover:bg-black/[0.06] border border-black/[0.05] transition-colors"
+                  >
+                    <Shield className="w-3.5 h-3.5 text-[#888888]" />
+                    <span>Admin Control Console</span>
                   </Link>
                 </div>
               </div>

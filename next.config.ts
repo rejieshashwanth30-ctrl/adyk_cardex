@@ -4,6 +4,7 @@ const nextConfig: NextConfig = {
   /* config options here */
   cacheComponents: true,
   partialPrefetching: true,
+  allowedDevOrigins: ['192.168.31.221', 'localhost', '127.0.0.1'],
   images: {
     remotePatterns: [
       {

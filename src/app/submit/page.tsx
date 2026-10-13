@@ -95,20 +95,21 @@ export default function SubmitProjectPage() {
     setImageUploadError(null);
     setErrorMessage('');
 
-    // Client-side file size check (5 MB)
-    if (file.size > 5 * 1024 * 1024) {
+    // Client-side file size check (10 MB)
+    if (file.size > 10 * 1024 * 1024) {
       setImageUploadError(
-        `File exceeds maximum allowed size of 5 MB (Selected size: ${(file.size / (1024 * 1024)).toFixed(2)} MB).`
+        `File exceeds maximum allowed size of 10 MB (Selected size: ${(file.size / (1024 * 1024)).toFixed(2)} MB).`
       );
       if (fileInputRef.current) fileInputRef.current.value = '';
       return;
     }
 
-    // Client-side MIME type check
-    const validTypes = ['image/jpeg', 'image/png', 'image/webp'];
-    if (!validTypes.includes(file.type.toLowerCase())) {
+    // Client-side MIME / extension check
+    const validExtensions = /\.(jpe?g|jfif|png|webp|avif|gif|svg)$/i;
+    const isImageMime = file.type ? file.type.toLowerCase().startsWith('image/') : false;
+    if (!isImageMime && !validExtensions.test(file.name)) {
       setImageUploadError(
-        'Unsupported file format. Please select a JPG, PNG, or WebP image.'
+        'Unsupported file format. Please select a JPG, PNG, WebP, GIF, or AVIF image.'
       );
       if (fileInputRef.current) fileInputRef.current.value = '';
       return;
@@ -161,20 +162,21 @@ export default function SubmitProjectPage() {
 
     setAvatarUploadError(null);
 
-    // Client-side file size check (5 MB)
-    if (file.size > 5 * 1024 * 1024) {
+    // Client-side file size check (10 MB)
+    if (file.size > 10 * 1024 * 1024) {
       setAvatarUploadError(
-        `File exceeds maximum allowed size of 5 MB (Selected size: ${(file.size / (1024 * 1024)).toFixed(2)} MB).`
+        `File exceeds maximum allowed size of 10 MB (Selected size: ${(file.size / (1024 * 1024)).toFixed(2)} MB).`
       );
       if (avatarInputRef.current) avatarInputRef.current.value = '';
       return;
     }
 
-    // Client-side MIME type check
-    const validTypes = ['image/jpeg', 'image/png', 'image/webp'];
-    if (!validTypes.includes(file.type.toLowerCase())) {
+    // Client-side MIME / extension check
+    const validExtensions = /\.(jpe?g|jfif|png|webp|avif|gif|svg)$/i;
+    const isImageMime = file.type ? file.type.toLowerCase().startsWith('image/') : false;
+    if (!isImageMime && !validExtensions.test(file.name)) {
       setAvatarUploadError(
-        'Unsupported file format. Please select a JPG, PNG, or WebP image.'
+        'Unsupported file format. Please select a JPG, PNG, WebP, GIF, or AVIF image.'
       );
       if (avatarInputRef.current) avatarInputRef.current.value = '';
       return;

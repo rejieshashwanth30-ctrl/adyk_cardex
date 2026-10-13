@@ -191,8 +191,9 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <Link href="/moderation" className="text-xs text-[#858585] hover:text-[#111111] transition-colors inline-flex items-center gap-1">
-                  <span>Review Queue</span>
+                <Link href="/admin" className="text-xs text-[#858585] hover:text-[#111111] transition-colors inline-flex items-center gap-1.5 font-medium">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#B99752] animate-pulse" />
+                  <span>Admin Console</span>
                   <ArrowUpRight className="w-3 h-3" />
                 </Link>
               </li>
@@ -266,9 +267,17 @@ export default function Footer() {
           <div>
             &copy; 2026 ADYK CARDEX &bull; ADYK - A MULTI-VENTURE COMPANY. ALL RIGHTS RESERVED.
           </div>
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-4 sm:gap-6">
+            <Link
+              href="/admin"
+              className="text-[#858585] hover:text-[#111111] transition-colors flex items-center gap-1 font-mono text-[11px] uppercase tracking-wider"
+              title="Access Admin Console"
+            >
+              <span>Admin Gateway</span>
+            </Link>
+            <span>&bull;</span>
             <span className="hover:text-[#111111] transition-colors">
-              CONFIDENTIAL &amp; PROPRIETARY DESIGN
+              CONFIDENTIAL &amp; PROPRIETARY
             </span>
             <span>&bull;</span>
             <span className="text-[#B99752] font-semibold">

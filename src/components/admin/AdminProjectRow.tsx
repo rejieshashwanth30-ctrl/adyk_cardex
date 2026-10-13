@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { Project } from '@/lib/types';
 import {
@@ -44,6 +45,7 @@ export default function AdminProjectRow({
   project,
   onStatusChange,
 }: AdminProjectRowProps) {
+  const router = useRouter();
   const [currentProject, setCurrentProject] = useState<Project>(project);
   const [expanded, setExpanded] = useState(false);
   const [loadingAction, setLoadingAction] = useState<'APPROVED' | 'DECLINED' | null>(null);
@@ -72,6 +74,7 @@ export default function AdminProjectRow({
         if (onStatusChange) {
           onStatusChange(data.project);
         }
+        router.refresh();
       } else {
         setFeedback(data.error || 'Failed to update status.');
       }

@@ -64,7 +64,7 @@ let cachedDevelopers: Developer[] = [...INITIAL_DEVELOPERS];
 export async function getApprovedProjects(): Promise<Project[]> {
   try {
     const dbProjects = await dbGetApprovedProjects();
-    if (dbProjects && dbProjects.length > 0) {
+    if (Array.isArray(dbProjects)) {
       cachedProjects = dbProjects;
       saveDataFile(cachedProjects);
       return dbProjects.map(sanitizeProjectForPublic);
@@ -167,7 +167,7 @@ function sanitizeDeveloperForPublic(dev: Developer): Developer {
 export async function getAllProjectsAdmin(): Promise<Project[]> {
   try {
     const dbProjects = await dbGetAllProjectsAdmin();
-    if (dbProjects && dbProjects.length > 0) {
+    if (Array.isArray(dbProjects)) {
       cachedProjects = dbProjects;
       saveDataFile(cachedProjects);
       return dbProjects;
@@ -188,13 +188,22 @@ export async function reviewProjectSubmission(
   try {
     const updated = await dbReviewProject(id, decision as SubmissionStatus, adminNotes, adminId);
     if (updated) {
-      const idx = cachedProjects.findIndex((p) => p.id === id);
-      if (idx !== -1) {
-        cachedProjects[idx] = updated;
-      } else {
-        cachedProjects.unshift(updated);
+      // Synchronize in-memory and disk cache from PostgreSQL
+      try {
+        const all = await dbGetAllProjectsAdmin();
+        if (Array.isArray(all)) {
+          cachedProjects = all;
+          saveDataFile(cachedProjects);
+        }
+      } catch {
+        const idx = cachedProjects.findIndex((p) => p.id === id);
+        if (idx !== -1) {
+          cachedProjects[idx] = updated;
+        } else {
+          cachedProjects.unshift(updated);
+        }
+        saveDataFile(cachedProjects);
       }
-      saveDataFile(cachedProjects);
       return updated;
     }
   } catch (err) {

@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 import { getAllProjectsAdmin, reviewProjectSubmission, getAdminStats } from '@/lib/data/store';
 import { verifyAdminSessionFromRequest } from '@/lib/auth/adminAuth';
 
@@ -57,6 +58,25 @@ export async function POST(request: Request) {
     const updated = await reviewProjectSubmission(id, decision, auditNotes, admin.id);
     if (!updated) {
       return NextResponse.json({ error: 'Project not found.' }, { status: 404 });
+    }
+
+    // Immediately purge and revalidate public and admin route caches
+    try {
+      revalidatePath('/', 'layout');
+      revalidatePath('/');
+      revalidatePath('/projects');
+      revalidatePath('/explore');
+      revalidatePath('/collaboration');
+      revalidatePath('/admin');
+      revalidatePath('/admin/projects');
+      revalidatePath('/admin/projects/pending');
+      revalidatePath('/admin/projects/approved');
+      revalidatePath('/admin/projects/declined');
+      if (updated.slug) {
+        revalidatePath(`/projects/${updated.slug}`);
+      }
+    } catch (revalErr) {
+      console.warn('Cache revalidation warning:', revalErr);
     }
 
     return NextResponse.json({

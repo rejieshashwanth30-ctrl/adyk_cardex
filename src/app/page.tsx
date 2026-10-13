@@ -8,7 +8,10 @@ import CollaborationSection from '@/components/home/CollaborationSection';
 import HowItWorksSection from '@/components/home/HowItWorksSection';
 import SubmitCtaSection from '@/components/home/SubmitCtaSection';
 import HomeAboutSection from '@/components/home/HomeAboutSection';
+import { connection } from 'next/server';
 import { getApprovedProjects, getDevelopers } from '@/lib/data/store';
+
+export const instant = false;
 
 export const metadata = {
   title: 'ADYK CARDEX — Build. Showcase. Connect.',
@@ -17,6 +20,7 @@ export const metadata = {
 };
 
 export default async function HomePage() {
+  await connection();
   const projects = await getApprovedProjects();
   const developers = await getDevelopers();
 

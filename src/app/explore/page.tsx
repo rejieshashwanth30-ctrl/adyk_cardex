@@ -8,9 +8,12 @@ export const metadata = {
     'Search projects, developers, and technologies across the open ecosystem. Discover talented builders and active collaborations on ADYK CARDEX.',
 };
 
+import { connection } from 'next/server';
+
 export const instant = false;
 
 export default async function ExplorePage() {
+  await connection();
   const projects = await getApprovedProjects();
   const developers = await getDevelopers();
 
