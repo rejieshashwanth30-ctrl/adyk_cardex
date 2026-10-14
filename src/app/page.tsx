@@ -39,7 +39,7 @@ export default async function HomePage() {
       <DiscoverDevelopers developers={developers} />
 
       {/* 5. Explore by Technology */}
-      <TechnologyGrid />
+      <TechnologyGrid projects={projects} developers={developers} />
 
       {/* 6. Collaboration Hub */}
       <CollaborationSection projects={projects} />

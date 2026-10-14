@@ -45,7 +45,7 @@ export default function DeveloperProfileClient({
   const whatsAppLink = `https://wa.me/${cleanPhone}?text=${whatsAppText}`;
 
   return (
-    <div className="pt-28 pb-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10">
+    <div className="pt-24 sm:pt-28 pb-28 px-3 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10">
       {/* Breadcrumb */}
       {/* Back link */}
       <div className="mb-10">
@@ -204,7 +204,7 @@ export default function DeveloperProfileClient({
             <p className="text-sm text-[#858585]">No verified builds listed yet.</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
+          <div className="grid grid-cols-2 gap-2.5 sm:gap-6 md:gap-8 lg:gap-10">
             {projects.map((project) => (
               <ProjectCard key={project.id} project={project} featured={true} />
             ))}

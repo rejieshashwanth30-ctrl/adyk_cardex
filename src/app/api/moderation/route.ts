@@ -153,8 +153,9 @@ export async function DELETE(request: Request) {
       );
     }
 
+    const { searchParams } = new URL(request.url);
     const body = await request.json().catch(() => ({}));
-    const { id } = body;
+    const id = body.id || searchParams.get('id');
 
     if (!id) {
       return NextResponse.json(

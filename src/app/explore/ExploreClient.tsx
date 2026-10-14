@@ -1,10 +1,12 @@
 'use client';
 
-import React, { useState, useMemo, Suspense } from 'react';
+import React, { useState, useMemo, useEffect, Suspense } from 'react';
+import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import ProjectCard from '@/components/projects/ProjectCard';
 import DeveloperCard from '@/components/developers/DeveloperCard';
 import { Project, Developer } from '@/lib/types';
+import { TECHNOLOGIES, matchesTech, findTechInfo } from '@/lib/data/technologies';
 import {
   Search,
   SlidersHorizontal,
@@ -12,6 +14,8 @@ import {
   Users,
   Handshake,
   X,
+  Layers,
+  Sparkles,
 } from 'lucide-react';
 
 interface ExploreClientProps {
@@ -39,12 +43,38 @@ function ExploreInner({ initialProjects, initialDevelopers }: ExploreClientProps
   const [collabOnly, setCollabOnly] = useState<boolean>(false);
   const [sortBy, setSortBy] = useState<'newest' | 'featured' | 'updated'>('featured');
 
-  // Derive unique tech tags across all data
+  // Keep selectedTech in sync when URL search params update (e.g. user navigates between tech links)
+  useEffect(() => {
+    if (initialTech) {
+      setSelectedTech(initialTech);
+    }
+  }, [initialTech]);
+
+  // Retrieve curated stack details for the active technology
+  const activeTechInfo = useMemo(() => {
+    if (!selectedTech) return null;
+    return findTechInfo(selectedTech);
+  }, [selectedTech]);
+
+  // Derive unique tech tags across all data, including curated TECHNOLOGIES
   const availableTechs = useMemo(() => {
-    const set = new Set<string>();
-    initialProjects.forEach((p) => p.technologies.forEach((t) => set.add(t)));
-    initialDevelopers.forEach((d) => d.skills.forEach((s) => set.add(s)));
-    return Array.from(set).sort();
+    const map = new Map<string, string>();
+    TECHNOLOGIES.forEach((t) => {
+      map.set(t.name.toLowerCase().replace(/[^a-z0-9]/g, ''), t.name);
+    });
+    initialProjects.forEach((p) =>
+      p.technologies.forEach((t) => {
+        const key = t.toLowerCase().replace(/[^a-z0-9]/g, '');
+        if (!map.has(key)) map.set(key, t);
+      })
+    );
+    initialDevelopers.forEach((d) =>
+      d.skills.forEach((s) => {
+        const key = s.toLowerCase().replace(/[^a-z0-9]/g, '');
+        if (!map.has(key)) map.set(key, s);
+      })
+    );
+    return Array.from(map.values()).sort((a, b) => a.localeCompare(b));
   }, [initialProjects, initialDevelopers]);
 
   // Derive unique categories
@@ -71,7 +101,7 @@ function ExploreInner({ initialProjects, initialDevelopers }: ExploreClientProps
 
     if (selectedTech) {
       result = result.filter((p) =>
-        p.technologies.some((t) => t.toLowerCase() === selectedTech.toLowerCase())
+        p.technologies.some((t) => matchesTech(t, selectedTech))
       );
     }
 
@@ -113,7 +143,7 @@ function ExploreInner({ initialProjects, initialDevelopers }: ExploreClientProps
 
     if (selectedTech) {
       result = result.filter((d) =>
-        d.skills.some((s) => s.toLowerCase() === selectedTech.toLowerCase())
+        d.skills.some((s) => matchesTech(s, selectedTech))
       );
     }
 
@@ -133,56 +163,150 @@ function ExploreInner({ initialProjects, initialDevelopers }: ExploreClientProps
   );
 
   return (
-    <div className="pt-28 pb-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10">
+    <div className="pt-24 sm:pt-28 pb-28 px-3 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10">
       {/* Editorial Header */}
-      <div className="mb-12 border-b border-[#EAE8E3] pb-10">
-        <span className="text-xs uppercase tracking-wider text-[#858585] font-semibold block mb-3">
+      <div className="mb-10 border-b border-[#EAE8E3] pb-8 sm:pb-10">
+        <span className="text-xs uppercase tracking-wider text-[#858585] font-semibold block mb-2 sm:mb-3">
           Discovery Engine &bull; ADYK CARDEX
         </span>
-        <h1 className="text-4xl sm:text-6xl font-black tracking-[-0.04em] text-[#111111] uppercase leading-[0.98]">
+        <h1 className="text-3xl sm:text-6xl font-black tracking-[-0.04em] text-[#111111] uppercase leading-[0.98]">
           EXPLORE ADYK CARDEX.
         </h1>
-        <p className="text-[#555555] text-sm sm:text-base mt-4 max-w-2xl font-normal leading-relaxed">
+        <p className="text-[#555555] text-xs sm:text-base mt-3 max-w-2xl font-normal leading-relaxed">
           Search verified projects, inspect technical architectures, and discover talented builders ready to collaborate.
         </p>
       </div>
 
+      {/* Dedicated Technology Details Showcase when exploring a specific technology */}
+      {selectedTech && (
+        <div className="mb-8 p-4 sm:p-6 rounded-2xl material-luxury-card bg-[#FAF9F6] border-2 border-[#111111] shadow-xs">
+          <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 pb-4 border-b border-[#EAE8E3]">
+            <div>
+              <div className="flex flex-wrap items-center gap-2 mb-2">
+                <span className="text-[10px] uppercase tracking-wider font-bold text-[#858585] bg-white border border-[#EAE8E3] px-2.5 py-0.5 rounded-full inline-flex items-center gap-1">
+                  <Layers className="w-3 h-3 text-[#B99752]" />
+                  <span>Stack Component</span>
+                </span>
+                <span className="text-[10px] font-semibold text-[#111111] bg-white border border-[#EAE8E3] px-2.5 py-0.5 rounded-full inline-flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#B99752]" />
+                  <span>{filteredProjects.length} {filteredProjects.length === 1 ? 'Build' : 'Builds'}</span>
+                </span>
+                {filteredDevelopers.length > 0 && (
+                  <span className="text-[10px] font-semibold text-[#555555] bg-white border border-[#EAE8E3] px-2.5 py-0.5 rounded-full">
+                    {filteredDevelopers.length} {filteredDevelopers.length === 1 ? 'Builder' : 'Builders'}
+                  </span>
+                )}
+              </div>
+
+              <h2 className="text-2xl sm:text-4xl font-black tracking-tight uppercase text-[#111111]">
+                {selectedTech}
+              </h2>
+
+              <p className="text-xs sm:text-sm text-[#555555] mt-1.5 max-w-2xl leading-relaxed">
+                {activeTechInfo?.desc ||
+                  `Verified builds and developer talent using ${selectedTech} across the open ecosystem.`}
+              </p>
+            </div>
+
+            <div className="flex items-center gap-2 self-start sm:self-auto flex-shrink-0">
+              <Link
+                href="/submit"
+                className="px-3.5 py-2 rounded-xl bg-[#111111] hover:bg-[#222222] text-white text-xs font-semibold uppercase tracking-wider transition-colors whitespace-nowrap shadow-xs"
+              >
+                Submit {selectedTech} Build &rarr;
+              </Link>
+              <button
+                onClick={() => setSelectedTech('')}
+                className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white hover:bg-[#F2EFE9] border border-[#EAE8E3] text-[#555555] hover:text-[#111111] text-xs font-semibold transition-colors"
+                title="Clear technology filter"
+              >
+                <X className="w-3.5 h-3.5" />
+                <span className="text-xs">View All Tech</span>
+              </button>
+            </div>
+          </div>
+
+          {/* Quick Relationship Switcher */}
+          <div className="pt-3 flex flex-wrap items-center gap-2 text-xs">
+            <span className="text-[10px] uppercase tracking-wider text-[#858585] font-semibold">
+              Filter By:
+            </span>
+            <button
+              onClick={() => setActiveTab('PROJECTS')}
+              className={`px-3 py-1 rounded-lg text-xs font-semibold transition-all ${
+                activeTab === 'PROJECTS'
+                  ? 'bg-[#111111] text-white'
+                  : 'bg-white text-[#555555] border border-[#EAE8E3] hover:text-[#111111]'
+              }`}
+            >
+              Projects ({filteredProjects.length})
+            </button>
+            <button
+              onClick={() => setActiveTab('DEVELOPERS')}
+              className={`px-3 py-1 rounded-lg text-xs font-semibold transition-all ${
+                activeTab === 'DEVELOPERS'
+                  ? 'bg-[#111111] text-white'
+                  : 'bg-white text-[#555555] border border-[#EAE8E3] hover:text-[#111111]'
+              }`}
+            >
+              Builders ({filteredDevelopers.length})
+            </button>
+            {filteredProjects.some((p) => p.collaborationOpen) && (
+              <button
+                onClick={() => setActiveTab('COLLABORATION')}
+                className={`px-3 py-1 rounded-lg text-xs font-semibold transition-all ${
+                  activeTab === 'COLLABORATION'
+                    ? 'bg-[#111111] text-white'
+                    : 'bg-white text-[#555555] border border-[#EAE8E3] hover:text-[#111111]'
+                }`}
+              >
+                Open Collabs ({filteredProjects.filter((p) => p.collaborationOpen).length})
+              </button>
+            )}
+          </div>
+        </div>
+      )}
+
       {/* Luxury Tabs */}
-      <div className="flex items-center gap-2 border-b border-[#EAE8E3] pb-5 mb-10 overflow-x-auto">
+      <div className="flex items-center gap-2 border-b border-[#EAE8E3] pb-5 mb-8 overflow-x-auto">
         <button
           onClick={() => setActiveTab('PROJECTS')}
-          className={`flex items-center gap-2 px-6 py-2.5 rounded-full text-xs uppercase tracking-wider transition-all whitespace-nowrap font-medium ${
+          className={`flex items-center gap-2 px-5 sm:px-6 py-2 rounded-full text-xs uppercase tracking-wider transition-all whitespace-nowrap font-medium ${
             activeTab === 'PROJECTS'
               ? 'bg-[#111111] text-white font-bold shadow-md'
               : 'text-[#555555] hover:text-[#111111] bg-white border border-[#EAE8E3] hover:border-[#D6D2C8]'
           }`}
         >
           <FolderKanban className="w-3.5 h-3.5 text-[#B99752]" />
-          <span>Projects ({initialProjects.length})</span>
+          <span>Projects ({selectedTech || searchQuery ? filteredProjects.length : initialProjects.length})</span>
         </button>
 
         <button
           onClick={() => setActiveTab('DEVELOPERS')}
-          className={`flex items-center gap-2 px-6 py-2.5 rounded-full text-xs uppercase tracking-wider transition-all whitespace-nowrap font-medium ${
+          className={`flex items-center gap-2 px-5 sm:px-6 py-2 rounded-full text-xs uppercase tracking-wider transition-all whitespace-nowrap font-medium ${
             activeTab === 'DEVELOPERS'
               ? 'bg-[#111111] text-white font-bold shadow-md'
               : 'text-[#555555] hover:text-[#111111] bg-white border border-[#EAE8E3] hover:border-[#D6D2C8]'
           }`}
         >
           <Users className="w-3.5 h-3.5 text-[#B99752]" />
-          <span>Developers ({initialDevelopers.length})</span>
+          <span>Developers ({selectedTech || searchQuery ? filteredDevelopers.length : initialDevelopers.length})</span>
         </button>
 
         <button
           onClick={() => setActiveTab('COLLABORATION')}
-          className={`flex items-center gap-2 px-6 py-2.5 rounded-full text-xs uppercase tracking-wider transition-all whitespace-nowrap font-medium ${
+          className={`flex items-center gap-2 px-5 sm:px-6 py-2 rounded-full text-xs uppercase tracking-wider transition-all whitespace-nowrap font-medium ${
             activeTab === 'COLLABORATION'
               ? 'bg-[#111111] text-white font-bold shadow-md'
               : 'text-[#555555] hover:text-[#111111] bg-white border border-[#EAE8E3] hover:border-[#D6D2C8]'
           }`}
         >
           <Handshake className="w-3.5 h-3.5 text-[#B99752]" />
-          <span>Collaboration ({initialProjects.filter((p) => p.collaborationOpen).length})</span>
+          <span>
+            Collaboration (
+            {(selectedTech || searchQuery ? filteredProjects : initialProjects).filter((p) => p.collaborationOpen).length}
+            )
+          </span>
         </button>
       </div>
 
@@ -292,21 +416,35 @@ function ExploreInner({ initialProjects, initialDevelopers }: ExploreClientProps
       {activeTab === 'PROJECTS' || activeTab === 'COLLABORATION' ? (
         <div>
           {filteredProjects.length === 0 ? (
-            <div className="py-20 text-center material-luxury-card rounded-2xl bg-white p-8">
+            <div className="py-16 text-center material-luxury-card rounded-2xl bg-white p-8 border border-[#EAE8E3]">
               <FolderKanban className="w-10 h-10 text-[#858585] mx-auto mb-3" />
-              <h3 className="text-lg font-bold text-[#111111] mb-1">No matching projects found</h3>
+              <h3 className="text-lg font-bold text-[#111111] mb-1">
+                {selectedTech ? `No ${selectedTech} projects found yet` : 'No matching projects found'}
+              </h3>
               <p className="text-xs text-[#555555] max-w-sm mx-auto mb-4">
-                No verified projects matched the active search and filter constraints.
+                {selectedTech
+                  ? `No verified projects have been submitted for ${selectedTech} yet. Be the first to showcase your build!`
+                  : 'No verified projects matched the active search and filter constraints.'}
               </p>
-              <button
-                onClick={resetFilters}
-                className="px-4 py-2 rounded-lg bg-[#111111] text-white hover:bg-[#222222] text-xs transition-colors font-medium"
-              >
-                Clear Filters
-              </button>
+              <div className="flex flex-wrap items-center justify-center gap-3">
+                {selectedTech && (
+                  <Link
+                    href="/submit"
+                    className="px-4 py-2 rounded-xl bg-[#111111] text-white hover:bg-[#222222] text-xs font-semibold uppercase tracking-wider transition-colors"
+                  >
+                    Submit the first {selectedTech} build &rarr;
+                  </Link>
+                )}
+                <button
+                  onClick={resetFilters}
+                  className="px-4 py-2 rounded-xl bg-white border border-[#EAE8E3] text-[#555555] hover:text-[#111111] text-xs transition-colors font-medium"
+                >
+                  Clear Filters
+                </button>
+              </div>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
+            <div className="grid grid-cols-2 gap-2.5 sm:gap-6 md:gap-8 lg:gap-10">
               {filteredProjects.map((project) => (
                 <ProjectCard key={project.id} project={project} featured={true} />
               ))}
@@ -316,21 +454,25 @@ function ExploreInner({ initialProjects, initialDevelopers }: ExploreClientProps
       ) : (
         <div>
           {filteredDevelopers.length === 0 ? (
-            <div className="py-20 text-center material-luxury-card rounded-2xl bg-white p-8">
+            <div className="py-16 text-center material-luxury-card rounded-2xl bg-white p-8 border border-[#EAE8E3]">
               <Users className="w-10 h-10 text-[#858585] mx-auto mb-3" />
-              <h3 className="text-lg font-bold text-[#111111] mb-1">No matching developers found</h3>
+              <h3 className="text-lg font-bold text-[#111111] mb-1">
+                {selectedTech ? `No ${selectedTech} builders listed yet` : 'No matching developers found'}
+              </h3>
               <p className="text-xs text-[#555555] max-w-sm mx-auto mb-4">
-                No builders matched your search keywords or technology filters.
+                {selectedTech
+                  ? `No verified developer profiles currently highlight ${selectedTech} in their primary skills.`
+                  : 'No builders matched your search keywords or technology filters.'}
               </p>
               <button
                 onClick={resetFilters}
-                className="px-4 py-2 rounded-lg bg-[#111111] text-white hover:bg-[#222222] text-xs transition-colors font-medium"
+                className="px-4 py-2 rounded-xl bg-[#111111] text-white hover:bg-[#222222] text-xs transition-colors font-medium"
               >
                 Clear Filters
               </button>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
+            <div className="grid grid-cols-2 gap-2.5 sm:gap-6 md:gap-8 lg:gap-10">
               {filteredDevelopers.map((dev) => (
                 <DeveloperCard key={dev.id} developer={dev} />
               ))}

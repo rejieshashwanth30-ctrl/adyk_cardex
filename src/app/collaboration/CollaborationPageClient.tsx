@@ -31,24 +31,24 @@ export default function CollaborationPageClient({ projects }: CollaborationPageC
   }, [projects, selectedRole]);
 
   return (
-    <div className="pt-28 pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10">
+    <div className="pt-24 sm:pt-28 pb-24 px-3 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10">
       {/* Header */}
-      <div className="mb-14 border-b border-[#EAE8E3] pb-10">
+      <div className="mb-6 sm:mb-14 border-b border-[#EAE8E3] pb-4 sm:pb-10">
         <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-wider text-[#858585] uppercase mb-3">
           <Handshake className="w-3.5 h-3.5 text-[#B99752]" />
           <span>Collaboration</span>
         </div>
-        <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-[#111111] uppercase leading-[0.95]">
+        <h1 className="text-2xl sm:text-6xl font-black tracking-tight text-[#111111] uppercase leading-tight sm:leading-[0.95]">
           BUILDING<br />
           <span className="text-[#858585]">IS BETTER TOGETHER.</span>
         </h1>
-        <p className="text-[#555555] text-sm sm:text-base mt-4 max-w-xl font-normal leading-relaxed">
+        <p className="text-[#555555] text-xs sm:text-base mt-2 sm:mt-4 max-w-xl font-normal leading-relaxed">
           Find people who have the skills your project needs. Connect directly with creators and build something great.
         </p>
       </div>
 
       {/* Role Filter Pills */}
-      <div className="p-4 rounded-xl material-luxury-card bg-white border border-[#EAE8E3] mb-12 flex flex-wrap items-center gap-2">
+      <div className="p-3 sm:p-4 rounded-xl material-luxury-card bg-white border border-[#EAE8E3] mb-6 sm:mb-12 flex flex-wrap items-center gap-1.5 sm:gap-2">
         <div className="flex items-center gap-1.5 text-xs text-[#858585] mr-2 font-semibold">
           <Filter className="w-3.5 h-3.5 text-[#B99752]" />
           <span>Needed Role:</span>
@@ -99,31 +99,31 @@ export default function CollaborationPageClient({ projects }: CollaborationPageC
           </button>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-8">
           {filteredProjects.map((project) => (
             <div
               key={project.id}
-              className="group relative rounded-3xl material-luxury-card bg-white hover:bg-[#FAF9F6] border border-[#EAE8E3] hover:border-[#D6D2C8] p-7 sm:p-8 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 shadow-sm overflow-hidden"
+              className="group relative rounded-xl sm:rounded-3xl material-luxury-card bg-white hover:bg-[#FAF9F6] border border-[#EAE8E3] hover:border-[#D6D2C8] p-3.5 sm:p-8 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 shadow-xs sm:shadow-sm overflow-hidden"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#B99752]/[0.03] to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 pointer-events-none" />
               <div>
                 {/* Meta Header */}
-                <div className="flex items-center justify-between gap-3 mb-4">
+                <div className="flex items-center justify-between gap-2 mb-2 sm:mb-4">
                   <span className="text-xs font-medium text-[#858585]">
                     {project.category}
                   </span>
-                  <StatusBadge status={project.status} />
+                  <StatusBadge status={project.status} className="!text-[9px] sm:!text-xs !px-2 sm:!px-3 !py-0.5 sm:!py-1" />
                 </div>
 
                 {/* Title */}
-                <h3 className="text-2xl font-bold text-[#111111] group-hover:text-black transition-colors mb-2 tracking-tight">
+                <h3 className="text-base sm:text-2xl font-bold text-[#111111] group-hover:text-black transition-colors mb-1 sm:mb-2 tracking-tight line-clamp-1 sm:line-clamp-none">
                   <Link href={`/projects/${project.slug}`}>
                     {project.title}
                   </Link>
                 </h3>
 
                 {/* Creator */}
-                <p className="text-xs text-[#858585] mb-4">
+                <p className="text-[11px] sm:text-xs text-[#858585] mb-2 sm:mb-4">
                   Created by{' '}
                   <Link
                     href={`/developers/${project.creatorUsername}`}
@@ -134,20 +134,20 @@ export default function CollaborationPageClient({ projects }: CollaborationPageC
                 </p>
 
                 {/* Short Description */}
-                <p className="text-sm text-[#555555] leading-relaxed mb-6 line-clamp-3 font-normal">
+                <p className="text-xs sm:text-sm text-[#555555] leading-relaxed mb-3 sm:mb-6 line-clamp-2 sm:line-clamp-3 font-normal">
                   {project.description}
                 </p>
 
                 {/* Required Skills Box */}
-                <div className="p-4 rounded-xl bg-[#FAF9F6] border border-[#EAE8E3] mb-6">
-                  <span className="text-xs font-semibold text-[#858585] block mb-2.5">
+                <div className="p-2.5 sm:p-4 rounded-xl bg-[#FAF9F6] border border-[#EAE8E3] mb-3 sm:mb-6">
+                  <span className="text-[10px] sm:text-xs font-semibold text-[#858585] block mb-1.5 sm:mb-2.5">
                     Actively Seeking Contributors:
                   </span>
                   <div className="flex flex-wrap gap-1.5">
                     {project.lookingFor.map((role) => (
                       <span
                         key={role}
-                        className="px-2.5 py-1 rounded-md text-xs bg-white text-[#111111] border border-[#EAE8E3] shadow-sm font-medium"
+                        className="px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-md text-[10px] sm:text-xs bg-white text-[#111111] border border-[#EAE8E3] shadow-xs font-medium"
                       >
                         &bull; {role}
                       </span>
@@ -157,7 +157,7 @@ export default function CollaborationPageClient({ projects }: CollaborationPageC
               </div>
 
               {/* Action Buttons */}
-              <div className="pt-5 border-t border-[#EAE8E3] flex items-center justify-between gap-4">
+              <div className="pt-2.5 sm:pt-5 border-t border-[#EAE8E3] flex items-center justify-between gap-3">
                 <Link
                   href={`/projects/${project.slug}`}
                   className="inline-flex items-center gap-1.5 text-xs text-[#555555] hover:text-[#111111] transition-colors font-medium"
@@ -169,7 +169,7 @@ export default function CollaborationPageClient({ projects }: CollaborationPageC
                 <button
                   type="button"
                   onClick={() => setActiveProjectModal(project)}
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#111111] text-white hover:bg-[#222222] text-xs font-medium transition-all shadow-md group/btn"
+                  className="inline-flex items-center gap-1.5 px-3.5 py-1.5 sm:px-5 sm:py-2.5 rounded-lg sm:rounded-xl bg-[#111111] text-white hover:bg-[#222222] text-xs font-medium transition-all shadow-xs sm:shadow-md group/btn"
                 >
                   <span>Collaborate &rarr;</span>
                 </button>

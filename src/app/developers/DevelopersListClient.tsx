@@ -56,7 +56,7 @@ export default function DevelopersListClient({ initialDevelopers }: DevelopersLi
   };
 
   return (
-    <div className="pt-28 pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10">
+    <div className="pt-24 sm:pt-28 pb-24 px-3 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10">
       {/* Header */}
       <div className="mb-14 border-b border-[#EAE8E3] pb-10">
         <div className="inline-flex items-center gap-2 text-xs uppercase tracking-wider text-[#858585] mb-3 font-semibold">
@@ -148,7 +148,7 @@ export default function DevelopersListClient({ initialDevelopers }: DevelopersLi
           </button>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
+        <div className="grid grid-cols-2 gap-2.5 sm:gap-6 md:gap-8 lg:gap-10">
           {filteredDevelopers.map((dev) => (
             <DeveloperCard key={dev.id} developer={dev} />
           ))}

@@ -13,7 +13,7 @@ export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
   const featuredProjectsList = projects.slice(0, 2);
 
   return (
-    <section className="py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10 border-t border-[#EAE8E3]">
+    <section className="py-20 sm:py-28 px-3 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10 border-t border-[#EAE8E3]">
       {/* Section Editorial Header with Reveal */}
       <ScrollReveal variant="fade-up" duration={700}>
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-16 border-b border-[#EAE8E3] pb-10">
@@ -62,13 +62,14 @@ export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
           </div>
         </ScrollReveal>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
+        <div className="grid grid-cols-2 gap-2.5 sm:gap-6 md:gap-8 lg:gap-10">
           {featuredProjectsList.map((project, idx) => (
             <ScrollReveal
               key={project.id}
               variant="fade-up"
               delay={idx * 120}
               duration={750}
+              className="h-full"
             >
               <ProjectCard project={project} featured={true} />
             </ScrollReveal>
