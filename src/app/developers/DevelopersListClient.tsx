@@ -56,32 +56,32 @@ export default function DevelopersListClient({ initialDevelopers }: DevelopersLi
   };
 
   return (
-    <div className="pt-24 sm:pt-28 pb-24 px-3 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10">
+    <div className="pt-20 sm:pt-24 pb-20 px-3 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10">
       {/* Header */}
-      <div className="mb-14 border-b border-[#EAE8E3] pb-10">
-        <div className="inline-flex items-center gap-2 text-xs uppercase tracking-wider text-[#858585] mb-3 font-semibold">
+      <div className="mb-8 sm:mb-10 border-b border-[#EAE8E3] pb-6 sm:pb-8">
+        <div className="inline-flex items-center gap-2 text-xs uppercase tracking-wider text-[#858585] mb-2 font-semibold">
           <Users className="w-3.5 h-3.5 text-[#B99752]" />
           <span>BUILDERS</span>
         </div>
-        <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-[#111111] uppercase leading-[0.95]">
+        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-[#111111] uppercase leading-[0.95]">
           THE PEOPLE<br />
           <span className="text-[#858585]">WHO BUILD.</span>
         </h1>
-        <p className="text-[#555555] text-sm sm:text-base mt-4 max-w-xl font-normal leading-relaxed">
+        <p className="text-[#555555] text-xs sm:text-sm mt-2.5 max-w-xl font-normal leading-relaxed">
           Discover developers, systems architects, and creative technologists through the authentic work they create.
         </p>
       </div>
 
       {/* Search & Filters */}
-      <div className="space-y-4 mb-12">
+      <div className="space-y-3 mb-6 sm:mb-8">
         <div className="relative">
-          <Search className="w-4 h-4 text-[#858585] absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
+          <Search className="w-4 h-4 text-[#858585] absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
           <input
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Find a developer, creator or skill..."
-            className="w-full pl-11 pr-4 py-3.5 rounded-xl bg-[#FAF9F6] border border-[#EAE8E3] text-sm text-[#111111] placeholder-[#858585] focus:outline-none focus:border-[#B99752] transition-colors"
+            className="w-full pl-10 pr-4 py-2.5 sm:py-3 rounded-xl bg-[#FAF9F6] border border-[#EAE8E3] text-xs sm:text-sm text-[#111111] placeholder-[#858585] focus:outline-none focus:border-[#B99752] transition-colors"
           />
           {search && (
             <button
@@ -93,7 +93,7 @@ export default function DevelopersListClient({ initialDevelopers }: DevelopersLi
           )}
         </div>
 
-        <div className="p-4 rounded-xl material-luxury-card bg-white border border-[#EAE8E3] flex flex-wrap items-center gap-3 text-xs">
+        <div className="p-3 sm:p-3.5 rounded-xl material-luxury-card bg-white border border-[#EAE8E3] flex flex-wrap items-center gap-2.5 text-xs">
           <div className="flex items-center gap-1.5 text-[#858585] mr-2 tracking-wider font-semibold">
             <SlidersHorizontal className="w-3.5 h-3.5 text-[#B99752]" />
             <span>FILTER:</span>
@@ -138,17 +138,17 @@ export default function DevelopersListClient({ initialDevelopers }: DevelopersLi
 
       {/* Grid */}
       {filteredDevelopers.length === 0 ? (
-        <div className="text-center py-20 material-luxury-card bg-white rounded-3xl p-10 border border-[#EAE8E3]">
-          <p className="text-[#858585] text-sm mb-4">No developers match your active filters.</p>
+        <div className="text-center py-16 material-luxury-card bg-white rounded-2xl p-8 border border-[#EAE8E3]">
+          <p className="text-[#858585] text-xs sm:text-sm mb-3">No developers match your active filters.</p>
           <button
             onClick={resetFilters}
-            className="px-5 py-2.5 rounded-xl bg-[#111111] hover:bg-[#222222] text-white text-xs uppercase tracking-wider font-semibold transition-colors"
+            className="px-4 py-2 rounded-xl bg-[#111111] hover:bg-[#222222] text-white text-xs uppercase tracking-wider font-semibold transition-colors"
           >
             Reset Filters
           </button>
         </div>
       ) : (
-        <div className="grid grid-cols-2 gap-2.5 sm:gap-6 md:gap-8 lg:gap-10">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5 lg:gap-6">
           {filteredDevelopers.map((dev) => (
             <DeveloperCard key={dev.id} developer={dev} />
           ))}

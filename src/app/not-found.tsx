@@ -6,7 +6,7 @@ import { ArrowLeft, Compass } from 'lucide-react';
 export default function NotFound() {
   return (
     <div className="min-h-[75vh] flex flex-col items-center justify-center text-center px-4 relative z-20">
-      <div className="p-10 rounded-3xl material-luxury-card bg-white border border-[#EAE8E3] max-w-md w-full shadow-md">
+      <div className="p-7 sm:p-8 rounded-2xl material-luxury-card bg-white border border-[#EAE8E3] max-w-md w-full shadow-xs">
         <div className="mb-6 flex justify-center">
           <CardexMark size="lg" glow={true} />
         </div>

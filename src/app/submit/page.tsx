@@ -286,28 +286,28 @@ export default function SubmitProjectPage() {
   };
 
   return (
-    <div className="pt-28 pb-28 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto relative z-10">
+    <div className="pt-20 sm:pt-24 pb-20 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto relative z-10">
       {/* Success State Screen */}
       {successData ? (
-        <div className="rounded-3xl material-luxury-card bg-white border border-[#EAE8E3] p-8 sm:p-14 shadow-md text-center">
-          <div className="w-16 h-16 rounded-2xl bg-[#FAF9F6] border border-[#B99752]/40 flex items-center justify-center mx-auto mb-6 text-[#B99752]">
-            <Clock className="w-8 h-8 animate-pulse text-[#B99752]" />
+        <div className="rounded-2xl material-luxury-card bg-white border border-[#EAE8E3] p-6 sm:p-10 shadow-xs text-center">
+          <div className="w-14 h-14 rounded-2xl bg-[#FAF9F6] border border-[#B99752]/40 flex items-center justify-center mx-auto mb-5 text-[#B99752]">
+            <Clock className="w-7 h-7 animate-pulse text-[#B99752]" />
           </div>
 
           <span className="text-xs uppercase tracking-wider text-[#858585] font-bold block mb-2">
             Submission Protocol Complete
           </span>
 
-          <h1 className="text-3xl sm:text-5xl font-black text-[#111111] mb-3 uppercase tracking-tight">
+          <h1 className="text-2xl sm:text-4xl font-black text-[#111111] mb-2.5 uppercase tracking-tight">
             PROJECT SUBMITTED
           </h1>
 
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#FAF9F6] border border-[#B99752]/40 text-[#111111] text-xs font-bold mb-6 shadow-sm">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#FAF9F6] border border-[#B99752]/40 text-[#111111] text-xs font-bold mb-5 shadow-xs">
             <span className="w-2 h-2 rounded-full bg-[#B99752] animate-ping" />
             <span>Status: Pending Review</span>
           </div>
 
-          <p className="text-base text-[#555555] max-w-lg mx-auto leading-relaxed mb-6 font-normal">
+          <p className="text-sm text-[#555555] max-w-lg mx-auto leading-relaxed mb-6 font-normal">
             Your project has been received and is currently pending review. It will not appear publicly on the homepage, search, explore, or developers pages until it has been inspected and approved by ADYK CARDEX moderation.
           </p>
 
@@ -316,16 +316,16 @@ export default function SubmitProjectPage() {
             <span className="text-[#111111] font-bold">{successData.submissionId}</span>
           </div>
 
-          <div className="flex flex-wrap items-center justify-center gap-4">
+          <div className="flex flex-wrap items-center justify-center gap-3">
             <Link
               href="/explore"
-              className="px-6 py-3 rounded-xl bg-white hover:bg-[#FAF9F6] border border-[#EAE8E3] text-xs uppercase tracking-wider text-[#111111] font-semibold transition-colors shadow-sm"
+              className="px-5 py-2.5 rounded-xl bg-white hover:bg-[#FAF9F6] border border-[#EAE8E3] text-xs uppercase tracking-wider text-[#111111] font-semibold transition-colors shadow-xs"
             >
               &larr; Return to Explore
             </Link>
             <Link
               href="/moderation"
-              className="px-6 py-3 rounded-xl bg-[#111111] text-white hover:bg-[#222222] text-xs uppercase tracking-wider font-bold transition-colors shadow-sm"
+              className="px-5 py-2.5 rounded-xl bg-[#111111] text-white hover:bg-[#222222] text-xs uppercase tracking-wider font-bold transition-colors shadow-xs"
             >
               Open Moderation Panel &rarr;
             </Link>
@@ -334,16 +334,16 @@ export default function SubmitProjectPage() {
       ) : (
         <div>
           {/* Header */}
-          <div className="mb-12 text-center sm:text-left border-b border-[#EAE8E3] pb-10">
-            <div className="inline-flex items-center gap-2 text-xs uppercase tracking-wider text-[#858585] mb-3 font-semibold">
+          <div className="mb-8 sm:mb-10 text-center sm:text-left border-b border-[#EAE8E3] pb-6 sm:pb-8">
+            <div className="inline-flex items-center gap-2 text-xs uppercase tracking-wider text-[#858585] mb-2 font-semibold">
               <UploadCloud className="w-3.5 h-3.5 text-[#B99752]" />
               <span>Public Intake &bull; No Login Required</span>
             </div>
-            <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-[#111111] uppercase leading-[0.95]">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-[#111111] uppercase leading-[0.95]">
               SHOW US WHAT<br />
               <span className="text-[#858585]">YOU BUILT.</span>
             </h1>
-            <p className="text-[#555555] text-sm sm:text-base mt-4 max-w-xl font-normal leading-relaxed">
+            <p className="text-[#555555] text-xs sm:text-sm mt-2.5 max-w-xl font-normal leading-relaxed">
               Publish your project to ADYK CARDEX. All submissions enter a curated review queue to ensure verified craftsmanship and developer privacy.
             </p>
           </div>

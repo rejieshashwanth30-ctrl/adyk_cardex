@@ -17,15 +17,15 @@ export default function CollaborationSection({ projects }: CollaborationSectionP
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   return (
-    <section className="py-12 sm:py-28 px-3 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10 border-t border-[#EAE8E3]">
+    <section className="py-14 sm:py-20 px-3 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10 border-t border-[#EAE8E3]">
       {/* Editorial Header */}
       <ScrollReveal variant="fade-up" duration={700}>
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 sm:gap-6 mb-6 sm:mb-16 border-b border-[#EAE8E3] pb-4 sm:pb-10">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 sm:gap-6 mb-8 sm:mb-12 border-b border-[#EAE8E3] pb-6 sm:pb-8">
           <div>
-            <span className="text-[10px] sm:text-xs uppercase tracking-wider text-[#858585] font-semibold block mb-1.5 sm:mb-3">
+            <span className="text-[10px] sm:text-xs uppercase tracking-wider text-[#858585] font-semibold block mb-1.5 sm:mb-2">
               COLLABORATION &bull; DIRECT CONNECTION
             </span>
-            <h2 className="text-2xl sm:text-6xl lg:text-7xl font-black tracking-[-0.03em] sm:tracking-[-0.04em] text-[#111111] uppercase max-w-3xl leading-tight sm:leading-[0.96]">
+            <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black tracking-[-0.03em] sm:tracking-[-0.04em] text-[#111111] uppercase max-w-3xl leading-tight sm:leading-[1.02]">
               <span className="sm:hidden">BUILDING IS BETTER TOGETHER.</span>
               <span className="hidden sm:inline">
                 BUILDING<br />
@@ -33,7 +33,7 @@ export default function CollaborationSection({ projects }: CollaborationSectionP
                 TOGETHER.
               </span>
             </h2>
-            <p className="text-xs sm:text-base lg:text-lg text-[#555555] mt-2 sm:mt-4 max-w-xl font-normal leading-relaxed">
+            <p className="text-xs sm:text-sm lg:text-base text-[#555555] mt-2 max-w-xl font-normal leading-relaxed">
               Find people with the skills your project needs. Directly connect with creators and build something together.
             </p>
           </div>
@@ -49,7 +49,7 @@ export default function CollaborationSection({ projects }: CollaborationSectionP
       </ScrollReveal>
 
       {/* Luxury Collaboration Cards Composition */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-8 lg:gap-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
         {collabProjects.map((project, idx) => (
           <ScrollReveal
             key={project.id}
@@ -58,25 +58,25 @@ export default function CollaborationSection({ projects }: CollaborationSectionP
             duration={750}
             className="h-full"
           >
-            <div className="group relative rounded-xl sm:rounded-3xl material-luxury-card p-3.5 sm:p-8 lg:p-10 flex flex-col justify-between bg-white hover:bg-[#FAF9F6] transition-all duration-400 h-full">
+            <div className="group relative rounded-2xl material-luxury-card p-4 sm:p-6 lg:p-7 flex flex-col justify-between bg-white hover:bg-[#FAF9F6] transition-all duration-300 h-full">
               <div>
                 {/* Meta Header */}
-                <div className="flex items-center justify-between gap-2 mb-2 sm:mb-5">
+                <div className="flex items-center justify-between gap-2 mb-2 sm:mb-3">
                   <span className="text-[10px] sm:text-xs uppercase tracking-wider text-[#858585] font-semibold truncate">
                     {project.category}
                   </span>
-                  <StatusBadge status={project.status} className="!text-[9px] sm:!text-xs !px-2 sm:!px-3 !py-0.5 sm:!py-1" />
+                  <StatusBadge status={project.status} className="!text-[9px] sm:!text-xs !px-2 sm:!px-2.5 !py-0.5" />
                 </div>
 
                 {/* Title */}
-                <h3 className="text-base sm:text-2xl lg:text-3xl font-bold tracking-tight text-[#111111] group-hover:text-black transition-colors mb-1 sm:mb-2.5 line-clamp-1 sm:line-clamp-none">
+                <h3 className="text-base sm:text-xl lg:text-2xl font-bold tracking-tight text-[#111111] group-hover:text-black transition-colors mb-1 sm:mb-2 line-clamp-1 sm:line-clamp-none">
                   <Link href={`/projects/${project.slug}`}>
                     {project.title}
                   </Link>
                 </h3>
 
                 {/* Creator Tag */}
-                <p className="text-[11px] sm:text-xs text-[#858585] mb-2 sm:mb-5 font-normal">
+                <p className="text-[11px] sm:text-xs text-[#858585] mb-2 sm:mb-3 font-normal">
                   Created by{' '}
                   <Link
                     href={`/developers/${project.creatorUsername}`}
@@ -87,23 +87,23 @@ export default function CollaborationSection({ projects }: CollaborationSectionP
                 </p>
 
                 {/* Short Description */}
-                <p className="text-xs sm:text-sm text-[#555555] leading-relaxed line-clamp-2 sm:line-clamp-none mb-3 sm:mb-8 font-normal">
+                <p className="text-xs sm:text-sm text-[#555555] leading-relaxed line-clamp-2 sm:line-clamp-none mb-3 sm:mb-4 font-normal">
                   {project.description}
                 </p>
 
                 {/* Looking For Luxury Section */}
-                <div className="p-2.5 sm:p-5 rounded-xl sm:rounded-2xl bg-[#F8F7F4] border border-[#EAE8E3] mb-3 sm:mb-8">
-                  <div className="flex items-center justify-between text-[10px] sm:text-xs uppercase tracking-wider text-[#858585] font-semibold mb-1.5 sm:mb-3">
+                <div className="p-3 sm:p-4 rounded-xl bg-[#F8F7F4] border border-[#EAE8E3] mb-3 sm:mb-5">
+                  <div className="flex items-center justify-between text-[10px] sm:text-xs uppercase tracking-wider text-[#858585] font-semibold mb-1.5 sm:mb-2.5">
                     <span>LOOKING FOR:</span>
-                    <span className="text-[#111111] text-[9px] sm:text-xs px-2 sm:px-2.5 py-0.5 rounded-full bg-white border border-[#B99752]/40 shadow-xs font-semibold">
+                    <span className="text-[#111111] text-[9px] sm:text-xs px-2 py-0.5 rounded-full bg-white border border-[#B99752]/40 shadow-xs font-semibold">
                       OPEN
                     </span>
                   </div>
-                  <div className="flex flex-wrap gap-1.5 sm:gap-2">
+                  <div className="flex flex-wrap gap-1.5">
                     {project.lookingFor.map((role) => (
                       <span
                         key={role}
-                        className="px-2 py-0.5 sm:px-3 sm:py-1.5 rounded-md sm:rounded-lg text-[10px] sm:text-xs bg-white text-[#111111] border border-[#EAE8E3] font-medium shadow-xs"
+                        className="px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-md text-[10px] sm:text-xs bg-white text-[#111111] border border-[#EAE8E3] font-medium shadow-xs"
                       >
                         &bull; {role}
                       </span>
@@ -113,7 +113,7 @@ export default function CollaborationSection({ projects }: CollaborationSectionP
               </div>
 
               {/* Action Buttons */}
-              <div className="pt-2.5 sm:pt-6 border-t border-[#EAE8E3] flex items-center justify-between gap-3">
+              <div className="pt-3 sm:pt-4 border-t border-[#EAE8E3] flex items-center justify-between gap-3">
                 <Link
                   href={`/projects/${project.slug}`}
                   className="inline-flex items-center gap-1 sm:gap-1.5 text-xs text-[#555555] hover:text-[#111111] transition-colors font-medium group/link py-1"
@@ -125,7 +125,7 @@ export default function CollaborationSection({ projects }: CollaborationSectionP
                 <button
                   type="button"
                   onClick={() => setSelectedProject(project)}
-                  className="inline-flex items-center gap-1.5 sm:gap-2 px-3.5 py-1.5 sm:px-6 sm:py-3 rounded-lg sm:rounded-xl bg-[#111111] hover:bg-[#222222] text-white font-semibold text-xs tracking-wider uppercase transition-all shadow-xs sm:shadow-[0_4px_20px_rgba(0,0,0,0.1)] hover:shadow-[0_6px_25px_rgba(0,0,0,0.15)] group/btn"
+                  className="inline-flex items-center gap-1.5 px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-lg bg-[#111111] hover:bg-[#222222] text-white font-semibold text-xs tracking-wider uppercase transition-all shadow-xs group/btn"
                 >
                   <span>Collaborate</span>
                   <span className="transition-transform duration-200 group-hover/btn:translate-x-1">&rarr;</span>

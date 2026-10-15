@@ -45,9 +45,9 @@ export default function ProjectDetailClient({ project, creator }: ProjectDetailC
   const whatsAppLink = `https://wa.me/${cleanPhone}?text=${whatsAppText}`;
 
   return (
-    <div className="pt-28 pb-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10">
+    <div className="pt-20 sm:pt-24 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10">
       {/* Top Breadcrumb */}
-      <div className="mb-8">
+      <div className="mb-6">
         <Link
           href="/projects"
           className="inline-flex items-center gap-2 text-xs uppercase tracking-wider text-[#858585] hover:text-[#111111] transition-colors font-medium"
@@ -58,9 +58,9 @@ export default function ProjectDetailClient({ project, creator }: ProjectDetailC
       </div>
 
       {/* Main Hero Header */}
-      <div className="relative rounded-3xl overflow-hidden material-luxury-card bg-white mb-14 border border-[#EAE8E3]">
+      <div className="relative rounded-2xl overflow-hidden material-luxury-card bg-white mb-10 border border-[#EAE8E3]">
         {/* Project Image Banner with Luxury Editorial Filter */}
-        <div className="relative w-full aspect-[21/9] min-h-[340px] max-h-[520px] overflow-hidden bg-[#F0EEEA]">
+        <div className="relative w-full aspect-[21/9] min-h-[260px] max-h-[420px] overflow-hidden bg-[#F0EEEA]">
           <Image
             src={project.imageUrl}
             alt={project.title}
@@ -72,11 +72,11 @@ export default function ProjectDetailClient({ project, creator }: ProjectDetailC
           <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/35 to-black/20" />
 
           {/* Floating Badges */}
-          <div className="absolute top-6 left-6 right-6 flex items-center justify-between z-10">
-            <StatusBadge status={project.status} />
+          <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-10">
+            <StatusBadge status={project.status} className="!text-[11px] !px-2.5 !py-0.5" />
 
             {project.collaborationOpen && (
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs bg-white/95 border border-[#B99752]/40 text-[#111111] backdrop-blur-md shadow-sm">
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] bg-white/95 border border-[#B99752]/40 text-[#111111] backdrop-blur-md shadow-xs">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#B99752] animate-pulse" />
                 <span className="font-semibold">Open for Collaboration</span>
               </span>
@@ -84,28 +84,28 @@ export default function ProjectDetailClient({ project, creator }: ProjectDetailC
           </div>
 
           {/* Hero Title & Identity Bottom Overlay */}
-          <div className="absolute bottom-6 left-6 right-6 flex flex-col md:flex-row md:items-end justify-between gap-6 z-10">
+          <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6 z-10">
             <div className="max-w-2xl text-white">
-              <span className="text-xs uppercase tracking-wider text-neutral-300 font-semibold mb-2 block">
+              <span className="text-[11px] uppercase tracking-wider text-neutral-300 font-semibold mb-1.5 block">
                 {project.category}
               </span>
-              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-[-0.03em] uppercase mb-2 text-white drop-shadow-sm">
+              <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black tracking-[-0.03em] uppercase mb-1.5 text-white drop-shadow-xs">
                 {project.title}
               </h1>
               {project.tagline && (
-                <p className="text-base text-neutral-200 font-normal line-clamp-2">
+                <p className="text-xs sm:text-sm text-neutral-200 font-normal line-clamp-2">
                   {project.tagline}
                 </p>
               )}
             </div>
 
             {/* Quick Action Buttons */}
-            <div className="flex flex-wrap items-center gap-3">
+            <div className="flex flex-wrap items-center gap-2.5">
               {project.collaborationOpen && (
                 <button
                   type="button"
                   onClick={() => setCollabOpen(true)}
-                  className="px-6 py-3.5 rounded-xl bg-[#111111] hover:bg-[#222222] text-white text-xs uppercase tracking-wider font-semibold transition-all shadow-md"
+                  className="px-5 py-2.5 rounded-xl bg-[#111111] hover:bg-[#222222] text-white text-xs uppercase tracking-wider font-semibold transition-all shadow-xs"
                 >
                   Collaborate &rarr;
                 </button>
@@ -113,7 +113,7 @@ export default function ProjectDetailClient({ project, creator }: ProjectDetailC
 
               <Link
                 href={`/developers/${project.creatorUsername}`}
-                className="px-5 py-3.5 rounded-xl bg-white hover:bg-[#F8F7F4] text-[#111111] text-xs uppercase tracking-wider font-semibold border border-[#EAE8E3] transition-colors shadow-sm"
+                className="px-4 py-2.5 rounded-xl bg-white hover:bg-[#F8F7F4] text-[#111111] text-xs uppercase tracking-wider font-semibold border border-[#EAE8E3] transition-colors shadow-xs"
               >
                 View Creator &rarr;
               </Link>

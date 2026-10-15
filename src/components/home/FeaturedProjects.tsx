@@ -10,18 +10,18 @@ interface FeaturedProjectsProps {
 }
 
 export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
-  const featuredProjectsList = projects.slice(0, 2);
+  const featuredProjectsList = projects.slice(0, 3);
 
   return (
-    <section className="py-20 sm:py-28 px-3 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10 border-t border-[#EAE8E3]">
+    <section className="py-14 sm:py-20 px-3 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10 border-t border-[#EAE8E3]">
       {/* Section Editorial Header with Reveal */}
       <ScrollReveal variant="fade-up" duration={700}>
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-16 border-b border-[#EAE8E3] pb-10">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 sm:gap-6 mb-8 sm:mb-12 border-b border-[#EAE8E3] pb-6 sm:pb-8">
           <div>
-            <span className="text-xs uppercase tracking-wider text-[#858585] font-semibold block mb-3">
+            <span className="text-xs uppercase tracking-wider text-[#858585] font-semibold block mb-2 sm:mb-3">
               PROJECTS &bull; WHAT PEOPLE BUILD
             </span>
-            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-[-0.03em] text-[#111111] uppercase max-w-3xl leading-[1.02]">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-[-0.03em] text-[#111111] uppercase max-w-3xl leading-[1.02]">
               IDEAS BECOME REAL<br />
               WHEN SOMEONE BUILDS THEM.
             </h2>
@@ -40,11 +40,11 @@ export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
       {/* Editorial Bento Grid with Staggered Entrance */}
       {featuredProjectsList.length === 0 ? (
         <ScrollReveal variant="fade-up" duration={700}>
-          <div className="p-12 sm:p-16 rounded-3xl bg-[#FAF9F6] border border-[#EAE8E3] text-center max-w-2xl mx-auto space-y-4">
+          <div className="p-12 sm:p-16 rounded-2xl bg-[#FAF9F6] border border-[#EAE8E3] text-center max-w-2xl mx-auto space-y-4">
             <span className="text-xs uppercase tracking-wider text-[#858585] font-semibold block">
               CURATED SHOWCASE &bull; REPOSITORY PENDING
             </span>
-            <h3 className="text-xl sm:text-2xl font-black text-[#111111] uppercase tracking-tight">
+            <h3 className="text-lg sm:text-xl font-black text-[#111111] uppercase tracking-tight">
               AWAITING APPROVED SUBMISSIONS
             </h3>
             <p className="text-xs sm:text-sm text-[#666666] leading-relaxed max-w-md mx-auto">
@@ -53,7 +53,7 @@ export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
             <div className="pt-2">
               <Link
                 href="/submit"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#111111] hover:bg-[#222222] text-white text-xs uppercase tracking-wider font-semibold transition-all shadow-sm"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#111111] hover:bg-[#222222] text-white text-xs uppercase tracking-wider font-semibold transition-all shadow-xs"
               >
                 <span>Submit Your Project</span>
                 <ArrowRight className="w-3.5 h-3.5 text-[#B99752]" />
@@ -62,7 +62,7 @@ export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
           </div>
         </ScrollReveal>
       ) : (
-        <div className="grid grid-cols-2 gap-2.5 sm:gap-6 md:gap-8 lg:gap-10">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5 lg:gap-6">
           {featuredProjectsList.map((project, idx) => (
             <ScrollReveal
               key={project.id}

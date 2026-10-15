@@ -131,93 +131,93 @@ export default function DeveloperCard({ developer }: DeveloperCardProps) {
       </div>
 
       {/* ---------------- DESKTOP / TABLET CARD (>= sm) ---------------- */}
-      {/* 100% UNMODIFIED EXISTING CARDEX DESIGN FOR DESKTOP */}
-      <div className="hidden sm:flex group relative rounded-2xl sm:rounded-3xl material-luxury-card p-7 sm:p-9 flex-col justify-between bg-white hover:bg-[#FAF9F6] transition-all duration-400 h-full">
+      {/* Refined compact, neat and clean editorial card for desktop & laptops */}
+      <div className="hidden sm:flex group relative rounded-2xl material-luxury-card p-4 sm:p-5 flex-col justify-between bg-white hover:bg-[#FAF9F6] transition-all duration-300 h-full">
         <div>
           {/* Top Header: Avatar + Availability */}
-          <div className="flex items-start justify-between gap-4 mb-6">
-            <div className="flex items-center gap-4">
-              <div className="relative w-14 h-14 rounded-2xl bg-[#F8F7F4] border border-[#EAE8E3] flex items-center justify-center font-bold text-lg text-[#111111] shadow-[0_2px_10px_rgba(0,0,0,0.03)] flex-shrink-0">
+          <div className="flex items-start justify-between gap-3 mb-3.5">
+            <div className="flex items-center gap-3">
+              <div className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-[#F8F7F4] border border-[#EAE8E3] flex items-center justify-center font-bold text-sm sm:text-base text-[#111111] shadow-xs flex-shrink-0">
                 {hasAvatar ? (
-                  <div className="w-full h-full rounded-2xl overflow-hidden relative">
+                  <div className="w-full h-full rounded-xl overflow-hidden relative">
                     <Image
                       src={developer.avatarUrl!}
                       alt={developer.name}
                       fill
                       className="object-cover"
-                      sizes="56px"
+                      sizes="48px"
                       onError={() => setImageError(true)}
                     />
                   </div>
                 ) : (
                   <span>{initials}</span>
                 )}
-                <div className="absolute -bottom-1.5 -right-1.5 w-5 h-5 bg-white rounded-full border border-[#EAE8E3] shadow-sm flex items-center justify-center z-10">
+                <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-white rounded-full border border-[#EAE8E3] shadow-xs flex items-center justify-center z-10">
                   <CardexMark size="xs" glow={false} />
                 </div>
               </div>
               <div>
-                <h3 className="text-xl font-bold tracking-tight text-[#111111] group-hover:text-black transition-colors">
+                <h3 className="text-base sm:text-lg font-bold tracking-tight text-[#111111] group-hover:text-black transition-colors leading-snug">
                   <Link href={`/developers/${developer.username}`}>
                     {developer.name}
                   </Link>
                 </h3>
-                <p className="text-xs text-[#737373] mt-0.5 font-normal">
+                <p className="text-[11px] text-[#737373] font-normal">
                   @{developer.username}
                 </p>
               </div>
             </div>
 
-            <AvailabilityBadge availability={developer.availability} />
+            <AvailabilityBadge availability={developer.availability} className="!text-[10px] !px-2 !py-0.5" />
           </div>
 
           {/* Role */}
-          <p className="text-sm font-medium text-[#222222] mb-3 leading-snug">
+          <p className="text-xs sm:text-sm font-medium text-[#222222] mb-1.5 leading-snug">
             {developer.role}
           </p>
 
           {/* Bio */}
-          <p className="text-sm text-[#555555] leading-relaxed line-clamp-3 mb-6 font-normal">
+          <p className="text-xs sm:text-sm text-[#555555] leading-relaxed line-clamp-2 mb-3.5 font-normal">
             {developer.bio}
           </p>
 
           {/* Skills */}
-          <div className="flex flex-wrap gap-1.5 mb-8">
-            {developer.skills.slice(0, 5).map((skill) => (
+          <div className="flex flex-wrap gap-1 mb-3.5">
+            {developer.skills.slice(0, 4).map((skill) => (
               <span
                 key={skill}
-                className="px-2.5 py-1 rounded-md text-xs bg-[#F8F7F4] text-[#444444] border border-[#EAE8E3] font-medium"
+                className="px-2 py-0.5 rounded text-[11px] bg-[#F8F7F4] text-[#444444] border border-[#EAE8E3] font-medium"
               >
                 {skill}
               </span>
             ))}
-            {developer.skills.length > 5 && (
-              <span className="px-2 py-1 rounded-md text-xs bg-[#F8F7F4] text-[#858585]">
-                +{developer.skills.length - 5}
+            {developer.skills.length > 4 && (
+              <span className="px-1.5 py-0.5 rounded text-[11px] bg-[#F8F7F4] text-[#858585]">
+                +{developer.skills.length - 4}
               </span>
             )}
           </div>
         </div>
 
         {/* Card Footer: Project count & Editorial Action Buttons */}
-        <div className="pt-6 border-t border-[#EAE8E3] flex items-center justify-between gap-3">
+        <div className="mt-auto pt-3 border-t border-[#EAE8E3] flex items-center justify-between gap-2.5">
           <div className="flex items-center gap-1.5 text-xs text-[#737373] font-medium">
             <FolderKanban className="w-3.5 h-3.5 text-[#B99752]" />
-            <span>{developer.featuredProjectSlugs.length} Featured {developer.featuredProjectSlugs.length === 1 ? 'Build' : 'Builds'}</span>
+            <span>{developer.featuredProjectSlugs.length} {developer.featuredProjectSlugs.length === 1 ? 'Build' : 'Builds'}</span>
           </div>
 
           <div className="flex items-center gap-2">
             <Link
               href={`/developers/${developer.username}`}
-              className="inline-flex items-center gap-1 px-3.5 py-1.5 rounded-lg text-xs text-[#444444] hover:text-[#111111] bg-white hover:bg-[#F8F7F4] border border-[#EAE8E3] transition-colors font-medium shadow-sm"
+              className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs text-[#444444] hover:text-[#111111] bg-white hover:bg-[#F8F7F4] border border-[#EAE8E3] transition-colors font-medium shadow-xs"
             >
-              <span>View Profile</span>
+              <span>Profile</span>
               <ArrowUpRight className="w-3.5 h-3.5 text-[#858585]" />
             </Link>
 
             <Link
               href={`/developers/${developer.username}`}
-              className="inline-flex items-center gap-1 px-3.5 py-1.5 rounded-lg text-xs text-white bg-[#111111] hover:bg-[#222222] font-semibold transition-all shadow-sm"
+              className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs text-white bg-[#111111] hover:bg-[#222222] font-semibold transition-all shadow-xs"
             >
               <span>Connect &rarr;</span>
             </Link>

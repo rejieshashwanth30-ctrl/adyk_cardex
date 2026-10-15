@@ -20,7 +20,7 @@ export default function HeroCSculpture() {
   }, []);
 
   return (
-    <div className="relative w-full aspect-square max-w-[480px] lg:max-w-[540px] flex items-center justify-center select-none group">
+    <div className="relative w-full aspect-square max-w-[380px] lg:max-w-[440px] flex items-center justify-center select-none group">
       {/* Volumetric Metallic Gold Spotlight behind sculpture */}
       <div
         className="absolute inset-0 rounded-full blur-[100px] pointer-events-none transition-transform duration-700 ease-out"

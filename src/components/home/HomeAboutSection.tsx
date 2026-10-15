@@ -8,37 +8,37 @@ import ScrollReveal from '../ui/ScrollReveal';
 
 export default function HomeAboutSection() {
   return (
-    <section className="py-14 sm:py-28 px-3 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10 border-t border-[#EAE8E3]">
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
+    <section className="py-14 sm:py-20 px-3 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10 border-t border-[#EAE8E3]">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
         {/* Left Column (7 cols): Editorial Manifesto */}
         <ScrollReveal variant="fade-up" duration={750} className="lg:col-span-7">
           <div>
-            <div className="inline-flex items-center gap-2 text-[10px] sm:text-xs uppercase tracking-wider text-[#858585] mb-2.5 sm:mb-4 font-semibold">
+            <div className="inline-flex items-center gap-2 text-[10px] sm:text-xs uppercase tracking-wider text-[#858585] mb-2 sm:mb-3 font-semibold">
               <CardexMark size="xs" glow={false} />
               <span>09 &bull; ADYK CARDEX PHILOSOPHY</span>
             </div>
 
-            <h2 className="text-2xl sm:text-6xl font-black tracking-[-0.03em] sm:tracking-[-0.04em] text-[#111111] uppercase leading-tight sm:leading-[0.98] mb-4 sm:mb-8">
+            <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black tracking-[-0.03em] sm:tracking-[-0.04em] text-[#111111] uppercase leading-tight sm:leading-[0.98] mb-3 sm:mb-6">
               THE WORK SPEAKS.<br />
               NOT THE FEED.
             </h2>
 
-            <div className="space-y-3 sm:space-y-5 text-xs sm:text-base lg:text-lg text-[#555555] leading-relaxed font-normal">
-              <p className="text-[#111111] font-semibold text-sm sm:text-xl">
+            <div className="space-y-3 sm:space-y-4 text-xs sm:text-sm lg:text-base text-[#555555] leading-relaxed font-normal">
+              <p className="text-[#111111] font-semibold text-sm sm:text-lg">
                 &ldquo;ADYK CARDEX is an open platform where developers and creators showcase what they build, discover talented people, find collaborators, and connect directly.&rdquo;
               </p>
               <p className="line-clamp-3 sm:line-clamp-none">
                 Traditional social feeds and portfolio templates reduce engineering achievements to vanity metrics. ADYK CARDEX was architected to illuminate the work itself&mdash;the technical decisions, the hardware schematics, the architecture diagrams, and the collaboration needs.
               </p>
-              <p className="text-[11px] sm:text-sm text-[#858585] pt-1.5 sm:pt-2 border-l-2 border-[#B99752] pl-3 sm:pl-4">
+              <p className="text-[11px] sm:text-xs text-[#858585] pt-1.5 sm:pt-2 border-l-2 border-[#B99752] pl-3 sm:pl-4">
                 Open discovery engine built for developers, designers, and systems architects across all stacks.
               </p>
             </div>
 
-            <div className="mt-6 sm:mt-10">
+            <div className="mt-5 sm:mt-8">
               <Link
                 href="/about"
-                className="inline-flex items-center gap-2 px-5 py-3 sm:px-6 sm:py-3.5 rounded-xl bg-white hover:bg-[#F8F7F4] border border-[#EAE8E3] hover:border-[#D6D2C8] text-xs tracking-wider uppercase text-[#111111] font-semibold transition-all shadow-xs sm:shadow-sm"
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-white hover:bg-[#F8F7F4] border border-[#EAE8E3] hover:border-[#D6D2C8] text-xs tracking-wider uppercase text-[#111111] font-semibold transition-all shadow-xs"
               >
                 <span>Read Full Manifesto</span>
                 <span className="text-[#B99752]">&rarr;</span>

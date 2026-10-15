@@ -17,20 +17,20 @@ export const metadata = {
 
 export default function ContactPage() {
   return (
-    <div className="pt-28 pb-28 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto relative z-10">
+    <div className="pt-20 sm:pt-24 pb-20 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto relative z-10">
       {/* Header */}
-      <div className="text-center max-w-3xl mx-auto mb-16">
-        <div className="inline-flex items-center gap-2 text-xs uppercase tracking-wider text-[#858585] mb-4 px-3.5 py-1.5 rounded-full bg-white border border-[#EAE8E3] shadow-sm font-semibold">
+      <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
+        <div className="inline-flex items-center gap-2 text-xs uppercase tracking-wider text-[#858585] mb-3 px-3 py-1 rounded-full bg-white border border-[#EAE8E3] shadow-xs font-semibold">
           <CardexMark size="xs" glow={false} />
           <span>ADYK Multi-Venture Network &bull; Contact Protocol</span>
         </div>
 
-        <h1 className="text-4xl sm:text-7xl font-black tracking-tight text-[#111111] mb-6 uppercase leading-[0.95]">
+        <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-[#111111] mb-4 uppercase leading-[0.95]">
           CONNECT WITH<br />
           <span className="text-[#858585]">THE ADYK TEAM.</span>
         </h1>
 
-        <p className="text-lg sm:text-2xl text-[#555555] font-light leading-relaxed">
+        <p className="text-base sm:text-xl text-[#555555] font-light leading-relaxed">
           &ldquo;Learn. Build. Grow. Inspire.&rdquo;
         </p>
       </div>

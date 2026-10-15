@@ -163,16 +163,16 @@ function ExploreInner({ initialProjects, initialDevelopers }: ExploreClientProps
   );
 
   return (
-    <div className="pt-24 sm:pt-28 pb-28 px-3 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10">
+    <div className="pt-20 sm:pt-24 pb-20 px-3 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10">
       {/* Editorial Header */}
-      <div className="mb-10 border-b border-[#EAE8E3] pb-8 sm:pb-10">
-        <span className="text-xs uppercase tracking-wider text-[#858585] font-semibold block mb-2 sm:mb-3">
+      <div className="mb-8 border-b border-[#EAE8E3] pb-6 sm:pb-8">
+        <span className="text-xs uppercase tracking-wider text-[#858585] font-semibold block mb-2">
           Discovery Engine &bull; ADYK CARDEX
         </span>
-        <h1 className="text-3xl sm:text-6xl font-black tracking-[-0.04em] text-[#111111] uppercase leading-[0.98]">
+        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-[-0.04em] text-[#111111] uppercase leading-[0.98]">
           EXPLORE ADYK CARDEX.
         </h1>
-        <p className="text-[#555555] text-xs sm:text-base mt-3 max-w-2xl font-normal leading-relaxed">
+        <p className="text-[#555555] text-xs sm:text-sm mt-2.5 max-w-2xl font-normal leading-relaxed">
           Search verified projects, inspect technical architectures, and discover talented builders ready to collaborate.
         </p>
       </div>
@@ -268,12 +268,12 @@ function ExploreInner({ initialProjects, initialDevelopers }: ExploreClientProps
       )}
 
       {/* Luxury Tabs */}
-      <div className="flex items-center gap-2 border-b border-[#EAE8E3] pb-5 mb-8 overflow-x-auto">
+      <div className="flex items-center gap-2 border-b border-[#EAE8E3] pb-3.5 mb-6 overflow-x-auto">
         <button
           onClick={() => setActiveTab('PROJECTS')}
-          className={`flex items-center gap-2 px-5 sm:px-6 py-2 rounded-full text-xs uppercase tracking-wider transition-all whitespace-nowrap font-medium ${
+          className={`flex items-center gap-2 px-4 sm:px-5 py-2 rounded-full text-xs uppercase tracking-wider transition-all whitespace-nowrap font-medium ${
             activeTab === 'PROJECTS'
-              ? 'bg-[#111111] text-white font-bold shadow-md'
+              ? 'bg-[#111111] text-white font-bold shadow-sm'
               : 'text-[#555555] hover:text-[#111111] bg-white border border-[#EAE8E3] hover:border-[#D6D2C8]'
           }`}
         >
@@ -283,9 +283,9 @@ function ExploreInner({ initialProjects, initialDevelopers }: ExploreClientProps
 
         <button
           onClick={() => setActiveTab('DEVELOPERS')}
-          className={`flex items-center gap-2 px-5 sm:px-6 py-2 rounded-full text-xs uppercase tracking-wider transition-all whitespace-nowrap font-medium ${
+          className={`flex items-center gap-2 px-4 sm:px-5 py-2 rounded-full text-xs uppercase tracking-wider transition-all whitespace-nowrap font-medium ${
             activeTab === 'DEVELOPERS'
-              ? 'bg-[#111111] text-white font-bold shadow-md'
+              ? 'bg-[#111111] text-white font-bold shadow-sm'
               : 'text-[#555555] hover:text-[#111111] bg-white border border-[#EAE8E3] hover:border-[#D6D2C8]'
           }`}
         >
@@ -295,9 +295,9 @@ function ExploreInner({ initialProjects, initialDevelopers }: ExploreClientProps
 
         <button
           onClick={() => setActiveTab('COLLABORATION')}
-          className={`flex items-center gap-2 px-5 sm:px-6 py-2 rounded-full text-xs uppercase tracking-wider transition-all whitespace-nowrap font-medium ${
+          className={`flex items-center gap-2 px-4 sm:px-5 py-2 rounded-full text-xs uppercase tracking-wider transition-all whitespace-nowrap font-medium ${
             activeTab === 'COLLABORATION'
-              ? 'bg-[#111111] text-white font-bold shadow-md'
+              ? 'bg-[#111111] text-white font-bold shadow-sm'
               : 'text-[#555555] hover:text-[#111111] bg-white border border-[#EAE8E3] hover:border-[#D6D2C8]'
           }`}
         >
@@ -311,17 +311,17 @@ function ExploreInner({ initialProjects, initialDevelopers }: ExploreClientProps
       </div>
 
       {/* Luxury Search & Filter Toolbar */}
-      <div className="space-y-4 mb-10">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-3">
+      <div className="space-y-3 mb-6 sm:mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-2.5 sm:gap-3">
           {/* Main Search Input */}
           <div className="md:col-span-8 relative">
-            <Search className="w-4 h-4 text-[#858585] absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
+            <Search className="w-4 h-4 text-[#858585] absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search projects, developers, technologies..."
-              className="w-full pl-11 pr-4 py-3.5 rounded-xl bg-[#FAF9F6] border border-[#EAE8E3] text-sm text-[#111111] placeholder-[#858585] focus:outline-none focus:border-[#B99752] transition-colors"
+              className="w-full pl-10 pr-4 py-2.5 sm:py-3 rounded-xl bg-[#FAF9F6] border border-[#EAE8E3] text-xs sm:text-sm text-[#111111] placeholder-[#858585] focus:outline-none focus:border-[#B99752] transition-colors"
             />
             {searchQuery && (
               <button
@@ -338,7 +338,7 @@ function ExploreInner({ initialProjects, initialDevelopers }: ExploreClientProps
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value as 'newest' | 'featured' | 'updated')}
-              className="w-full py-3.5 px-4 rounded-xl bg-white border border-[#EAE8E3] text-xs text-[#111111] focus:outline-none focus:border-[#B99752] shadow-sm font-medium"
+              className="w-full py-2.5 sm:py-3 px-3.5 rounded-xl bg-white border border-[#EAE8E3] text-xs text-[#111111] focus:outline-none focus:border-[#B99752] shadow-xs font-medium"
             >
               <option value="featured">Sort: Featured First</option>
               <option value="newest">Sort: Newest Submissions</option>
@@ -348,7 +348,7 @@ function ExploreInner({ initialProjects, initialDevelopers }: ExploreClientProps
         </div>
 
         {/* Filter Pill Toolbar */}
-        <div className="p-4 rounded-2xl material-luxury-card bg-white flex flex-wrap items-center gap-3 text-xs">
+        <div className="p-3 sm:p-3.5 rounded-xl material-luxury-card bg-white flex flex-wrap items-center gap-2.5 text-xs">
           <div className="flex items-center gap-1.5 text-[#858585] mr-2 font-semibold">
             <SlidersHorizontal className="w-3.5 h-3.5 text-[#B99752]" />
             <span>Filters:</span>
@@ -444,7 +444,7 @@ function ExploreInner({ initialProjects, initialDevelopers }: ExploreClientProps
               </div>
             </div>
           ) : (
-            <div className="grid grid-cols-2 gap-2.5 sm:gap-6 md:gap-8 lg:gap-10">
+            <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5 lg:gap-6">
               {filteredProjects.map((project) => (
                 <ProjectCard key={project.id} project={project} featured={true} />
               ))}
@@ -472,7 +472,7 @@ function ExploreInner({ initialProjects, initialDevelopers }: ExploreClientProps
               </button>
             </div>
           ) : (
-            <div className="grid grid-cols-2 gap-2.5 sm:gap-6 md:gap-8 lg:gap-10">
+            <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5 lg:gap-6">
               {filteredDevelopers.map((dev) => (
                 <DeveloperCard key={dev.id} developer={dev} />
               ))}

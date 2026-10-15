@@ -130,9 +130,9 @@ export default function ProjectCard({ project, featured = false }: ProjectCardPr
       </div>
 
       {/* ---------------- DESKTOP / TABLET CARD (>= sm) ---------------- */}
-      {/* 100% UNMODIFIED EXISTING CARDEX DESIGN FOR DESKTOP */}
+      {/* Refined compact, neat and clean editorial card for desktop & laptops */}
       <div
-        className={`hidden sm:flex group relative rounded-2xl sm:rounded-3xl material-luxury-card flex-col overflow-hidden h-full ${
+        className={`hidden sm:flex group relative rounded-2xl material-luxury-card flex-col overflow-hidden h-full ${
           featured ? 'bg-[#FFFFFF]' : 'bg-[#FAF9F6]'
         }`}
       >
@@ -140,12 +140,12 @@ export default function ProjectCard({ project, featured = false }: ProjectCardPr
         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#B99752]/[0.04] to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out pointer-events-none z-20" />
 
         {/* Project Image Banner with Luxury Editorial Treatment */}
-        <div className="relative w-full aspect-[16/9] overflow-hidden bg-[#F0EEEA]">
+        <div className="relative w-full aspect-[16/10] overflow-hidden bg-[#F0EEEA]">
           <Image
             src={project.imageUrl}
             alt={project.title}
             fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            sizes="(max-width: 768px) 50vw, (max-width: 1200px) 50vw, 33vw"
             className="object-cover object-center project-editorial-image"
             priority={featured}
           />
@@ -154,11 +154,11 @@ export default function ProjectCard({ project, featured = false }: ProjectCardPr
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent pointer-events-none" />
 
           {/* Badges Over Image Top */}
-          <div className="absolute top-4 left-4 right-4 flex items-center justify-between pointer-events-none z-10">
-            <StatusBadge status={project.status} />
+          <div className="absolute top-3 left-3 right-3 flex items-center justify-between pointer-events-none z-10">
+            <StatusBadge status={project.status} className="!text-[11px] !px-2.5 !py-0.5" />
 
             {project.collaborationOpen && (
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-white/95 border border-[#B99752]/40 text-[#111111] backdrop-blur-md shadow-sm">
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-white/95 border border-[#B99752]/40 text-[#111111] backdrop-blur-md shadow-xs">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#B99752] animate-pulse" />
                 <span>Collaborate</span>
               </span>
@@ -166,10 +166,10 @@ export default function ProjectCard({ project, featured = false }: ProjectCardPr
           </div>
 
           {/* Creator Pill Over Image Bottom */}
-          <div className="absolute bottom-3 left-4 flex items-center gap-2 z-10">
+          <div className="absolute bottom-2.5 left-3 flex items-center gap-2 z-10">
             <Link
               href={`/developers/${project.creatorUsername}`}
-              className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/95 border border-[#EAE8E3] text-xs font-medium text-[#111111] hover:text-[#B99752] backdrop-blur-md transition-colors shadow-sm"
+              className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-white/95 border border-[#EAE8E3] text-[11px] font-medium text-[#111111] hover:text-[#B99752] backdrop-blur-md transition-colors shadow-xs"
             >
               <span className="w-1.5 h-1.5 rounded-full bg-[#B99752]" />
               <span>by {project.creatorName}</span>
@@ -178,52 +178,52 @@ export default function ProjectCard({ project, featured = false }: ProjectCardPr
         </div>
 
         {/* Card Body */}
-        <div className="p-6 sm:p-8 flex flex-col flex-grow relative z-10 bg-white">
+        <div className="p-4 sm:p-5 flex flex-col flex-grow relative z-10 bg-white">
           {/* Category */}
-          <div className="flex items-center gap-2 mb-2.5">
-            <span className="text-xs font-medium text-[#737373]">
+          <div className="flex items-center gap-2 mb-1.5">
+            <span className="text-[11px] font-medium text-[#737373] tracking-wide uppercase">
               {project.category}
             </span>
           </div>
 
           {/* Title */}
-          <h3 className="text-2xl font-bold tracking-tight text-[#111111] group-hover:text-black transition-colors mb-3">
+          <h3 className="text-base sm:text-lg font-bold tracking-tight text-[#111111] group-hover:text-black transition-colors mb-2 leading-snug">
             <Link href={`/projects/${project.slug}`} className="focus:outline-none">
               {project.title}
             </Link>
           </h3>
 
           {/* Description */}
-          <p className="text-sm text-[#555555] line-clamp-2 leading-relaxed mb-6 font-normal">
+          <p className="text-xs sm:text-sm text-[#555555] line-clamp-2 leading-relaxed mb-3.5 font-normal">
             {project.description}
           </p>
 
           {/* Technologies */}
-          <div className="flex flex-wrap gap-1.5 mb-6">
-            {project.technologies.slice(0, 4).map((tech) => (
+          <div className="flex flex-wrap gap-1 mb-3.5">
+            {project.technologies.slice(0, 3).map((tech) => (
               <span
                 key={tech}
-                className="px-2.5 py-1 rounded-md text-xs bg-[#F8F7F4] text-[#444444] border border-[#EAE8E3] font-medium"
+                className="px-2 py-0.5 rounded text-[11px] bg-[#F8F7F4] text-[#444444] border border-[#EAE8E3] font-medium"
               >
                 {tech}
               </span>
             ))}
-            {project.technologies.length > 4 && (
-              <span className="px-2 py-1 rounded-md text-xs bg-[#F8F7F4] text-[#858585]">
-                +{project.technologies.length - 4}
+            {project.technologies.length > 3 && (
+              <span className="px-1.5 py-0.5 rounded text-[11px] bg-[#F8F7F4] text-[#858585] font-medium">
+                +{project.technologies.length - 3}
               </span>
             )}
           </div>
 
           {/* Looking For Collaboration Role Block */}
           {project.collaborationOpen && project.lookingFor && project.lookingFor.length > 0 && (
-            <div className="mt-auto mb-6 p-3.5 rounded-xl bg-[#FAF9F6] border border-[#EAE8E3]">
-              <span className="text-xs text-[#737373] block mb-1.5 font-medium">
+            <div className="mt-auto mb-3.5 p-2.5 rounded-xl bg-[#FAF9F6] border border-[#EAE8E3]">
+              <span className="text-[10px] uppercase tracking-wider text-[#737373] block mb-1 font-semibold">
                 Looking For:
               </span>
-              <div className="text-xs text-[#111111] font-medium">
+              <div className="text-[11px] text-[#111111] font-medium flex flex-wrap gap-x-2 gap-y-0.5">
                 {project.lookingFor.map((role) => (
-                  <span key={role} className="inline-block mr-3">
+                  <span key={role} className="inline-block">
                     &bull; {role}
                   </span>
                 ))}
@@ -232,10 +232,10 @@ export default function ProjectCard({ project, featured = false }: ProjectCardPr
           )}
 
           {/* Action Row */}
-          <div className="mt-auto pt-5 border-t border-[#EAE8E3] flex items-center justify-between gap-3">
+          <div className="mt-auto pt-3 border-t border-[#EAE8E3] flex items-center justify-between gap-2.5">
             <Link
               href={`/projects/${project.slug}`}
-              className="inline-flex items-center gap-1.5 text-xs text-[#555555] hover:text-[#111111] transition-colors group-hover:translate-x-0.5 duration-200 font-medium"
+              className="inline-flex items-center gap-1 text-xs text-[#555555] hover:text-[#111111] transition-colors group-hover:translate-x-0.5 duration-200 font-semibold"
             >
               <span>View Project</span>
               <ArrowUpRight className="w-3.5 h-3.5 text-[#858585] group-hover:text-[#111111] transition-colors" />
@@ -245,7 +245,7 @@ export default function ProjectCard({ project, featured = false }: ProjectCardPr
               <button
                 type="button"
                 onClick={() => setIsCollabOpen(true)}
-                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs bg-[#111111] hover:bg-[#222222] border border-[#111111] text-white transition-all shadow-sm font-medium"
+                className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs bg-[#111111] hover:bg-[#222222] border border-[#111111] text-white transition-all shadow-xs font-medium"
               >
                 <span>Collaborate &rarr;</span>
               </button>

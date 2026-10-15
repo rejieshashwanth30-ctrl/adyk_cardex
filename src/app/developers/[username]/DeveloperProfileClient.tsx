@@ -45,10 +45,10 @@ export default function DeveloperProfileClient({
   const whatsAppLink = `https://wa.me/${cleanPhone}?text=${whatsAppText}`;
 
   return (
-    <div className="pt-24 sm:pt-28 pb-28 px-3 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10">
+    <div className="pt-20 sm:pt-24 pb-20 px-3 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10">
       {/* Breadcrumb */}
       {/* Back link */}
-      <div className="mb-10">
+      <div className="mb-6 sm:mb-8">
         <Link
           href="/developers"
           className="inline-flex items-center gap-2 text-xs uppercase tracking-wider text-[#858585] hover:text-[#111111] transition-colors font-medium"
@@ -59,11 +59,11 @@ export default function DeveloperProfileClient({
       </div>
 
       {/* Main Profile Header Banner */}
-      <div className="p-8 sm:p-14 rounded-3xl material-luxury-card bg-white border border-[#EAE8E3] mb-16 shadow-sm">
-        <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-10">
+      <div className="p-5 sm:p-8 rounded-2xl material-luxury-card bg-white border border-[#EAE8E3] mb-10 shadow-xs">
+        <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-6 lg:gap-10">
           {/* Avatar & Info */}
-          <div className="flex flex-col sm:flex-row items-start gap-8">
-            <div className="relative w-28 h-28 rounded-2xl bg-[#F8F7F4] border border-[#EAE8E3] flex items-center justify-center font-bold text-3xl text-[#111111] flex-shrink-0 shadow-sm">
+          <div className="flex flex-col sm:flex-row items-start gap-5 sm:gap-6">
+            <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-[#F8F7F4] border border-[#EAE8E3] flex items-center justify-center font-bold text-2xl sm:text-3xl text-[#111111] flex-shrink-0 shadow-xs">
               {hasAvatar ? (
                 <div className="w-full h-full rounded-2xl overflow-hidden relative">
                   <Image
@@ -72,35 +72,35 @@ export default function DeveloperProfileClient({
                     fill
                     priority
                     className="object-cover"
-                    sizes="112px"
+                    sizes="96px"
                     onError={() => setImageError(true)}
                   />
                 </div>
               ) : (
                 <span>{initials}</span>
               )}
-              <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-white rounded-full border border-[#EAE8E3] shadow-sm flex items-center justify-center z-10">
+              <div className="absolute -bottom-1.5 -right-1.5 w-6 h-6 bg-white rounded-full border border-[#EAE8E3] shadow-xs flex items-center justify-center z-10">
                 <CardexMark size="xs" />
               </div>
             </div>
 
             <div>
-              <div className="flex flex-wrap items-center gap-3 mb-2">
-                <h1 className="text-3xl sm:text-5xl font-black text-[#111111] uppercase tracking-tight">
+              <div className="flex flex-wrap items-center gap-2.5 mb-1.5">
+                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#111111] uppercase tracking-tight">
                   {developer.name}
                 </h1>
-                <AvailabilityBadge availability={developer.availability} />
+                <AvailabilityBadge availability={developer.availability} className="!text-[10px] !px-2 !py-0.5" />
               </div>
 
-              <p className="text-sm sm:text-base text-[#444444] mb-4 font-medium">
+              <p className="text-xs sm:text-sm text-[#444444] mb-2.5 font-medium">
                 @{developer.username} &bull; {developer.role}
               </p>
 
-              <p className="text-sm sm:text-base text-[#555555] max-w-2xl leading-relaxed mb-6 font-normal">
+              <p className="text-xs sm:text-sm text-[#555555] max-w-2xl leading-relaxed mb-4 font-normal">
                 {developer.bio}
               </p>
 
-              <div className="flex flex-wrap items-center gap-5 text-xs text-[#737373] font-medium">
+              <div className="flex flex-wrap items-center gap-4 text-xs text-[#737373] font-medium">
                 {developer.location && (
                   <span className="flex items-center gap-1.5">
                     <MapPin className="w-3.5 h-3.5 text-[#B99752]" />
@@ -200,11 +200,11 @@ export default function DeveloperProfileClient({
         </div>
 
         {projects.length === 0 ? (
-          <div className="text-center py-16 material-luxury-card bg-white rounded-3xl p-8 border border-[#EAE8E3]">
-            <p className="text-sm text-[#858585]">No verified builds listed yet.</p>
+          <div className="text-center py-16 material-luxury-card bg-white rounded-2xl p-8 border border-[#EAE8E3]">
+            <p className="text-xs sm:text-sm text-[#858585]">No verified builds listed yet.</p>
           </div>
         ) : (
-          <div className="grid grid-cols-2 gap-2.5 sm:gap-6 md:gap-8 lg:gap-10">
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5 lg:gap-6">
             {projects.map((project) => (
               <ProjectCard key={project.id} project={project} featured={true} />
             ))}

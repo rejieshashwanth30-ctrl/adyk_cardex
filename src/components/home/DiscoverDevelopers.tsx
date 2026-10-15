@@ -11,15 +11,15 @@ interface DiscoverDevelopersProps {
 
 export default function DiscoverDevelopers({ developers }: DiscoverDevelopersProps) {
   return (
-    <section className="py-20 sm:py-28 px-3 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10 border-t border-[#EAE8E3]">
+    <section className="py-14 sm:py-20 px-3 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10 border-t border-[#EAE8E3]">
       {/* Editorial Section Header */}
       <ScrollReveal variant="fade-up" duration={700}>
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-16 border-b border-[#EAE8E3] pb-10">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 sm:gap-6 mb-8 sm:mb-12 border-b border-[#EAE8E3] pb-6 sm:pb-8">
           <div>
-            <span className="text-xs uppercase tracking-wider text-[#858585] font-semibold block mb-3">
+            <span className="text-xs uppercase tracking-wider text-[#858585] font-semibold block mb-2 sm:mb-3">
               BUILDERS &bull; DEVELOPER DISCOVERY
             </span>
-            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-[-0.03em] text-[#111111] uppercase max-w-2xl leading-[1.02]">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-[-0.03em] text-[#111111] uppercase max-w-2xl leading-[1.02]">
               MEET THE PEOPLE<br />
               BEHIND THE WORK.
             </h2>
@@ -36,7 +36,7 @@ export default function DiscoverDevelopers({ developers }: DiscoverDevelopersPro
       </ScrollReveal>
 
       {/* Developer Cards Grid with Staggered Entrance */}
-      <div className="grid grid-cols-2 gap-2.5 sm:gap-6 md:gap-8 lg:gap-10">
+      <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5 lg:gap-6">
         {developers.map((dev, idx) => (
           <ScrollReveal
             key={dev.id}
